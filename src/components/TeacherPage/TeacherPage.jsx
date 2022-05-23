@@ -47,6 +47,7 @@ function TeacherPage() {
 
 
     const [imageUrl, setImageUrl] = useState('');
+    const [description, setDescription] = useState('');
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
@@ -54,6 +55,7 @@ function TeacherPage() {
 
     let imageObject = {
         imageUrl,
+        description,
         artist,
         title,
         year,
@@ -67,7 +69,13 @@ function TeacherPage() {
         dispatch({
             type: 'POST_TO_GALLERY',
             payload: imageObject
-        })
+        });
+        setImageUrl('');
+        setDescription('');
+        setArtist('');
+        setTitle('');
+        setYear('');
+        setMedia('');
     }
 
     return (
@@ -94,6 +102,13 @@ function TeacherPage() {
                                         label="image url required"
                                         defaultValue={imageUrl}
                                         onChange={(event) => setImageUrl(event.target.value)}
+                                    />
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="description required"
+                                        defaultValue={description}
+                                        onChange={(event) => setDescription(event.target.value)}
                                     />
                                     <TextField
                                         required
