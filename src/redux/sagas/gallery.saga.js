@@ -34,8 +34,7 @@ function* addImageToGallery(action){
     }
 }
 
-function* incrementGallery(action){
-    console.log('in incrementGallery', action.payload);
+function* incrementGallery(){
     try{
         yield put ({
             type: 'NEXT_IMAGE'
