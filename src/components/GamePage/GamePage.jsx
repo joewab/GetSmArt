@@ -15,9 +15,17 @@ import Box from '@mui/material/Box';
 
 
 function GamePage(){
-    
-    const gallery = useSelector(store => store.gallery)
 
+    const gallery = useSelector(store => store.gallery.gallery);
+    const gallerySlideNumber = useSelector(store => store.gallery.galleryCount)
+    const dispatch = useDispatch();
+
+    const handleGallerySlideIncrement = () => {
+        dispatch({
+            type: 'INCREMENT_GALLERY',
+            payload: gallerySlideNumber
+        })
+    }
 
     return(
         
@@ -31,6 +39,11 @@ function GamePage(){
                             noValidate
                             autoComplete="off">
                        <Typography>Game!</Typography>
+                       {/* Only show the first image in the gallery 
+                       ideas: conditional rendering based on image id
+                       use incrementing state to pull image out of an array*/}
+                       <Typography>{gallerySlideNumber}</Typography>
+                       <Button onClick={handleGallerySlideIncrement}>Skip to next</Button>
 
                    </Box>
                 </Grid>

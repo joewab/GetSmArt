@@ -28,19 +28,29 @@ function* addImageToGallery(action){
                     media: image.media }
             });
             yield put({type: 'FETCH_GALLERY'})
-
-        }
-    
+        }  
     catch{
         console.log('problem with post image saga');
     }
+}
 
-    //imageUrl: 'Portrait of a man with a Book', description: 'Portrait of a man with a Book', artist: 'Portrait of a man with a Book', title: 'Portrait of a man with a Book', year: 'Portrait of a man with a Book', …}
+function* incrementGallery(action){
+    console.log('in incrementGallery', action.payload);
+    try{
+        yield put ({
+            type: 'NEXT_IMAGE'
+        });
+    }
+    catch{
+        console.log('error incrementing to next slide');
+    }
 }
 
 function* gallerySaga() {
     yield takeLatest('POST_TO_GALLERY', addImageToGallery);
     yield takeLatest('FETCH_GALLERY', fetchGallery);
+    yield takeLatest('INCREMENT_GALLERY', incrementGallery);
+
   }
 
 export default gallerySaga
