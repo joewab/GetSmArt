@@ -1,11 +1,17 @@
+//react,redux,saga stuff---------------------------------
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { useState } from 'react';
 
+//components---------------------------------------------
+import LogOutButton from '../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
+import MediaPicker from '../MediaPicker/MediaPicker';
+import Nav from '../Nav/Nav';
 
+
+//materialUI----------------------------------------------
 import { Button } from '@mui/material';
 import { Container } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
@@ -53,13 +59,19 @@ function TeacherPage() {
     const [year, setYear] = useState('');
     const [media, setMedia] = useState('');
 
+    const [medium, setMedium] = useState('');
+
+    const handleChange = (event) => {
+        setMedium(event.target.value);
+    };
+
     let imageObject = {
         imageUrl,
         description,
         artist,
         title,
         year,
-        media
+        medium
     }
 
 
@@ -131,13 +143,7 @@ function TeacherPage() {
                                         defaultValue={year}
                                         onChange={(event) => setYear(event.target.value)}
                                     />
-                                    <TextField
-                                        required
-                                        id="outlined-required"
-                                        label="media required"
-                                        defaultValue={media}
-                                        onChange={(event) => setMedia(event.target.value)}
-                                    />
+                                    <MediaPicker medium={medium} handleChange={handleChange}/>
                                 </div>
                             </Box>
                         </Grid>

@@ -15,7 +15,7 @@ function* fetchGallery() {
 
 function* addImageToGallery(action){
     const image = action.payload;
-    console.log(image);
+    console.log('to add to gallery:',image);
     try{
             yield axios({
                 method: 'POST',
@@ -25,7 +25,7 @@ function* addImageToGallery(action){
                     artist: image.artist,
                     title: image.title,
                     year: image.year,
-                    media: image.media }
+                    media: image.medium }
             });
             yield put({type: 'FETCH_GALLERY'})
         }  
