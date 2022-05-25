@@ -45,10 +45,25 @@ function* incrementGallery(){
     }
 }
 
+function* deleteImage(action){
+    try{
+        yield axios ({
+            method: 'DELETE',
+            url: `api/gallery/${action.payload}`
+        });
+        yield put({type: 'FETCH_GALLERY'})
+    }
+    catch{
+        console.log('error in deleteImage');
+    }
+}
+
 function* gallerySaga() {
     yield takeLatest('POST_TO_GALLERY', addImageToGallery);
     yield takeLatest('FETCH_GALLERY', fetchGallery);
     yield takeLatest('INCREMENT_GALLERY', incrementGallery);
+    yield takeLatest('DELETE_IMAGE', deleteImage);
+
 
   }
 

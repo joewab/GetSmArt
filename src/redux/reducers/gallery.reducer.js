@@ -26,6 +26,7 @@ const galleryCount = (state = 0, action) => {
     }
 }
 
+
 export default combineReducers({
     image,
     gallery,
