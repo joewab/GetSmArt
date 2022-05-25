@@ -26,9 +26,19 @@ const galleryCount = (state = 0, action) => {
     }
 }
 
+const galleries = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_GALLERIES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 
 export default combineReducers({
     image,
     gallery,
-    galleryCount
+    galleryCount,
+    galleries
   });

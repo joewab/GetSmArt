@@ -1,16 +1,31 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* fetchGallery() {
+function* fetchGallery(action) {
+    let galleryId = action.payload;
+    console.log('this is the galleryId:', galleryId);
     try {
-        const gallery = yield axios.get('/api/gallery');
-        console.log('get all:', gallery.data);
+        const gallery = yield axios.get(`/api/gallery/${galleryId}`);
+        console.log('got this gallery:', gallery.data);
         yield put({ type: 'SET_GALLERY', payload: gallery.data });
 
     } catch {
         console.log('get gallery error');
     }
         
+}
+
+function* fetchGalleries() {
+    try{
+        const galleries = yield axios.get('/api/galleries');
+        console.log('get all galleries:', galleries.data);
+        yield put ({
+            type: 'SET_GALLERIES',
+            payload: galleries.data
+        })
+    } catch{
+        console.log('get all galleries error');
+    }
 }
 
 function* addImageToGallery(action){
@@ -49,9 +64,10 @@ function* deleteImage(action){
     try{
         yield axios ({
             method: 'DELETE',
-            url: `api/gallery/${action.payload}`
+            url: `api/gallery/${action.payload.imageId}`
         });
-        yield put({type: 'FETCH_GALLERY'})
+        yield put({type: 'FETCH_GALLERY',
+                    payload: action.payload.galleryId})
     }
     catch{
         console.log('error in deleteImage');
@@ -63,6 +79,8 @@ function* gallerySaga() {
     yield takeLatest('FETCH_GALLERY', fetchGallery);
     yield takeLatest('INCREMENT_GALLERY', incrementGallery);
     yield takeLatest('DELETE_IMAGE', deleteImage);
+    yield takeLatest('FETCH_GALLERIES', fetchGalleries);
+
 
 
   }

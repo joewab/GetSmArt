@@ -13,7 +13,7 @@ import { CardActions } from '@mui/material';
 
 
 
-function GalleryItem({ image }) {
+function GalleryItem({ image, galleryId }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -30,12 +30,12 @@ function GalleryItem({ image }) {
         console.log('in deleteImage, this is the id:', image.id);
         dispatch({
             type: 'DELETE_IMAGE',
-            payload: image.id
+            payload: {imageId: image.id, galleryId}
         })
     }
 
     return (
-        <Card elevation={10}>
+        <Card key={image.id} elevation={10}>
             <CardHeader
                 title={image.title}
             />

@@ -1,7 +1,7 @@
 //react,redux,saga stuff---------------------------------
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 //components---------------------------------------------
@@ -41,16 +41,23 @@ const useStyles = makeStyles({
 
 
 
-function TeacherPage() {
-    // this component doesn't do much to start, just renders some user reducer info to the DOM
-    const user = useSelector((store) => store.user);
-    const gallery = useSelector(store => store.gallery)
+function AddImageForm() {
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_GALLERY',
+            payload: galleryId
+        })
+    }, [])
+
+    const params = useParams();
     const history = useHistory();
     const classes = useStyles();
-    const image = useSelector(store => store.image);
-
     const dispatch = useDispatch();
 
+    const galleryId = params.id;
+    const user = useSelector((store) => store.user);
+    const gallery = useSelector(store => store.gallery)
+    const image = useSelector(store => store.image);
 
     const [imageUrl, setImageUrl] = useState('');
     const [description, setDescription] = useState('');
@@ -95,10 +102,10 @@ function TeacherPage() {
             <h2>Welcome, teacher {user.username}!</h2>
             <p>Your ID is: {user.id}</p>
 
-            <div className={classes.root}>
-                <Container key={user.id}>
+            <div key={user.id} className={classes.root}>
+                <Container>
                     <Grid container spacing={2}>
-                        <Grid item key={user.id} xs={6}>
+                        <Grid item xs={6}>
                             <Box
                                 component="form"
                                 sx={{
@@ -143,7 +150,7 @@ function TeacherPage() {
                                         defaultValue={year}
                                         onChange={(event) => setYear(event.target.value)}
                                     />
-                                    <MediaPicker medium={medium} handleChange={handleChange}/>
+                                    <MediaPicker medium={medium} handleChange={handleChange} />
                                 </div>
                             </Box>
                         </Grid>
@@ -157,7 +164,7 @@ function TeacherPage() {
                     variant='permanent'
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList/>
+                    <GalleryList galleryId={galleryId}/>
                 </Drawer>
             </div>
         </div>
@@ -166,4 +173,4 @@ function TeacherPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default TeacherPage;
+export default AddImageForm;

@@ -1,3 +1,4 @@
+//react, redux, saga----------------------------------------------
 import React, { useEffect } from 'react';
 import {
   HashRouter as Router,
@@ -5,21 +6,20 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
+//componenets----------------------------------------------------
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import TeacherPage from '../TeacherPage/TeacherPage';
+import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
+import AddImageForm from '../AddImageForm/AddImageForm';
 
 import './App.css';
 
@@ -68,6 +68,22 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/gallery"
+          >
+            <AllGalleriesPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/addgallery/:id"
+          >
+            <AddImageForm />
           </ProtectedRoute>
 
           <Route
