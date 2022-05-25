@@ -14,12 +14,9 @@ import MediaAnswerForm from '../MediaAnswerForm/MediaAnswerForm';
 import { Button } from '@mui/material';
 import { Container } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
-import Drawer from '@mui/material/Drawer';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/styles';
-import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import MenuItem from '@mui/material/MenuItem';
 
 
 const useStyles = makeStyles({
@@ -31,9 +28,6 @@ const useStyles = makeStyles({
     }
 
 })
-
-
-
 
 function GamePage() {
 
@@ -62,27 +56,6 @@ function GamePage() {
     console.log('this is gallery on gamepage:', gallery);
     const gameImage = gallery[gallerySlideNumber];
     console.log('this is the image showing:', gameImage);
-
-
-    // const handleSubmitArtist = () => {
-    //     console.log('in Submit Artist');
-    //     if(artist && artist === gameImage.artist){
-    //         setArtistAnswer(true);
-    //     }
-    //     console.log(artistAnswer);
-    // }
-
-    const handleSubmitTitle = () => {
-        console.log('in Submit Title');
-    }
-
-    const handleSubmitYear = () => {
-        console.log('in Submit Year');
-    }
-
-    const handleSubmitMedia = () => {
-        console.log('in Submit Media');
-    }
 
 
     const handleGallerySlideIncrement = () => {

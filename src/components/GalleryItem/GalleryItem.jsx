@@ -25,6 +25,15 @@ function GalleryItem({ image }) {
             payload: image.id
         })
     }
+
+    const deleteImage = () => {
+        console.log('in deleteImage, this is the id:', image.id);
+        dispatch({
+            type: 'DELETE_IMAGE',
+            payload: image.id
+        })
+    }
+
     return (
         <Card elevation={10}>
             <CardHeader
@@ -40,8 +49,8 @@ function GalleryItem({ image }) {
                 <IconButton onClick= {fetchImage} aria-label="edit">
                     <EditIcon />
                 </IconButton>
-                <IconButton aria-label="delete">
-                    <DeleteForeverIcon />
+                <IconButton onClick={deleteImage} aria-label="delete">
+                    <DeleteForeverIcon  />
                 </IconButton>
             </CardActions>
         </Card>
