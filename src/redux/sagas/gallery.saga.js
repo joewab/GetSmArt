@@ -12,84 +12,90 @@ function* fetchGallery(action) {
     } catch {
         console.log('get gallery error');
     }
-        
+
 }
 
 function* fetchGalleries() {
-    try{
+    try {
         const galleries = yield axios.get('/api/galleries');
         console.log('get all galleries:', galleries.data);
-        yield put ({
+        yield put({
             type: 'SET_GALLERIES',
             payload: galleries.data
         })
-    } catch{
+    } catch {
         console.log('get all galleries error');
     }
 }
 
-function* addImageToGallery(action){
+function* addImageToGallery(action) {
     const image = action.payload;
-    console.log('to add to gallery:',image);
-    try{
-            yield axios({
-                method: 'POST',
-                url: '/api/gallery',
-                data: image
-            });
-            yield put({type: 'FETCH_GALLERY',
-                       payload: image.galleryId})
-        }  
-    catch{
+    console.log('to add to gallery:', image);
+    try {
+        yield axios({
+            method: 'POST',
+            url: '/api/gallery',
+            data: image
+        });
+        yield put({
+            type: 'FETCH_GALLERY',
+            payload: image.galleryId
+        })
+    }
+    catch {
         console.log('problem with post image saga');
     }
 }
 
 function* createGallery(action) {
     const galleryName = action.payload;
-    console.log('this is galleryName in createGallery:',galleryName);
-    try{
+    console.log('this is galleryName in createGallery:', galleryName);
+    try {
         yield axios({
             method: 'POST',
             url: 'api/galleries',
-            data: {galleryName}
+            data: { galleryName }
         })
         yield put({
-            type:'FETCH_GALLERIES'
+            type: 'FETCH_GALLERIES'
         })
-    } catch{
+    } catch {
         console.log('error in createGallery');
     }
 }
 
-function* incrementGallery(){
-    try{
-        yield put ({
+function* incrementGallery() {
+    try {
+        yield put({
             type: 'NEXT_IMAGE'
         });
     }
-    catch{
+    catch {
         console.log('error incrementing to next slide');
     }
 }
 
-function* deleteImage(action){
-    try{
-        yield axios ({
+function* deleteImage(action) {
+    console.log('in deleteImage',action);
+    try {
+        yield axios({
             method: 'DELETE',
-            url: `api/gallery/${action.payload.imageId}`
+            url: `api/gallery/${action.payload.imageId}`,
+            data: action.payload
         });
-        yield put({type: 'FETCH_GALLERY',
-                    payload: action.payload.galleryId})
+        yield put({
+            type: 'FETCH_GALLERY',
+            payload: action.payload.galleryId
+        })
     }
-    catch{
+    catch {
         console.log('error in deleteImage');
     }
 }
 
-function* deleteGallery(action){
-    try{
-        yield axios ({
+function* deleteGallery(action) {
+    try {
+        yield axios({
             method: 'DELETE',
             url: `api/galleries/${action.payload}`
         })
@@ -97,7 +103,7 @@ function* deleteGallery(action){
             type: 'FETCH_GALLERIES'
         })
 
-    } catch{
+    } catch {
         console.log('error in deleteGallery');
     }
 
@@ -116,6 +122,6 @@ function* gallerySaga() {
 
 
 
-  }
+}
 
 export default gallerySaga
