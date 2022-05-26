@@ -41,8 +41,7 @@ const useStyles = makeStyles({
 
 
 
-function TeacherPage() {
-    // this component doesn't do much to start, just renders some user reducer info to the DOM
+function EditGalleryPage() {
     const user = useSelector((store) => store.user);
     const gallery = useSelector(store => store.gallery)
     const history = useHistory();
@@ -112,7 +111,7 @@ function TeacherPage() {
                                         required
                                         id="outlined-required"
                                         label="image url required"
-                                        defaultValue={imageUrl}
+                                        defaultValue={image.imageUrl}
                                         onChange={(event) => setImageUrl(event.target.value)}
                                     />
                                     <TextField
@@ -166,4 +165,4 @@ function TeacherPage() {
 }
 
 // this allows us to use <App /> in index.js
-export default TeacherPage;
+export default EditGalleryPage;

@@ -1,9 +1,15 @@
+//react, redux, sagas-------------------------------------------------
 import React from 'react';
-import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import TeacherPage from '../TeacherPage/TeacherPage';
+
+// components--------------------------------------------------------
+import TeacherPage from '../AddImageForm/AddImageForm';
 import GamePage from '../GamePage/GamePage';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
+
+//material------------------------------------------------------
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -12,7 +18,7 @@ function UserPage() {
 
   if(user.admin===true){
     return(
-      <TeacherPage/>
+      <AllGalleriesPage/>
     )
   }
 
