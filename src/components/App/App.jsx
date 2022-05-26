@@ -20,6 +20,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
 import AddImageForm from '../AddImageForm/AddImageForm';
+import EditImageForm from '../EditImageForm/EditImageForm';
 
 import './App.css';
 
@@ -84,6 +85,14 @@ function App() {
             path="/addgallery/:id"
           >
             <AddImageForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/editgallery/:id"
+          >
+            <EditImageForm />
           </ProtectedRoute>
 
           <Route

@@ -52,26 +52,19 @@ function AddImageForm() {
     
 
     const params = useParams();
-    const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    console.log('this is params:',params);
 
     const galleryId = params.id;
     const user = useSelector((store) => store.user);
-    const gallery = useSelector(store => store.gallery.gallery)
-    const image = useSelector(store => store.image);
 
-    console.log('this is galleryId:', galleryId);
 
     const [imageUrl, setImageUrl] = useState('');
     const [description, setDescription] = useState('');
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
-    // const [media, setMedia] = useState('');
-
     const [medium, setMedium] = useState('');
 
     const handleChange = (event) => {
@@ -91,7 +84,6 @@ function AddImageForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('in handleSubmit, here is data:', imageObject);
         dispatch({
             type: 'POST_TO_GALLERY',
             payload: imageObject

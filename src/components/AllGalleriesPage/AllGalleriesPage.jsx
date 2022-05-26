@@ -39,7 +39,6 @@ function AllGalleriesPage() {
             type:'CREATE_GALLERY',
             payload: newGalleryName
         })
-        // history.push(`/addgallery/${newGalleryName}`)
     }
 
     return (

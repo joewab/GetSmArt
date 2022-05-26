@@ -18,12 +18,13 @@ function GalleryItem({ image, galleryId }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const fetchImage = () => {
-        console.log('in fetchImage! this is the id:', image.id);
+    const editImage = () => {
+        console.log('in editImage, this is the id:', image.id);
         dispatch({
-            type: 'FETCH_IMAGE',
+            type: 'EDIT_IMAGE',
             payload: image.id
         })
+        history.push(`/editgallery/${galleryId}`)
     }
 
     const deleteImage = () => {
@@ -46,7 +47,7 @@ function GalleryItem({ image, galleryId }) {
                 alt={image.title}
             />
             <CardActions disableSpacing>
-                <IconButton onClick= {fetchImage} aria-label="edit">
+                <IconButton onClick= {editImage} aria-label="edit">
                     <EditIcon />
                 </IconButton>
                 <IconButton onClick={deleteImage} aria-label="delete">
