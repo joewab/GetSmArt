@@ -26,7 +26,7 @@ function AllGalleriesPage() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    
+
     const galleries = useSelector(store => store.gallery.galleries)
     console.log('here are all the galleries', galleries);
 
@@ -34,6 +34,11 @@ function AllGalleriesPage() {
 
     function createGallery() {
         console.log('in createGallery');
+        dispatch({
+            type:'CREATE_GALLERY',
+            payload: newGalleryName
+        })
+        history.push(`/addgallery/${newGalleryName}`)
     }
 
     return (
@@ -51,7 +56,7 @@ function AllGalleriesPage() {
                 </Grid>
                 {galleries.map((gal) => {
                     return(
-                        <GalleryLink gal={gal} />
+                        <GalleryLink key={gal.id} gal={gal} />
                     )
                 })}
                 

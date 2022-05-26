@@ -45,16 +45,20 @@ function AddImageForm() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_GALLERY',
-            payload: galleryId
+            payload: galleryName
         })
     }, [])
+
+    
 
     const params = useParams();
     const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const galleryId = params.id;
+    console.log('this is params:',params);
+
+    const galleryName = params.id;
     const user = useSelector((store) => store.user);
     const gallery = useSelector(store => store.gallery)
     const image = useSelector(store => store.image);
@@ -164,7 +168,7 @@ function AddImageForm() {
                     variant='permanent'
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList galleryId={galleryId}/>
+                    <GalleryList galleryName={galleryName}/>
                 </Drawer>
             </div>
         </div>

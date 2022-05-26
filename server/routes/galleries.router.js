@@ -18,5 +18,15 @@ router.get('/', (req, res) => {
 })
 
 
-
+router.post('/', (req, res)=>{
+    const galleryName = req.body.galleryName;
+    console.log('this is gallery name in Post route',galleryName);
+    const sqlQuery = `INSERT INTO gallery ("name") VALUES ($1);`;
+    const sqlValues = [galleryName];
+    pool.query (sqlQuery, sqlValues)
+    .then((result) => { console.log(result); res.sendStatus(200) })
+    .catch((err) => {
+      console.log('Error in POST galleryName', err);
+      res.sendStatus(500);})
+})
 module.exports = router;

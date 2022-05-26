@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
   const queryText = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media
   FROM image JOIN gallery_image ON image.id = gallery_image.image_id
   JOIN gallery ON gallery.id = gallery_image.gallery_id
-  WHERE gallery.id=$1;`;
+  WHERE gallery.name=$1;`;
   pool.query(queryText, [req.params.id])
     .then((result) => { res.send(result.rows); console.log('this is the get gallery result:',result.rows); })
     .catch((err) => {

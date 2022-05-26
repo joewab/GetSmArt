@@ -15,9 +15,10 @@ import { Button } from '@mui/material';
 
 function GalleryLink({gal}) {
     const history = useHistory();
+    console.log('this is gal',gal);
 
     function goToGallery() {
-        history.push(`/addgallery/${gal.id}`)
+        history.push(`/addgallery/${gal.name}`)
     }
 
     return (
