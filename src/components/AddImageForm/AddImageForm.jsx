@@ -101,13 +101,12 @@ function AddImageForm() {
         setMedia('');
     }
 
-    return (
-        <div className="container">
-            <h2>Welcome, teacher {user.username}!</h2>
-            <p>Your ID is: {user.id}</p>
-
+    return (    
             <div key={user.id} className={classes.root}>
                 <Container>
+                <Nav/>
+                <h2>{user.username}'s gallery: {galleryName}</h2>
+                <h2>Add a slide below:</h2>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
                             <Box
@@ -156,12 +155,11 @@ function AddImageForm() {
                                     />
                                     <MediaPicker medium={medium} handleChange={handleChange} />
                                 </div>
+                                <Button onClick={handleSubmit}>submit</Button>
                             </Box>
                         </Grid>
                     </Grid>
                 </Container>
-                <Button onClick={handleSubmit}>submit</Button>
-                <LogOutButton className="btn" />
 
                 <Drawer
                     className={classes.drawer}
@@ -171,7 +169,7 @@ function AddImageForm() {
                     <GalleryList galleryName={galleryName}/>
                 </Drawer>
             </div>
-        </div>
+        
 
     );
 }

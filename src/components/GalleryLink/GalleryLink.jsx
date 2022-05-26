@@ -10,26 +10,40 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
+import { Card } from '@material-ui/core';
 
 
 
-function GalleryLink({gal}) {
+function GalleryLink({ gal }) {
     const history = useHistory();
-    console.log('this is gal',gal);
+    const dispatch = useDispatch();
+    
+    console.log('this is gal', gal);
 
     function goToGallery() {
         history.push(`/addgallery/${gal.name}`)
     }
 
+    function deleteGallery(){
+        console.log('in deleteGallery');
+        dispatch({
+            type: 'DELETE_GALLERY',
+            payload: gal.id
+        })
+    }
+
     return (
         <>
-            <Grid item key={gal.id}>
-                <Typography>{gal.name}</Typography>
-            </Grid>
-            <Grid item>
-                <Button onClick={goToGallery}
-                    variant='filled'>
-                    go to gallery</Button>
+            <Grid item key={gal.id} xs={4}>
+                <Card>
+                    <Typography>{gal.name}</Typography>
+                    <Button onClick={goToGallery}
+                        variant='filled'>
+                        go to gallery</Button>
+                    <Button onClick={deleteGallery}
+                        variant='filled'>
+                        delete gallery</Button>
+                </Card>
             </Grid>
         </>
     )

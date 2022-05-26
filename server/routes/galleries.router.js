@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 })
 
 
-router.post('/', (req, res)=>{
+router.post('/', (req, res) => {
     const galleryName = req.body.galleryName;
     console.log('this is gallery name in Post route',galleryName);
     const sqlQuery = `INSERT INTO gallery ("name") VALUES ($1);`;
@@ -30,3 +30,15 @@ router.post('/', (req, res)=>{
       res.sendStatus(500);})
 })
 module.exports = router;
+
+router.delete('/:id', (req,res) => {
+    const galleryId = req.params.id;
+    const sqlQuery = 'DELETE FROM gallery WHERE id=$1;';
+    const sqlValues = [galleryId];
+    pool.query (sqlQuery, sqlValues)
+    .then((result) => {console.log(result); res.sendStatus(200) })
+    .catch((err) => {
+        console.log('Error in Delete gallery', err);
+        res.sendStatus(500);})
+
+})

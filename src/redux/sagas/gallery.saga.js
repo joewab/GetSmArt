@@ -92,6 +92,22 @@ function* deleteImage(action){
     }
 }
 
+function* deleteGallery(action){
+    try{
+        yield axios ({
+            method: 'DELETE',
+            url: `api/galleries/${action.payload}`
+        })
+        yield put({
+            type: 'FETCH_GALLERIES'
+        })
+
+    } catch{
+        console.log('error in deleteGallery');
+    }
+
+}
+
 function* gallerySaga() {
     yield takeLatest('POST_TO_GALLERY', addImageToGallery);
     yield takeLatest('FETCH_GALLERY', fetchGallery);
@@ -99,6 +115,8 @@ function* gallerySaga() {
     yield takeLatest('DELETE_IMAGE', deleteImage);
     yield takeLatest('FETCH_GALLERIES', fetchGalleries);
     yield takeLatest('CREATE_GALLERY', createGallery);
+    yield takeLatest('DELETE_GALLERY', deleteGallery);
+
 
 
 

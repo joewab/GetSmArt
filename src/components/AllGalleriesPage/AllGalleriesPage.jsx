@@ -8,6 +8,7 @@ import { useState } from 'react';
 //components--------------------------------------------
 
 import GalleryLink from '../GalleryLink/GalleryLink';
+import Nav from '../Nav/Nav';
 
 //material--------------------------------------------
 import Grid from '@mui/material/Grid';
@@ -43,8 +44,9 @@ function AllGalleriesPage() {
 
     return (
         <Container>
-            <Grid>
-                <Grid item>
+            <Nav/>
+            <Grid container spacing={2}>
+                <Grid item xs={12}>
                     <TextField
                         required
                         id="outlined-required"
