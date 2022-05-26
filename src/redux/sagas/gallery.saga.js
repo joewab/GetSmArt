@@ -2,10 +2,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function* fetchGallery(action) {
-    let galleryName = action.payload;
-    console.log('this is the galleryName:', galleryName);
+    let galleryId = action.payload;
+    console.log('this is the galleryId:', galleryId);
     try {
-        const gallery = yield axios.get(`/api/gallery/${galleryName}`);
+        const gallery = yield axios.get(`/api/gallery/${galleryId}`);
         console.log('got this gallery:', gallery.data);
         yield put({ type: 'SET_GALLERY', payload: gallery.data });
 
@@ -35,14 +35,10 @@ function* addImageToGallery(action){
             yield axios({
                 method: 'POST',
                 url: '/api/gallery',
-                data: { imageUrl: image.imageUrl, 
-                    description: image.description, 
-                    artist: image.artist,
-                    title: image.title,
-                    year: image.year,
-                    media: image.medium }
+                data: image
             });
-            yield put({type: 'FETCH_GALLERY'})
+            yield put({type: 'FETCH_GALLERY',
+                       payload: image.galleryId})
         }  
     catch{
         console.log('problem with post image saga');
@@ -59,8 +55,7 @@ function* createGallery(action) {
             data: {galleryName}
         })
         yield put({
-            type:'FETCH_GALLERY',
-            payload: galleryName
+            type:'FETCH_GALLERIES'
         })
     } catch{
         console.log('error in createGallery');
@@ -85,7 +80,7 @@ function* deleteImage(action){
             url: `api/gallery/${action.payload.imageId}`
         });
         yield put({type: 'FETCH_GALLERY',
-                    payload: action.payload.galleryName})
+                    payload: action.payload.galleryId})
     }
     catch{
         console.log('error in deleteImage');

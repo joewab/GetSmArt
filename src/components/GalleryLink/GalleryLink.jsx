@@ -17,11 +17,11 @@ import { Card } from '@material-ui/core';
 function GalleryLink({ gal }) {
     const history = useHistory();
     const dispatch = useDispatch();
-    
+
     console.log('this is gal', gal);
 
     function goToGallery() {
-        history.push(`/addgallery/${gal.name}`)
+        history.push(`/addgallery/${gal.id}`)
     }
 
     function deleteGallery(){

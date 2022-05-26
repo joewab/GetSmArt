@@ -45,7 +45,7 @@ function AddImageForm() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_GALLERY',
-            payload: galleryName
+            payload: galleryId
         })
     }, [])
 
@@ -58,17 +58,19 @@ function AddImageForm() {
 
     console.log('this is params:',params);
 
-    const galleryName = params.id;
+    const galleryId = params.id;
     const user = useSelector((store) => store.user);
-    const gallery = useSelector(store => store.gallery)
+    const gallery = useSelector(store => store.gallery.gallery)
     const image = useSelector(store => store.image);
+
+    console.log('this is galleryId:', galleryId);
 
     const [imageUrl, setImageUrl] = useState('');
     const [description, setDescription] = useState('');
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
-    const [media, setMedia] = useState('');
+    // const [media, setMedia] = useState('');
 
     const [medium, setMedium] = useState('');
 
@@ -82,7 +84,8 @@ function AddImageForm() {
         artist,
         title,
         year,
-        medium
+        media: medium,
+        galleryId
     }
 
 
@@ -98,14 +101,14 @@ function AddImageForm() {
         setArtist('');
         setTitle('');
         setYear('');
-        setMedia('');
+        setMedium('');
     }
 
     return (    
             <div key={user.id} className={classes.root}>
                 <Container>
                 <Nav/>
-                <h2>{user.username}'s gallery: {galleryName}</h2>
+                <h2>{user.username}'s gallery: {galleryId}</h2>
                 <h2>Add a slide below:</h2>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
@@ -166,7 +169,7 @@ function AddImageForm() {
                     variant='permanent'
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList galleryName={galleryName}/>
+                    <GalleryList galleryId={galleryId}/>
                 </Drawer>
             </div>
         

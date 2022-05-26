@@ -6,12 +6,12 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
-function GalleryList({galleryName}) {
+function GalleryList({galleryId}) {
 
     const dispatch = useDispatch();
     const gallery = useSelector(store => store.gallery.gallery);
     console.log('this is the gallery reducer:', gallery);
-    console.log('this is the galleryName:', galleryName);
+    console.log('this is the galleryId:', galleryId);
 
 
     return (
@@ -20,7 +20,7 @@ function GalleryList({galleryName}) {
             {gallery && gallery.map((image) => {
                 return (
                     <Grid key = {image.id} item xs={12}>
-                    <GalleryItem galleryName={galleryName} image={image} />
+                    <GalleryItem galleryId={galleryId} image={image} />
                     </Grid>
                 )
             }
