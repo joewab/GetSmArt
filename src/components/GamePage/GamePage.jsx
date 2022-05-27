@@ -32,7 +32,8 @@ const useStyles = makeStyles({
 function GamePage() {
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_GALLERY' });
+        dispatch({ type: 'FETCH_GALLERY', 
+                   payload: 1});
     }, []);
 
 
