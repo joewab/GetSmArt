@@ -20,9 +20,10 @@ function GalleryItem({ image, galleryId }) {
 
     const editImage = () => {
         console.log('in editImage, this is the id:', image.id);
+        console.log('in edit image, this is the galleryId:', galleryId);
         dispatch({
             type: 'EDIT_IMAGE',
-            payload: image.id
+            payload: {imageId:image.id, galleryId}
         })
         history.push(`/editgallery/${galleryId}`)
     }

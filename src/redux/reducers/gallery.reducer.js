@@ -35,10 +35,20 @@ const galleries = (state = [], action) => {
     }
 }
 
+const editImage = (state = [], action) => {
+    switch (action.type) {
+        case 'GET_ONE_IMAGE':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 
 export default combineReducers({
     image,
     gallery,
     galleryCount,
-    galleries
+    galleries,
+    editImage
   });

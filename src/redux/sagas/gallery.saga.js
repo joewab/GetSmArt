@@ -109,6 +109,24 @@ function* deleteGallery(action) {
 
 }
 
+function* editImage(action){
+    try{
+        
+        const imageId = action.payload.imageId
+        console.log('payload from edit image:',imageId);
+        const oneImage = yield axios.get(`/api/image/${imageId}`);
+        console.log('data for one image from edit button:', oneImage.data);
+        yield put ({
+            type: 'GET_ONE_IMAGE',
+            payload: oneImage.data
+        })
+
+
+    } catch{
+        console.log('error in editImage');
+    }
+}
+
 function* gallerySaga() {
     yield takeLatest('POST_TO_GALLERY', addImageToGallery);
     yield takeLatest('FETCH_GALLERY', fetchGallery);
@@ -117,6 +135,7 @@ function* gallerySaga() {
     yield takeLatest('FETCH_GALLERIES', fetchGalleries);
     yield takeLatest('CREATE_GALLERY', createGallery);
     yield takeLatest('DELETE_GALLERY', deleteGallery);
+    yield takeLatest('EDIT_IMAGE', editImage);
 
 
 

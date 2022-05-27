@@ -54,6 +54,8 @@ function EditImageForm() {
 
     //variables that are react functions--------------------------------
     const params = useParams();
+    console.log('in edit page, this is params:', params);
+
     const history = useHistory();
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -61,9 +63,10 @@ function EditImageForm() {
     //variables that evaluate to something specific from the store or params---------
     const galleryId = params.id;
     const user = useSelector((store) => store.user);
-    const gallery = useSelector(store => store.gallery.gallery)
-    console.log('this is the gallery:', gallery);
-    const image = useSelector(store => store.image);
+    const gallery = useSelector(store => store.gallery.gallery);
+    const imageToEdit = useSelector(store => store.gallery.editImage[0])
+    console.log('image to edit:', imageToEdit);
+
 
 
     //local state--------------------------------------------------------------
@@ -100,16 +103,19 @@ function EditImageForm() {
         setArtist('');
         setTitle('');
         setYear('');
-        setMedia('');
     }
 
-    return (
+
+    return ( imageToEdit ? 
         <div key={user.id} className={classes.root}>
             <Container>
                 <Nav />
                 <h2>{user.username}'s gallery: {galleryId}</h2>
                 <h2>Edit slide below:</h2>
                 <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <img src = {imageToEdit.url} />
+                    </Grid>
                     <Grid item key={user.id} xs={6}>
                         <Box
                             component="form"
@@ -124,36 +130,37 @@ function EditImageForm() {
                                     required
                                     id="outlined-required"
                                     label="image url required"
-                                    defaultValue=''
-                                    onChange={(event) => setImageUrl(event.target.value)}
+                                    defaultValue={imageToEdit.url}
                                 />
                                 <TextField
                                     required
                                     id="outlined-required"
                                     label="description required"
-                                    defaultValue={description}
-                                    onChange={(event) => setDescription(event.target.value)}
+                                    defaultValue={imageToEdit.description}
+                                    
+
                                 />
                                 <TextField
                                     required
                                     id="outlined-required"
                                     label="artist required"
-                                    defaultValue={artist}
-                                    onChange={(event) => setArtist(event.target.value)}
+                                    defaultValue={imageToEdit.artist}
+                                
                                 />
                                 <TextField
                                     required
                                     id="outlined-required"
                                     label="title required"
-                                    defaultValue={title}
-                                    onChange={(event) => setTitle(event.target.value)}
+                                    defaultValue={imageToEdit.title}
+                                    
+                                
                                 />
                                 <TextField
                                     required
                                     id="outlined-required"
                                     label="year required"
-                                    defaultValue={year}
-                                    onChange={(event) => setYear(event.target.value)}
+                                    defaultValue={imageToEdit.year}
+                                    
                                 />
                                 <MediaPicker medium={medium} handleChange={handleChange} />
                             </div>
@@ -163,15 +170,17 @@ function EditImageForm() {
                 </Grid>
             </Container>
             
+
+            
             <Drawer
                 className={classes.drawer}
                 variant='permanent'
                 anchor='right'
                 classes={{ paper: classes.drawerPaper }}>
-                <GalleryList />
+                <GalleryList galleryId={galleryId}/>
             </Drawer>
         </div>
-
+    :<>fail</>
 
     );
 }
