@@ -82,7 +82,7 @@ function App() {
           <ProtectedRoute
             // logged in shows all galleries page
             exact
-            path="/addgallery/:id"
+            path="/addgallery/:galleryId/:galleryName"
           >
             <AddImageForm />
           </ProtectedRoute>
@@ -90,7 +90,7 @@ function App() {
           <ProtectedRoute
             // logged in shows all galleries page
             exact
-            path="/editgallery/:id"
+            path="/editimage/:galleryId/:imageId/:galleryName"
           >
             <EditImageForm />
           </ProtectedRoute>

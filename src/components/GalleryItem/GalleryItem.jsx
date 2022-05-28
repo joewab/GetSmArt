@@ -13,23 +13,17 @@ import { CardActions } from '@mui/material';
 
 
 
-function GalleryItem({ image, galleryId }) {
+function GalleryItem({ image, galleryId, galleryName }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log('galleryName in GalleryItem component:', galleryName);
 
     const editImage = () => {
-        console.log('in editImage, this is the id:', image.id);
-        console.log('in edit image, this is the galleryId:', galleryId);
-        dispatch({
-            type: 'EDIT_IMAGE',
-            payload: {imageId:image.id, galleryId}
-        })
-        history.push(`/editgallery/${galleryId}`)
+        history.push(`/editimage/${galleryId}/${image.id}/${galleryName}`)
     }
 
     const deleteImage = () => {
-        console.log('in deleteImage, this is the id:', image.id);
         dispatch({
             type: 'DELETE_IMAGE',
             payload: {imageId: image.id, galleryId}

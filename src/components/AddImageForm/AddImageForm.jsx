@@ -21,7 +21,7 @@ import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 
-const drawerWidth = 300
+const drawerWidth = 500
 
 const useStyles = makeStyles({
     drawer: {
@@ -56,7 +56,8 @@ function AddImageForm() {
     const dispatch = useDispatch();
 
 
-    const galleryId = params.id;
+    const galleryId = params.galleryId;
+    const galleryName = params.galleryName;
     const user = useSelector((store) => store.user);
 
 
@@ -100,7 +101,7 @@ function AddImageForm() {
             <div key={user.id} className={classes.root}>
                 <Container>
                 <Nav/>
-                <h2>{user.username}'s gallery: {galleryId}</h2>
+                <h2>{user.username}'s gallery: {galleryName}</h2>
                 <h2>Add a slide below:</h2>
                     <Grid container spacing={2}>
                         <Grid item xs={6}>
@@ -148,7 +149,14 @@ function AddImageForm() {
                                         defaultValue={year}
                                         onChange={(event) => setYear(event.target.value)}
                                     />
-                                    <MediaPicker medium={medium} handleChange={handleChange} />
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="media required"
+                                        defaultValue={medium}
+                                        onChange={(event) => setMedium(event.target.value)}
+                                    />
+                                    {/* <MediaPicker medium={medium} handleChange={handleChange} /> */}
                                 </div>
                                 <Button onClick={handleSubmit}>submit</Button>
                             </Box>
@@ -161,7 +169,7 @@ function AddImageForm() {
                     variant='permanent'
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList galleryId={galleryId}/>
+                    <GalleryList galleryId={galleryId} galleryName={galleryName}/>
                 </Drawer>
             </div>
         

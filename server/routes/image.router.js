@@ -9,7 +9,7 @@ router.get('/:id', (req, res) => {
     WHERE image.id=$1;`;
     const sqlValues = [req.params.id]
     pool.query(sqlQuery, sqlValues)
-        .then((result) => { res.send(result.rows); console.log('this is the get one image result:', result.rows); })
+        .then((result) => { res.send(result.rows[0]); console.log('this is the get one image result:', result.rows); })
         .catch((err) => {
             console.log('Error completing SELECT one image query', err);
             res.sendStatus(500);
