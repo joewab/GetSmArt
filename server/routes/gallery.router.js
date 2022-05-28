@@ -19,16 +19,16 @@ const pool = require('../modules/pool')
 
 
 router.get('/:id', (req, res) => {
-  const queryText = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media, gallery.id AS gallery_id
+    const queryText = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media, gallery.id AS gallery_id
   FROM image JOIN gallery_image ON image.id = gallery_image.image_id
   JOIN gallery ON gallery.id = gallery_image.gallery_id
   WHERE gallery.id=$1;`;
-  pool.query(queryText, [req.params.id])
-    .then((result) => { res.send(result.rows); console.log('this is the get gallery result:',result.rows); })
-    .catch((err) => {
-      console.log('Error completing SELECT image query', err);
-      res.sendStatus(500);
-    });
+    pool.query(queryText, [req.params.id])
+        .then((result) => { res.send(result.rows); console.log('this is the get gallery result:', result.rows); })
+        .catch((err) => {
+            console.log('Error completing SELECT image query', err);
+            res.sendStatus(500);
+        });
 });
 
 // router.post('/', (req, res) => {
@@ -51,21 +51,21 @@ router.post('/', async (req, res) => {
 
     try {
         const image = req.body;
-        console.log('this is the image object',image);
+        console.log('this is the image object', image);
         await client.query('BEGIN')
         const sqlQuery = `INSERT INTO "image" ("url", "description", "artist", "title", "year", "media")
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id;`;
         const sqlValues = [image.imageUrl, image.description, image.artist, image.title, image.year, image.media]
         const imageInsertResults = await client.query(sqlQuery, sqlValues);
-        console.log('this should be the image id:',imageInsertResults.rows[0].id);
+        console.log('this should be the image id:', imageInsertResults.rows[0].id);
         const imageId = imageInsertResults.rows[0].id;
 
-        
-            const insertIntoGalleryImageQuery = `INSERT INTO "gallery_image" ("gallery_id", "image_id") VALUES ($1, $2)`;
-            const insertIntoGalleryImageValues = [image.galleryId, imageId];
-            await client.query(insertIntoGalleryImageQuery, insertIntoGalleryImageValues);
-        
+
+        const insertIntoGalleryImageQuery = `INSERT INTO "gallery_image" ("gallery_id", "image_id") VALUES ($1, $2)`;
+        const insertIntoGalleryImageValues = [image.galleryId, imageId];
+        await client.query(insertIntoGalleryImageQuery, insertIntoGalleryImageValues);
+
 
         await client.query('COMMIT')
         res.sendStatus(201);
@@ -79,14 +79,19 @@ router.post('/', async (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    const sqlText = 'DELETE  FROM image WHERE id=$1';
     const imageId = req.params.id
-    pool.query(sqlText, [imageId])
-      .then((result) => { res.send(result.rows); })
-      .catch((err) => {
-        console.log('Error completing DELETE image query', err);
-        res.sendStatus(500);
-      });
-  });
+    console.log('this is req params in delete:',imageId);
+    const galleryId = req.body.galleryId
+    console.log('this is req body in delete:', galleryId);
+    const sqlText = 'DELETE FROM gallery_image WHERE image_id=$1 AND gallery_id=$2';
+    const sqlValues = [imageId, galleryId]
+    
+    pool.query(sqlText, sqlValues)
+        .then((result) => { res.send(result.rows); })
+        .catch((err) => {
+            console.log('Error completing DELETE image query', err);
+            res.sendStatus(500);
+        });
+});
 
 module.exports = router;

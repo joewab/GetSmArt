@@ -8,7 +8,7 @@ import { useState } from 'react';
 //components--------------------------------------------
 
 import GalleryLink from '../GalleryLink/GalleryLink';
-import Nav from '../Nav/Nav';
+import Nav from '../../Nav/Nav';
 
 //material--------------------------------------------
 import Grid from '@mui/material/Grid';
@@ -39,7 +39,6 @@ function AllGalleriesPage() {
             type:'CREATE_GALLERY',
             payload: newGalleryName
         })
-        // history.push(`/addgallery/${newGalleryName}`)
     }
 
     return (

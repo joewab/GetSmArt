@@ -21,7 +21,7 @@ function GalleryLink({ gal }) {
     console.log('this is gal', gal);
 
     function goToGallery() {
-        history.push(`/addgallery/${gal.id}`)
+        history.push(`/addgallery/${gal.id}/${gal.name}`)
     }
 
     function deleteGallery(){

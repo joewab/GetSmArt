@@ -18,8 +18,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
-import AddImageForm from '../AddImageForm/AddImageForm';
+import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
+import AddImageForm from '../GameMakerComponents/AddImageForm/AddImageForm';
+import EditImageForm from '../GameMakerComponents/EditImageForm/EditImageForm';
 
 import './App.css';
 
@@ -81,9 +82,17 @@ function App() {
           <ProtectedRoute
             // logged in shows all galleries page
             exact
-            path="/addgallery/:id"
+            path="/addgallery/:galleryId/:galleryName"
           >
             <AddImageForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/editimage/:galleryId/:imageId/:galleryName"
+          >
+            <EditImageForm />
           </ProtectedRoute>
 
           <Route

@@ -4,10 +4,9 @@ import {useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 // components--------------------------------------------------------
-import TeacherPage from '../AddImageForm/AddImageForm';
-import GamePage from '../GamePage/GamePage';
+import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
+import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
 
 //material------------------------------------------------------
 

@@ -1,14 +1,14 @@
 //react,redux,saga stuff---------------------------------
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 //components---------------------------------------------
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
-import Nav from '../Nav/Nav';
+import Nav from '../../Nav/Nav';
 
 
 //materialUI----------------------------------------------
@@ -21,7 +21,7 @@ import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 
-const drawerWidth = 300
+const drawerWidth = 500
 
 const useStyles = makeStyles({
     drawer: {
@@ -41,14 +41,24 @@ const useStyles = makeStyles({
 
 
 
-function EditGalleryPage() {
-    const user = useSelector((store) => store.user);
-    const gallery = useSelector(store => store.gallery)
-    const history = useHistory();
-    const classes = useStyles();
-    const image = useSelector(store => store.image);
+function AddImageForm() {
+    useEffect(() => {
+        dispatch({
+            type: 'FETCH_GALLERY',
+            payload: galleryId
+        })
+    }, [])
 
+    
+
+    const params = useParams();
+    const classes = useStyles();
     const dispatch = useDispatch();
+
+
+    const galleryId = params.galleryId;
+    const galleryName = params.galleryName;
+    const user = useSelector((store) => store.user);
 
 
     const [imageUrl, setImageUrl] = useState('');
@@ -56,8 +66,6 @@ function EditGalleryPage() {
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
-    const [media, setMedia] = useState('');
-
     const [medium, setMedium] = useState('');
 
     const handleChange = (event) => {
@@ -70,13 +78,13 @@ function EditGalleryPage() {
         artist,
         title,
         year,
-        medium
+        media: medium,
+        galleryId
     }
 
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('in handleSubmit, here is data:', imageObject);
         dispatch({
             type: 'POST_TO_GALLERY',
             payload: imageObject
@@ -86,18 +94,17 @@ function EditGalleryPage() {
         setArtist('');
         setTitle('');
         setYear('');
-        setMedia('');
+        setMedium('');
     }
 
-    return (
-        <div className="container">
-            <h2>Welcome, teacher {user.username}!</h2>
-            <p>Your ID is: {user.id}</p>
-
-            <div className={classes.root}>
-                <Container key={user.id}>
+    return (    
+            <div key={user.id} className={classes.root}>
+                <Container>
+                <Nav/>
+                <h2>{user.username}'s gallery: {galleryName}</h2>
+                <h2>Add a slide below:</h2>
                     <Grid container spacing={2}>
-                        <Grid item key={user.id} xs={6}>
+                        <Grid item xs={6}>
                             <Box
                                 component="form"
                                 sx={{
@@ -111,7 +118,7 @@ function EditGalleryPage() {
                                         required
                                         id="outlined-required"
                                         label="image url required"
-                                        defaultValue={image.imageUrl}
+                                        defaultValue={imageUrl}
                                         onChange={(event) => setImageUrl(event.target.value)}
                                     />
                                     <TextField
@@ -142,27 +149,33 @@ function EditGalleryPage() {
                                         defaultValue={year}
                                         onChange={(event) => setYear(event.target.value)}
                                     />
-                                    <MediaPicker medium={medium} handleChange={handleChange}/>
+                                    <TextField
+                                        required
+                                        id="outlined-required"
+                                        label="media required"
+                                        defaultValue={medium}
+                                        onChange={(event) => setMedium(event.target.value)}
+                                    />
+                                    {/* <MediaPicker medium={medium} handleChange={handleChange} /> */}
                                 </div>
+                                <Button onClick={handleSubmit}>submit</Button>
                             </Box>
                         </Grid>
                     </Grid>
                 </Container>
-                <Button onClick={handleSubmit}>submit</Button>
-                <LogOutButton className="btn" />
 
                 <Drawer
                     className={classes.drawer}
                     variant='permanent'
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList/>
+                    <GalleryList galleryId={galleryId} galleryName={galleryName}/>
                 </Drawer>
             </div>
-        </div>
+        
 
     );
 }
 
 // this allows us to use <App /> in index.js
-export default EditGalleryPage;
+export default AddImageForm;

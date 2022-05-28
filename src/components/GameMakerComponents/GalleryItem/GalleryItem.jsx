@@ -13,21 +13,17 @@ import { CardActions } from '@mui/material';
 
 
 
-function GalleryItem({ image, galleryId }) {
+function GalleryItem({ image, galleryId, galleryName }) {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    console.log('galleryName in GalleryItem component:', galleryName);
 
-    const fetchImage = () => {
-        console.log('in fetchImage! this is the id:', image.id);
-        dispatch({
-            type: 'FETCH_IMAGE',
-            payload: image.id
-        })
+    const editImage = () => {
+        history.push(`/editimage/${galleryId}/${image.id}/${galleryName}`)
     }
 
     const deleteImage = () => {
-        console.log('in deleteImage, this is the id:', image.id);
         dispatch({
             type: 'DELETE_IMAGE',
             payload: {imageId: image.id, galleryId}
@@ -46,7 +42,7 @@ function GalleryItem({ image, galleryId }) {
                 alt={image.title}
             />
             <CardActions disableSpacing>
-                <IconButton onClick= {fetchImage} aria-label="edit">
+                <IconButton onClick= {editImage} aria-label="edit">
                     <EditIcon />
                 </IconButton>
                 <IconButton onClick={deleteImage} aria-label="delete">
