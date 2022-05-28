@@ -18,9 +18,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-import AllGalleriesPage from '../AllGalleriesPage/AllGalleriesPage';
-import AddImageForm from '../AddImageForm/AddImageForm';
-import EditImageForm from '../EditImageForm/EditImageForm';
+import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
+import AddImageForm from '../GameMakerComponents/AddImageForm/AddImageForm';
+import EditImageForm from '../GameMakerComponents/EditImageForm/EditImageForm';
 
 import './App.css';
 

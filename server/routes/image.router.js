@@ -16,6 +16,35 @@ router.get('/:id', (req, res) => {
         });
 });
 
+router.put('/:id', (req, res) => {
+    const imageToEdit = req.body;
+    const imageId = req.params.id
+    console.log('image to update:', imageToEdit);
+    const sqlQuery = `
+    UPDATE image 
+      SET 
+        description = $1,
+        artist = $2,
+        title = $3,
+        year = $4,
+        media = $5
+      WHERE id = $6;
+  `;
+    const sqlValues = [imageToEdit.description,
+    imageToEdit.artist,
+    imageToEdit.title,
+    imageToEdit.year,
+    imageToEdit.media,
+        imageId
+    ]
+    pool.query(sqlQuery, sqlValues)
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('Update image failed: ', err);
+      res.sendStatus(500);
+    });
+})
+
 
 
 module.exports = router;

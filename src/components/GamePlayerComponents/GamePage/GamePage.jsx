@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 //components---------------------------------------------
-import MediaPicker from '../MediaPicker/MediaPicker';
+import MediaPicker from '../../GameMakerComponents/MediaPicker/MediaPicker';
 import ArtistAnswerForm from '../ArtistAnswerForm/ArtistAnswerForm';
 import TitleAnswerForm from '../TitleAnswerForm/TitleAnswerForm';
 import YearAnswerForm from '../YearAnswerForm/YearAnswerForm';
@@ -40,7 +40,7 @@ function GamePage() {
 
     const classes = useStyles();
     const gallery = useSelector(store => store.gallery.gallery);
-    const gallerySlideNumber = useSelector(store => store.gallery.galleryCount)
+    const gallerySlideNumber = useSelector(store => store.game.galleryCount)
     const dispatch = useDispatch();
 
     const [artist, setArtist] = useState('');

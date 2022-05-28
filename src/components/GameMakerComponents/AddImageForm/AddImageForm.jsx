@@ -5,10 +5,10 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 //components---------------------------------------------
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
-import Nav from '../Nav/Nav';
+import Nav from '../../Nav/Nav';
 
 
 //materialUI----------------------------------------------

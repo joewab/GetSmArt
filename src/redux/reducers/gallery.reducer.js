@@ -17,14 +17,7 @@ const gallery = (state = [], action) => {
     }
 }
 
-const galleryCount = (state = 0, action) => {
-    switch (action.type) {
-        case 'NEXT_IMAGE':
-            return state + 1;
-        default:
-            return state;
-    }
-}
+
 
 const galleries = (state = [], action) => {
     switch (action.type) {
@@ -68,7 +61,6 @@ const editImage = (state = {}, action) => {
 export default combineReducers({
     image,
     gallery,
-    galleryCount,
     galleries,
     editImage
 });

@@ -5,10 +5,10 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 //components---------------------------------------------
-import LogOutButton from '../LogOutButton/LogOutButton';
+import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
-import Nav from '../Nav/Nav';
+import Nav from '../../Nav/Nav';
 
 
 //materialUI----------------------------------------------
@@ -99,8 +99,8 @@ function EditImageForm() {
         e.preventDefault();
         console.log('in handleSubmit, here is data:', imageObject);
         dispatch({
-            type: 'POST_TO_GALLERY',
-            payload: imageObject
+            type: 'UPDATE_IMAGE',
+            payload: imageToEdit
         });
         setImageUrl('');
         setDescription('');

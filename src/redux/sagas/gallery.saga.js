@@ -64,17 +64,6 @@ function* createGallery(action) {
     }
 }
 
-function* incrementGallery() {
-    try {
-        yield put({
-            type: 'NEXT_IMAGE'
-        });
-    }
-    catch {
-        console.log('error incrementing to next slide');
-    }
-}
-
 function* deleteImage(action) {
     console.log('in deleteImage',action);
     try {
@@ -126,21 +115,37 @@ function* editImage(action){
         console.log('error in editImage');
     }
 }
+function* updateImage(action){
+    try{ 
+        const imageToEdit = action.payload;
+        console.log('payload from update image:',imageToEdit);
+        console.log('image to edit id:', imageToEdit.id);
+        yield axios({
+            method: 'PUT',
+            url: `/api/image/${imageToEdit.id}`,
+            data: imageToEdit
+        })
+       
+        yield put ({
+            type: 'GET_ONE_IMAGE',
+            payload: imageToEdit
+        })
+
+
+    } catch{
+        console.log('error in editImage');
+    }
+}
 
 function* gallerySaga() {
     yield takeLatest('POST_TO_GALLERY', addImageToGallery);
     yield takeLatest('FETCH_GALLERY', fetchGallery);
-    yield takeLatest('INCREMENT_GALLERY', incrementGallery);
     yield takeLatest('DELETE_IMAGE', deleteImage);
     yield takeLatest('FETCH_GALLERIES', fetchGalleries);
     yield takeLatest('CREATE_GALLERY', createGallery);
     yield takeLatest('DELETE_GALLERY', deleteGallery);
     yield takeLatest('EDIT_IMAGE', editImage);
-
-
-
-
-
+    yield takeLatest('UPDATE_IMAGE', updateImage);
 }
 
 export default gallerySaga
