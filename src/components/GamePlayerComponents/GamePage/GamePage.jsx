@@ -55,18 +55,19 @@ function GamePage() {
 
 
     console.log('this is gallery on gamepage:', gallery);
-    const gameImage = gallery[gallerySlideNumber];
+    const gameImage = gallery[gallerySlideNumber-1];
     console.log('this is the image showing:', gameImage);
 
 
     const handleGallerySlideIncrement = () => {
+        if(gallerySlideNumber < gallery.length){
         dispatch({
             type: 'INCREMENT_GALLERY',
         })
         setArtistAnswer(false);
         setTitleAnswer(false);
         setYearAnswer(false);
-        setMediaAnswer(false);
+        setMediaAnswer(false);}
     }
 
 
@@ -85,7 +86,7 @@ function GamePage() {
                         }}
                         noValidate
                         autoComplete="off">
-                        <Typography>slide: {gallerySlideNumber+1} / {gallery.length}</Typography>
+                        <Typography>slide: {gallerySlideNumber} / {gallery.length}</Typography>
                         <div>
                             <ArtistAnswerForm artist={artist} setArtist={setArtist} artistAnswer={artistAnswer} setArtistAnswer={setArtistAnswer} gameImage={gameImage} />
                         </div>
