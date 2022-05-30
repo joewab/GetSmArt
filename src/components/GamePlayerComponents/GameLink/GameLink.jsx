@@ -18,6 +18,8 @@ function GameLink({ game }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    const storedScore = useSelector(store => store.game.storedScore.score)
+
     console.log('this is game', game);
 
     function goToGame() {
@@ -32,6 +34,7 @@ function GameLink({ game }) {
                     <Button onClick={goToGame}
                         variant='filled'>
                         go to game</Button>
+                    <Typography> Current Score: {storedScore}</Typography>
             
                 </Card>
             </Grid>
