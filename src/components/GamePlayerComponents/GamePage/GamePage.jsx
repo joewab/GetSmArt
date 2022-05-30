@@ -1,7 +1,8 @@
-
 //react, redux, saga stuff-------------------------------
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory, useParams } from 'react-router-dom';
+
 
 //components---------------------------------------------
 import MediaPicker from '../../GameMakerComponents/MediaPicker/MediaPicker';
@@ -9,6 +10,7 @@ import ArtistAnswerForm from '../ArtistAnswerForm/ArtistAnswerForm';
 import TitleAnswerForm from '../TitleAnswerForm/TitleAnswerForm';
 import YearAnswerForm from '../YearAnswerForm/YearAnswerForm';
 import MediaAnswerForm from '../MediaAnswerForm/MediaAnswerForm';
+import Nav from '../../Nav/Nav';
 
 //material stuff-----------------------------------------
 import { Button } from '@mui/material';
@@ -33,12 +35,14 @@ function GamePage() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_GALLERY', 
-                   payload: 1});
+                   payload: galleryId});
     }, []);
 
 
-
+    const params = useParams();
     const classes = useStyles();
+
+    const galleryId = params.galleryId;
     const gallery = useSelector(store => store.gallery.gallery);
     const gallerySlideNumber = useSelector(store => store.game.galleryCount)
     const dispatch = useDispatch();
@@ -73,8 +77,10 @@ function GamePage() {
 
 
     return (
-
+        <>
+        <Nav/>
         <Container className={classes.root}>
+           
             <Grid>
                 <Grid item xs={6}>
                     <img className={classes.img} src={gameImage && gameImage.url} />
@@ -107,6 +113,7 @@ function GamePage() {
                 </Grid>
             </Grid>
         </Container>
+        </>
     )
 }
 

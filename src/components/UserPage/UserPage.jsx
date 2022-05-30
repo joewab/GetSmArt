@@ -7,6 +7,7 @@ import { useHistory } from 'react-router-dom';
 import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
+import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
 
 //material------------------------------------------------------
 
@@ -27,7 +28,7 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
-      <GamePage/>
+      <AllGamesPage/>
       <LogOutButton className="btn" />
     </div>
   );}
