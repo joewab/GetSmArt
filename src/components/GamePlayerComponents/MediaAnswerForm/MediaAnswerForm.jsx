@@ -9,10 +9,15 @@ import Card from '@mui/material/Card';
 
 function MediaAnswerForm({media, setMedia, mediaAnswer, setMediaAnswer, gameImage}) {
 
+    const dispatch = useDispatch();
+
     const handleSubmitMedia = () => {
         console.log('in Submit Media');
         if(media && media === gameImage.media){
             setMediaAnswer(true);
+            dispatch({
+                type: 'CORRECT_ANSWER'
+            });
         }
         console.log(mediaAnswer);
     }

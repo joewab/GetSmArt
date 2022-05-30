@@ -9,10 +9,15 @@ import Card from '@mui/material/Card';
 
 function YearAnswerForm({year, setYear, yearAnswer, setYearAnswer, gameImage}) {
 
+    const dispatch = useDispatch();
+
     const handleSubmitYear = () => {
         console.log('in Submit Year');
         if(year && year === gameImage.year){
             setYearAnswer(true);
+            dispatch({
+                type: 'CORRECT_ANSWER'
+            });
         }
         console.log(yearAnswer);
     }

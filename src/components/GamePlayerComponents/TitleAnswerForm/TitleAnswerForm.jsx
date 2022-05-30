@@ -9,10 +9,15 @@ import Card from '@mui/material/Card';
 
 function TitleAnswerForm({title, setTitle, titleAnswer, setTitleAnswer, gameImage}) {
 
+    const dispatch = useDispatch();
+
     const handleSubmitTitle = () => {
         console.log('in Submit Title');
         if(title && title === gameImage.title){
             setTitleAnswer(true);
+            dispatch({
+                type: 'CORRECT_ANSWER'
+            });
         }
         console.log(titleAnswer);
     }

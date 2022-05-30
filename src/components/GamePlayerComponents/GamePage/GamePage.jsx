@@ -11,6 +11,8 @@ import TitleAnswerForm from '../TitleAnswerForm/TitleAnswerForm';
 import YearAnswerForm from '../YearAnswerForm/YearAnswerForm';
 import MediaAnswerForm from '../MediaAnswerForm/MediaAnswerForm';
 import Nav from '../../Nav/Nav';
+import GameIncrementButton from '../GameIncrementButton/GameIncrementButton';
+import PreviousScore from '../PreviousScore/PreviousScore';
 
 //material stuff-----------------------------------------
 import { Button } from '@mui/material';
@@ -36,17 +38,34 @@ function GamePage() {
     useEffect(() => {
         dispatch({ type: 'FETCH_GALLERY', 
                    payload: galleryId});
+        dispatch({
+            type: 'FETCH_SCORE',
+            payload: {galleryId, userId: user.id}
+        })
     }, []);
 
+    console.log('stored score:', storedScore);
 
+//constants that are react functions--------------------------------------------------
     const params = useParams();
     const classes = useStyles();
-
-    const galleryId = params.galleryId;
-    const gallery = useSelector(store => store.gallery.gallery);
-    const gallerySlideNumber = useSelector(store => store.game.galleryCount)
     const dispatch = useDispatch();
 
+    console.log('params on game page:', params);
+
+//constants that evaluate to specific values using react functions----------------
+    const galleryId = params.galleryId;
+    const gallery = useSelector(store => store.gallery.gallery);
+    const gallerySlideNumber = useSelector(store => store.game.galleryCount);
+    const gameScore = useSelector(store => store.game.gameScore);
+    const user = useSelector(store => store.user);
+    const storedScore = useSelector(store => store.game.storedScore)
+
+    console.log('storedScore on gamepage:', storedScore);
+
+
+   
+//local state----------------------------------------------------------------
     const [artist, setArtist] = useState('');
     const [title, setTitle] = useState('');
     const [year, setYear] = useState('');
@@ -57,22 +76,11 @@ function GamePage() {
     const [yearAnswer, setYearAnswer] = useState(false);
     const [mediaAnswer, setMediaAnswer] = useState(false);
 
-
-    console.log('this is gallery on gamepage:', gallery);
+//other constants-------------------------------------------------------------------
     const gameImage = gallery[gallerySlideNumber-1];
-    console.log('this is the image showing:', gameImage);
 
 
-    const handleGallerySlideIncrement = () => {
-        if(gallerySlideNumber < gallery.length){
-        dispatch({
-            type: 'INCREMENT_GALLERY',
-        })
-        setArtistAnswer(false);
-        setTitleAnswer(false);
-        setYearAnswer(false);
-        setMediaAnswer(false);}
-    }
+   
 
 
 
@@ -80,8 +88,8 @@ function GamePage() {
         <>
         <Nav/>
         <Container className={classes.root}>
-           
             <Grid>
+                <PreviousScore/>
                 <Grid item xs={6}>
                     <img className={classes.img} src={gameImage && gameImage.url} />
                 </Grid>
@@ -92,6 +100,7 @@ function GamePage() {
                         }}
                         noValidate
                         autoComplete="off">
+                        <Typography> score: {gameScore}</Typography>
                         <Typography>slide: {gallerySlideNumber} / {gallery.length}</Typography>
                         <div>
                             <ArtistAnswerForm artist={artist} setArtist={setArtist} artistAnswer={artistAnswer} setArtistAnswer={setArtistAnswer} gameImage={gameImage} />
@@ -107,7 +116,11 @@ function GamePage() {
                             {/* <MediaPicker medium={media} /> */}
                             {/* <Button onClick={handleSubmitMedia}>Submit Answer</Button> */}
                         </div>
-                        <Button onClick={handleGallerySlideIncrement}>Skip to next</Button>
+                        <GameIncrementButton  setArtistAnswer={setArtistAnswer} 
+                                             setTitleAnswer={setTitleAnswer}
+                                             setYearAnswer={setYearAnswer}
+                                             setMediaAnswer={setMediaAnswer}
+                                             galleryId={galleryId} />
 
                     </Box>
                 </Grid>
