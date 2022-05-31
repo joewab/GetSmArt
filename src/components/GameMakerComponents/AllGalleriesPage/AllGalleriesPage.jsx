@@ -17,6 +17,8 @@ import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { Button } from '@material-ui/core';
 import { TextField } from '@mui/material';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
 
 
 
@@ -25,6 +27,12 @@ function AllGalleriesPage() {
     useEffect(() => {
         dispatch({ type: 'FETCH_GALLERIES' });
     }, []);
+
+    const theme = createTheme({
+        typography: {
+            fontFamily: 'Quicksand'
+        }
+    })
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -44,6 +52,7 @@ function AllGalleriesPage() {
     }
 
     return ( user.admin ?
+        <ThemeProvider theme={theme}>
         <Container>
             <Nav/>
             <Grid container spacing={2}>
@@ -65,6 +74,7 @@ function AllGalleriesPage() {
                 
             </Grid>
         </Container>
+        </ThemeProvider>
         :
         <UserPage/>
     )

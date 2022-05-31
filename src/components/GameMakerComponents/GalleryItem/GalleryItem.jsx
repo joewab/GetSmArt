@@ -12,14 +12,34 @@ import CardMedia from '@mui/material/CardMedia';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { CardActions } from '@mui/material';
+import { makeStyles } from '@material-ui/styles';
+import { createTheme, ThemeProvider, Typography } from '@material-ui/core';
 
+
+const useStyles = makeStyles({
+
+    root: {
+
+        fontFamily: 'Quicksand'
+        
+    },
+    
+
+})
 
 
 function GalleryItem({ image, galleryId, galleryName }) {
 
+    const classes = useStyles();
     const dispatch = useDispatch();
     const history = useHistory();
     console.log('galleryName in GalleryItem component:', galleryName);
+
+    const theme = createTheme({
+        typography: {
+            fontFamily: 'Quicksand'
+        }
+    })
 
     const editImage = () => {
         dispatch({
@@ -37,8 +57,10 @@ function GalleryItem({ image, galleryId, galleryName }) {
     }
 
     return (
-        <Card key={image.id} elevation={10}>
+        <ThemeProvider theme={theme}>
+        <Card key={image.id} elevation={10} >
             <CardHeader
+                disableTypography = 'true'
                 title={image.title}
             />
             <CardMedia
@@ -58,6 +80,7 @@ function GalleryItem({ image, galleryId, galleryName }) {
                 </IconButton>
             </CardActions>
         </Card>
+        </ThemeProvider>
     )
 }
 

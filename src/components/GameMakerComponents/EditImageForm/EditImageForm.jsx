@@ -21,6 +21,7 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@mui/material';
 import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 
 const drawerWidth = 400
 
@@ -32,11 +33,13 @@ const useStyles = makeStyles({
         width: drawerWidth
     },
     root: {
-        display: 'flex'
+        display: 'flex',
+        fontFamily: 'Quicksand'
+        
     },
     img: {
         width: 400
-    }
+    },
 
 })
 
@@ -55,8 +58,14 @@ function EditImageForm() {
             type: 'FETCH_GALLERY',
             payload: galleryId
         });
-        
+
     }, [])
+
+    const theme = createTheme({
+        typography: {
+            fontFamily: 'Quicksand'
+        }
+    })
 
     //variables that are react functions--------------------------------
     const params = useParams();
@@ -111,22 +120,20 @@ function EditImageForm() {
         setYear('');
     }
 
-    function backToAddSlide(){
+    function backToAddSlide() {
         history.push(`/addgallery/${galleryId}/${galleryName}`)
     }
 
 
-    return ( user.admin ?
+    return (user.admin ?
         <div key={user.id} className={classes.root}>
+            <ThemeProvider theme={theme} >
             <Container>
                 <Nav />
                 <h2>{user.username}'s gallery: {galleryName}</h2>
                 <h2>Edit slide below:</h2>
                 <Grid container spacing={2}>
-                    <Grid item xs={6}>
-                        {/* Look at this!!!!!!!!!!!!!!!!!!!!! it updates here and nowhere else!!!!!!!!!!!!!!!! */}
-                        <img src = {imageToEdit.url} /> 
-                        <>{imageToEdit.title}</>
+                    <Grid item xs={6}>  <img src={imageToEdit.url} />
                     </Grid>
                     <Grid item key={user.id} xs={6}>
                         <Box
@@ -138,70 +145,60 @@ function EditImageForm() {
                             autoComplete="off"
                         >
                             <div>
-                               
+
                                 <TextField
-                                    required
-                                    id="outlined-required"
                                     label="artist"
-                                    defaultValue={imageToEdit.artist}
+                                    value={imageToEdit.artist}
                                     onChange={(e) => {
                                         dispatch({
-                                          type: 'EDIT_IMAGE_ARTIST',
-                                          payload: e.target.value
+                                            type: 'EDIT_IMAGE_ARTIST',
+                                            payload: e.target.value
                                         })
-                                      }}
-                                
+                                    }}
+
                                 />
                                 <TextField
-                                    required
-                                    id="outlined-required"
                                     label="title"
-                                    defaultValue={imageToEdit.title}
+                                    value={imageToEdit.title}
                                     onChange={(e) => {
                                         dispatch({
-                                          type: 'EDIT_IMAGE_TITLE',
-                                          payload: e.target.value
+                                            type: 'EDIT_IMAGE_TITLE',
+                                            payload: e.target.value
                                         })
-                                      }}
-                                    
-                                
+                                    }}
+
+
                                 />
                                 <TextField
-                                    required
-                                    id="outlined-required"
                                     label="year"
-                                    defaultValue={imageToEdit.year}
+                                    value={imageToEdit.year}
                                     onChange={(e) => {
                                         dispatch({
-                                          type: 'EDIT_IMAGE_YEAR',
-                                          payload: e.target.value
+                                            type: 'EDIT_IMAGE_YEAR',
+                                            payload: e.target.value
                                         })
-                                      }}
-                                    
+                                    }}
+
                                 />
                                 {/* <MediaPicker medium={imageToEdit.media} handleChange={handleChange} */}
-                                 <TextField
-                                 required
-                                 id="outlined-required"
-                                 label="media"
-                                 defaultValue={imageToEdit.media}
-                                onChange={(e) => {
-                                    dispatch({
-                                      type: 'EDIT_IMAGE_MEDIA',
-                                      payload: e.target.value
-                                    })
-                                  }} />
                                 <TextField
-                                    required
-                                    id="outlined-required"
-                                    label="description"
-                                    defaultValue={imageToEdit.description}
+                                    label="media"
+                                    value={imageToEdit.media}
                                     onChange={(e) => {
                                         dispatch({
-                                          type: 'EDIT_IMAGE_DESCRIPTION',
-                                          payload: e.target.value
+                                            type: 'EDIT_IMAGE_MEDIA',
+                                            payload: e.target.value
                                         })
-                                      }}
+                                    }} />
+                                <TextField
+                                    label="description"
+                                    value={imageToEdit.description}
+                                    onChange={(e) => {
+                                        dispatch({
+                                            type: 'EDIT_IMAGE_DESCRIPTION',
+                                            payload: e.target.value
+                                        })
+                                    }}
 
                                 />
                             </div>
@@ -211,7 +208,7 @@ function EditImageForm() {
                     </Grid>
                 </Grid>
             </Container>
-            
+
 
 
             <Drawer
@@ -221,9 +218,10 @@ function EditImageForm() {
                 classes={{ paper: classes.drawerPaper }}>
                 <GalleryList galleryId={galleryId} galleryName={galleryName} imageId={imageId} />
             </Drawer>
+            </ThemeProvider>
         </div>
-    :
-    <UserPage/>
+        :
+        <UserPage />
 
     );
 }

@@ -11,12 +11,28 @@ import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { Button } from '@mui/material';
 import { Card } from '@material-ui/core';
+import CardHeader from '@mui/material/CardHeader';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles({
+    
+    galleryHeading: {
+        fontFamily: 'Quicksand',
+        fontWeight: 'bold',
+        fontSize: 20
+        
+    }
+
+})
+
 
 
 
 function GalleryLink({ gal }) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const classes = useStyles();
+
 
     console.log('this is gal', gal);
 
@@ -36,7 +52,12 @@ function GalleryLink({ gal }) {
         <>
             <Grid item key={gal.id} xs={4}>
                 <Card>
-                    <Typography>{gal.name}</Typography>
+                <CardHeader
+                disableTypography = 'true'
+                className={classes.galleryHeading}
+                title={gal.name}
+            />
+            
                     <Button onClick={goToGallery}
                         variant='filled'>
                         go to gallery</Button>
