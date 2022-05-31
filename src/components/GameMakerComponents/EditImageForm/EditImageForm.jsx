@@ -202,9 +202,12 @@ function EditImageForm() {
 
                                 />
                             </div>
+                            </Box>
+                            <Grid item>
                             <Button onClick={handleSubmit}>update slide</Button>
                             <Button onClick={backToAddSlide}>back to add a new slide</Button>
-                        </Box>
+                            </Grid>
+                       
                     </Grid>
                 </Grid>
             </Container>
