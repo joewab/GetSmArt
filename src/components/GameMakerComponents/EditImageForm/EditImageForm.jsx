@@ -124,7 +124,9 @@ function EditImageForm() {
                 <h2>Edit slide below:</h2>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>
-                        <img src = {imageToEdit.url} />
+                        {/* Look at this!!!!!!!!!!!!!!!!!!!!! it updates here and nowhere else!!!!!!!!!!!!!!!! */}
+                        <img src = {imageToEdit.url} /> 
+                        <>{imageToEdit.title}</>
                     </Grid>
                     <Grid item key={user.id} xs={6}>
                         <Box
