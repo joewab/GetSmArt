@@ -9,6 +9,7 @@ import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
 import Nav from '../../Nav/Nav';
+import UserPage from '../../UserPage/UserPage';
 
 
 //materialUI----------------------------------------------
@@ -97,7 +98,7 @@ function AddImageForm() {
         setMedium('');
     }
 
-    return (    
+    return ( user.admin ?
             <div key={user.id} className={classes.root}>
                 <Container>
                 <Nav/>
@@ -172,7 +173,8 @@ function AddImageForm() {
                     <GalleryList galleryId={galleryId} galleryName={galleryName}/>
                 </Drawer>
             </div>
-        
+        :
+        <UserPage/>
 
     );
 }

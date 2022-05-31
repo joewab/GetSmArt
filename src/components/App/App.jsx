@@ -21,6 +21,8 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
 import AddImageForm from '../GameMakerComponents/AddImageForm/AddImageForm';
 import EditImageForm from '../GameMakerComponents/EditImageForm/EditImageForm';
+import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
+import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 
 import './App.css';
 
@@ -93,6 +95,22 @@ function App() {
             path="/editimage/:galleryId/:imageId/:galleryName"
           >
             <EditImageForm />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/game/:galleryId/:galleryName"
+          >
+            <GamePage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows all galleries page
+            exact
+            path="/allgames"
+          >
+            <AllGamesPage />
           </ProtectedRoute>
 
           <Route

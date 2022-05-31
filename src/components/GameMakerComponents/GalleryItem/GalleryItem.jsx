@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 import Card from '@mui/material/Card';
@@ -20,7 +22,11 @@ function GalleryItem({ image, galleryId, galleryName }) {
     console.log('galleryName in GalleryItem component:', galleryName);
 
     const editImage = () => {
-        history.push(`/editimage/${galleryId}/${image.id}/${galleryName}`)
+        dispatch({
+            type: 'EDIT_IMAGE',
+            payload: image.id
+        });
+        history.push(`/editimage/${galleryId}/${image.id}/${galleryName}`);
     }
 
     const deleteImage = () => {
@@ -42,9 +48,11 @@ function GalleryItem({ image, galleryId, galleryName }) {
                 alt={image.title}
             />
             <CardActions disableSpacing>
-                <IconButton onClick= {editImage} aria-label="edit">
+           
+                <IconButton onClick={editImage}  aria-label="edit">
                     <EditIcon />
                 </IconButton>
+               
                 <IconButton onClick={deleteImage} aria-label="delete">
                     <DeleteForeverIcon  />
                 </IconButton>

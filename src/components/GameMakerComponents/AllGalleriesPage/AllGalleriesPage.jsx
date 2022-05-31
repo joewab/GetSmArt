@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import GalleryLink from '../GalleryLink/GalleryLink';
 import Nav from '../../Nav/Nav';
+import UserPage from '../../UserPage/UserPage';
 
 //material--------------------------------------------
 import Grid from '@mui/material/Grid';
@@ -28,7 +29,8 @@ function AllGalleriesPage() {
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const galleries = useSelector(store => store.gallery.galleries)
+    const galleries = useSelector(store => store.gallery.galleries);
+    const user = useSelector(store => store.user)
     console.log('here are all the galleries', galleries);
 
     const [newGalleryName, setNewGalleryName] = useState('')
@@ -41,7 +43,7 @@ function AllGalleriesPage() {
         })
     }
 
-    return (
+    return ( user.admin ?
         <Container>
             <Nav/>
             <Grid container spacing={2}>
@@ -63,6 +65,8 @@ function AllGalleriesPage() {
                 
             </Grid>
         </Container>
+        :
+        <UserPage/>
     )
 }
 

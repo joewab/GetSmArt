@@ -11,7 +11,9 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const galleryRouter = require('./routes/gallery.router');
 const galleriesRouter = require('./routes/galleries.router');
-const imageRouter = require('./routes/image.router')
+const imageRouter = require('./routes/image.router');
+const gameRouter = require('./routes/game.router');
+
 
 
 // Body parser middleware
@@ -30,6 +32,8 @@ app.use('/api/user', userRouter);
 app.use('/api/gallery', galleryRouter);
 app.use('/api/galleries', galleriesRouter);
 app.use('/api/image', imageRouter);
+app.use('/api/game', gameRouter);
+
 
 
 // Serve static files

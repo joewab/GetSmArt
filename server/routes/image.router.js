@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../modules/pool')
 
 router.get('/:id', (req, res) => {
+  console.log('params:', req.params.id);
     const sqlQuery = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media, gallery.id AS gallery_id
     FROM image JOIN gallery_image ON image.id = gallery_image.image_id
     JOIN gallery ON gallery.id = gallery_image.gallery_id
