@@ -6,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import GalleryItem from '../GalleryItem/GalleryItem';
 
-function GalleryList({galleryId, galleryName}) {
+function GalleryList({galleryId, galleryName, imageId }) {
 
     const dispatch = useDispatch();
     const gallery = useSelector(store => store.gallery.gallery);
@@ -19,7 +19,7 @@ function GalleryList({galleryId, galleryName}) {
             {gallery && gallery.map((image) => {
                 return (
                     <Grid key = {image.id} item sm={12} md={6}>
-                    <GalleryItem galleryId={galleryId} image={image} galleryName={galleryName}/>
+                    <GalleryItem galleryId={galleryId} image={image} galleryName={galleryName} imageId={imageId} />
                     </Grid>
                 )
             }

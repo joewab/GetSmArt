@@ -23,12 +23,15 @@ function AllGamesPage() {
 
     useEffect(() => {
         dispatch({ type: 'FETCH_GALLERIES' });
+        dispatch({ type: 'FETCH_SCORES' });
     }, []);
 
     const dispatch = useDispatch();
     const history = useHistory();
 
-    const galleries = useSelector(store => store.gallery.galleries)
+    const galleries = useSelector(store => store.gallery.galleries);
+    const allScores = useSelector(store => store.game.allScores);
+    console.log('all scores:', allScores);
     console.log('here are all the galleries', galleries);
 
     
@@ -38,10 +41,13 @@ function AllGamesPage() {
             <Nav/>
             <Grid container spacing={2}>
                
+               
                 {galleries.map((game) => {
+                    
                     return(
-                        <GameLink key={game.id} game={game} />
+                        <GameLink key={game.id} game={game} allScores={allScores} />
                     )
+               
                 })}
                 
             </Grid>

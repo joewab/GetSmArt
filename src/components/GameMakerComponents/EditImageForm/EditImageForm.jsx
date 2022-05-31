@@ -9,6 +9,7 @@ import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
 import Nav from '../../Nav/Nav';
+import UserPage from '../../UserPage/UserPage';
 
 
 //materialUI----------------------------------------------
@@ -47,13 +48,14 @@ function EditImageForm() {
     //on load, GET the gallery with the matching id-------------------
     useEffect(() => {
         dispatch({
+            type: 'EDIT_IMAGE',
+            payload: imageId
+        });
+        dispatch({
             type: 'FETCH_GALLERY',
             payload: galleryId
         });
-        dispatch({
-            type: 'EDIT_IMAGE',
-            payload: {imageId, galleryId}
-        });
+        
     }, [])
 
     //variables that are react functions--------------------------------
@@ -68,8 +70,8 @@ function EditImageForm() {
     const galleryName = params.galleryName;
     const user = useSelector((store) => store.user);
     const gallery = useSelector(store => store.gallery.gallery);
-    const imageToEdit = useSelector(store => store.gallery.editImage)
-    console.log('image to edit:', imageToEdit);
+    const imageToEdit = useSelector(store => store.gallery.editImage);
+    console.log('imageId in EditImageForm:', imageId);
 
 
 
@@ -114,7 +116,7 @@ function EditImageForm() {
     }
 
 
-    return ( imageToEdit ? 
+    return ( user.admin ?
         <div key={user.id} className={classes.root}>
             <Container>
                 <Nav />
@@ -215,10 +217,11 @@ function EditImageForm() {
                 variant='permanent'
                 anchor='right'
                 classes={{ paper: classes.drawerPaper }}>
-                <GalleryList galleryId={galleryId} galleryName={galleryName}/>
+                <GalleryList galleryId={galleryId} galleryName={galleryName} imageId={imageId} />
             </Drawer>
         </div>
-    :<>fail</>
+    :
+    <UserPage/>
 
     );
 }

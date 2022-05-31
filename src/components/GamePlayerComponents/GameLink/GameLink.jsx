@@ -14,19 +14,23 @@ import { Card } from '@material-ui/core';
 
 
 
-function GameLink({ game }) {
+function GameLink({ game, allScores }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
     const storedScore = useSelector(store => store.game.storedScore.score)
 
     console.log('this is game', game);
+    console.log('all scores in gamelink:', allScores);
 
     function goToGame() {
         history.push(`/game/${game.id}/${game.name}`)
     }
 
+
+
     return (
+
         <>
             <Grid item key={game.id} xs={4}>
                 <Card>
@@ -34,8 +38,14 @@ function GameLink({ game }) {
                     <Button onClick={goToGame}
                         variant='filled'>
                         go to game</Button>
-                    <Typography> Current Score: {storedScore}</Typography>
-            
+                    {allScores.map((score) => {
+                        if (game.id === score.gallery_id) {
+                            return (
+                                <Typography key={score.id} > Current Score: {score.score}</Typography>
+                            )
+                        }
+                    })}
+
                 </Card>
             </Grid>
         </>

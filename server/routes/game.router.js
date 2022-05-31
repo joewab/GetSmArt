@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+router.get('/', (req,res) => {
+    const sqlQuery = `SELECT * FROM score;`;
+    pool.query(sqlQuery)
+    .then((result) => { res.send(result.rows); console.log('this is the get all scores result:', result.rows); })
+    .catch((err) => {
+        console.log('Error completing SELECT all scores query', err);
+        res.sendStatus(500);
+    });
+})
+
 router.get('/:userId/:galleryId', (req, res) => {
     const sqlQuery = `SELECT * FROM score WHERE user_id = $1 AND gallery_id = $2;`;
     const sqlValues = [req.params.userId, req.params.galleryId];

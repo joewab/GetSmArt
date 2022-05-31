@@ -101,8 +101,8 @@ function* deleteGallery(action) {
 function* editImage(action){
     try{
         
-        const imageId = action.payload.imageId
-        console.log('payload from edit image:',imageId);
+        const imageId = action.payload
+        console.log('payload from edit image:', action.payload);
         const oneImage = yield axios.get(`/api/image/${imageId}`);
         console.log('data for one image from edit button:', oneImage.data);
         yield put ({

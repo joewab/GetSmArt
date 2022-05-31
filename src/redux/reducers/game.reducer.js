@@ -12,6 +12,15 @@ const galleryCount = (state = 1, action) => {
     }
 }
 
+const allScores = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SCORES':
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 const gameScore = (state = 0, action) => {
     switch (action.type) {
         case 'CORRECT_ANSWER':
@@ -36,5 +45,6 @@ const storedScore = (state = {}, action) => {
 export default combineReducers({
     galleryCount,
     gameScore,
-    storedScore
+    storedScore,
+    allScores
 });

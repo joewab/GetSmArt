@@ -2,6 +2,19 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 
+function* fetchScores(){
+    try{
+        const scores = yield axios.get('/api/game');
+        yield put ({
+            type: 'SET_SCORES',
+            payload: scores.data
+        })
+
+    }catch{
+        console.log('error in fetch all scores');
+    }
+}
+
 function* incrementGallery() {
     try {
         yield put({
@@ -63,6 +76,8 @@ function* gameSaga() {
     yield takeLatest('UPDATE_SCORE', updateScore);
     yield takeLatest('FETCH_SCORE', fetchScore);
     yield takeLatest('CREATE_NEW_SCORE', createNewScore);
+    yield takeLatest('FETCH_SCORES', fetchScores);
+
 
 
 
