@@ -9,11 +9,13 @@ import { Link, useHistory } from 'react-router-dom';
 import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
-import { Button, Paper } from '@mui/material';
+import { Button, Paper } from '@material-ui/core';
 import { Card } from '@material-ui/core';
-import CardHeader from '@mui/material/CardHeader';
-import { makeStyles } from '@material-ui/styles';
+import {CardHeader} from '@material-ui/core';
+import { makeStyles, useTheme, ThemeProvider } from '@material-ui/styles';
 import Carousel from 'react-material-ui-carousel';
+import Theme from '../../_theme/_theme';
+
 
 
 const useStyles = makeStyles({
@@ -25,8 +27,8 @@ const useStyles = makeStyles({
 
     },
     galleryCard: {
-    width: 'auto',
-       
+        width: 'auto',
+
     }
 
 })
@@ -43,6 +45,19 @@ function GalleryLink({ gal }) {
         });
 
     }, [])
+
+    // const Theme = useTheme({
+    //     palette: {
+    //         primary: {
+    //             main: '#9fc8a5',
+    //             contrastText: '#e1f0e2'
+    //         },
+    //         secondary: {
+    //             main: '#e1f0e2',
+    //             contrastText: '#9fc8a5'
+    //         }
+    //     }
+    // })
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -69,34 +84,26 @@ function GalleryLink({ gal }) {
 
     return (
         <>
-            <Carousel className={classes.galleryCard}
-            autoPlay = {false}>
-                {galleryImages.map((gallery) => {
-                    return (
+            <ThemeProvider theme={Theme}>
+                <Card item key={gal.id} xs={4}>
+                    <CardHeader
+                        disableTypography={true}
+                        className={classes.galleryHeading}
+                        title={gal.name}
+                    />
 
-                        
-                            <Card item key={gal.id} xs={4}>
-                                <CardHeader
-                                    disableTypography={true}
-                                    className={classes.galleryHeading}
-                                    title={gal.name}
-                                />
-                                <img src = {gallery.url}/>
-
-                                <Button onClick={goToGallery}
-                                    variant='filled'>
-                                    go to gallery</Button>
-                                <Button onClick={deleteGallery}
-                                    variant='filled'>
-                                    delete gallery</Button>
-                            </Card>
-                        
-
-
-                    )
-                })}
-            </Carousel>
-
+                    <ThemeProvider theme={Theme}>
+                        <Button
+                            variant='contained'
+                            color='primary'
+                            onClick={goToGallery}>
+                            go to gallery</Button>
+                    </ThemeProvider>
+                    <Button onClick={deleteGallery}
+                        variant='filled'>
+                        delete gallery</Button>
+                </Card>
+            </ThemeProvider>
         </>
     )
 }

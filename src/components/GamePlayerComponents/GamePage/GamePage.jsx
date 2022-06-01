@@ -13,14 +13,17 @@ import MediaAnswerForm from '../MediaAnswerForm/MediaAnswerForm';
 import Nav from '../../Nav/Nav';
 import GameIncrementButton from '../GameIncrementButton/GameIncrementButton';
 import PreviousScore from '../PreviousScore/PreviousScore';
+import Theme from '../../_theme/_theme';
 
 //material stuff-----------------------------------------
-import { Button } from '@mui/material';
+import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@mui/material/Box';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles({
@@ -44,14 +47,13 @@ function GamePage() {
         })
     }, []);
 
-    console.log('stored score:', storedScore);
 
 //constants that are react functions--------------------------------------------------
     const params = useParams();
     const classes = useStyles();
     const dispatch = useDispatch();
+    const history = useHistory();
 
-    console.log('params on game page:', params);
 
 //constants that evaluate to specific values using react functions----------------
     const galleryId = params.galleryId;
@@ -60,9 +62,6 @@ function GamePage() {
     const gameScore = useSelector(store => store.game.gameScore);
     const user = useSelector(store => store.user);
     const storedScore = useSelector(store => store.game.storedScore)
-
-    console.log('storedScore on gamepage:', storedScore);
-
 
    
 //local state----------------------------------------------------------------
@@ -80,13 +79,17 @@ function GamePage() {
     const gameImage = gallery[gallerySlideNumber-1];
 
 
-   
+
+    function handleGoBack(){
+        history.push('/allgames')
+    }
 
 
 
     return (
         <>
         <Nav/>
+        <ThemeProvider>
         <Container className={classes.root}>
             <Grid>
                 <PreviousScore/>
@@ -116,16 +119,22 @@ function GamePage() {
                             {/* <MediaPicker medium={media} /> */}
                             {/* <Button onClick={handleSubmitMedia}>Submit Answer</Button> */}
                         </div>
+                        </Box>
+                        <Grid item>
                         <GameIncrementButton  setArtistAnswer={setArtistAnswer} 
                                              setTitleAnswer={setTitleAnswer}
                                              setYearAnswer={setYearAnswer}
                                              setMediaAnswer={setMediaAnswer}
                                              galleryId={galleryId} />
+                        </Grid>
+                        
+                        <Button variant='contained' color='primary'onClick={handleGoBack} >Exit Game to Main Menu (score will not be saved)</Button>
 
-                    </Box>
+                    
                 </Grid>
             </Grid>
         </Container>
+        </ThemeProvider>
         </>
     )
 }

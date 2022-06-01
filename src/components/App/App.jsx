@@ -23,8 +23,13 @@ import AddImageForm from '../GameMakerComponents/AddImageForm/AddImageForm';
 import EditImageForm from '../GameMakerComponents/EditImageForm/EditImageForm';
 import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
 import GamePage from '../GamePlayerComponents/GamePage/GamePage';
+import Theme from '../_theme/_theme';
+import { Button } from '@material-ui/core';
+// import { Button } from '@mui/material';
 
 import './App.css';
+
+import { ThemeProvider } from '@material-ui/core';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +41,7 @@ function App() {
   }, [dispatch]);
 
   return (
+    <ThemeProvider theme={Theme}>
     <Router>
       <div>
         {/* <Nav /> */}
@@ -163,6 +169,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 

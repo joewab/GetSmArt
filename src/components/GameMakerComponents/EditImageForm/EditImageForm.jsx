@@ -10,18 +10,21 @@ import GalleryList from '../GalleryList/GalleryList';
 import MediaPicker from '../MediaPicker/MediaPicker';
 import Nav from '../../Nav/Nav';
 import UserPage from '../../UserPage/UserPage';
+import Theme from '../../_theme/_theme';
 
 
 //materialUI----------------------------------------------
-import { Button } from '@mui/material';
+import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import Grid from '@mui/material/Grid';
 import Drawer from '@mui/material/Drawer';
-import Typography from '@mui/material/Typography';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
-import { TextField } from '@mui/material';
+import { TextField } from '@material-ui/core';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@material-ui/core';
+import Alert from '@mui/material/Alert';
+
 
 const drawerWidth = 400
 
@@ -127,10 +130,10 @@ function EditImageForm() {
 
     return (user.admin ?
         <div key={user.id} className={classes.root}>
-            <ThemeProvider theme={theme} >
+            <ThemeProvider theme={Theme} >
             <Container>
                 <Nav />
-                <h2>{user.username}'s gallery: {galleryName}</h2>
+                <Typography>{user.username}'s gallery: {galleryName}</Typography>
                 <h2>Edit slide below:</h2>
                 <Grid container spacing={2}>
                     <Grid item xs={6}>  <img src={imageToEdit.url} />
@@ -204,7 +207,7 @@ function EditImageForm() {
                             </div>
                             </Box>
                             <Grid item>
-                            <Button onClick={handleSubmit}>update slide</Button>
+                            <Button variant='contained' color='primary'onClick={handleSubmit}>update slide</Button>
                             <Button onClick={backToAddSlide}>back to add a new slide</Button>
                             </Grid>
                        
