@@ -15,9 +15,11 @@ import UserPage from '../../UserPage/UserPage';
 import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
-import { Button } from '@material-ui/core';
+import { Paper, Button } from '@material-ui/core';
 import { TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@material-ui/core';
+import Carousel from 'react-material-ui-carousel';
+
 
 
 
@@ -55,7 +57,7 @@ function AllGalleriesPage() {
         <ThemeProvider theme={theme}>
         <Container>
             <Nav/>
-            <Grid container spacing={2}>
+            <Grid container spacing={5}>
                 <Grid item xs={12}>
                     <TextField
                         required
@@ -68,7 +70,10 @@ function AllGalleriesPage() {
                 </Grid>
                 {galleries.map((gal) => {
                     return(
-                        <GalleryLink key={gal.id} gal={gal} />
+                        <Grid item key={gal.id} xs={4} >
+                        <GalleryLink gal={gal} />
+                        </Grid>
+                        
                     )
                 })}
                 
