@@ -1,43 +1,84 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
-import { TextField } from '@mui/material';
-import Card from '@mui/material/Card';
+import { Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+const ValidationTextField = withStyles({
+    root: {
+        '& input:valid + fieldset': {
+            borderColor: 'green',
+            borderWidth: 2,
+        },
+        '& input:invalid + fieldset': {
+            borderColor: 'red',
+            borderWidth: 2,
+        },
+        '& input:valid:focus + fieldset': {
+            borderLeftWidth: 6,
+            padding: '4px !important', // override inline-style
+        },
+    },
+})(TextField);
 
 
-function MediaAnswerForm({media, setMedia, mediaAnswer, setMediaAnswer, gameImage}) {
+
+function MediaAnswerForm({ media, setMedia, mediaAnswerTrue, setMediaAnswerTrue, mediaAnswerFalse, setMediaAnswerFalse, gameImage }) {
 
     const dispatch = useDispatch();
 
     const handleSubmitMedia = () => {
         console.log('in Submit Media');
-        if(media && media === gameImage.media){
-            setMediaAnswer(true);
+
+        if (media && media === gameImage.media) {
+            setMediaAnswerTrue(true);
             dispatch({
                 type: 'CORRECT_ANSWER'
-            });
+            })
         }
-        console.log(mediaAnswer);
+
+        else if (media !== gameImage.media) {
+            setMediaAnswerFalse(true);
+        }
+
+        console.log(mediaAnswerTrue);
     }
 
-    if(mediaAnswer===true){
-        return(
-            <Card sx={{minHeight: 50,
-                       background: '#66b266',
-                       textAlign: 'center',
-                       }}>
-            <Typography sx={{margin: 2,
-                             color: '#dbefdc'}}>
-                {gameImage.media} is correct!</Typography>
-            </Card>
+    if (mediaAnswerTrue === true) {
+
+        return (
+
+            <div className='correct-answer'>
+                <ValidationTextField
+                    label="Correct!"
+                    required
+                    variant="outlined"
+                    defaultValue={media}
+                    id="validation-outlined-input"
+                />
+            </div>
+        )
+    }
+
+    else if (mediaAnswerFalse === true) {
+        return (
+            <div className='correct-answer'>
+                <TextField
+                    error
+                    id="outlined-error-helper-text"
+                    label="incorrect!"
+                    defaultValue={media}
+                    onChange={(event) => setMedia(event.target.value)}
+                />
+                <Button variant='contained' color='primary' onClick={handleSubmitMedia}>Submit Answer</Button>
+            </div>
         )
     }
 
 
     return (
-        <div>
+        <div className='correct-answer'>
             <TextField
                 required
                 id="outlined-required"
@@ -45,7 +86,7 @@ function MediaAnswerForm({media, setMedia, mediaAnswer, setMediaAnswer, gameImag
                 defaultValue=''
                 onChange={(event) => setMedia(event.target.value)}
             />
-            <Button onClick={handleSubmitMedia}>Submit Answer</Button>
+            <Button variant='contained' color='primary' onClick={handleSubmitMedia}>Submit Answer</Button>
         </div>
     )
 

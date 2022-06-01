@@ -3,11 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
 
-import { Button } from '@mui/material';
+import { Button } from '@material-ui/core';
 
 
 
-function GameIncrementButton({setArtistAnswer, setTitleAnswer, setYearAnswer, setMediaAnswer, galleryId}) {
+function GameIncrementButton({setArtistAnswerTrue, 
+                              setTitleAnswerTrue, 
+                              setYearAnswerTrue, 
+                              setMediaAnswerTrue,
+                              setArtistAnswerFalse, 
+                              setTitleAnswerFalse, 
+                              setYearAnswerFalse, 
+                              setMediaAnswerFalse, 
+                                galleryId}) {
 
     const dispatch = useDispatch();
     const history = useHistory();
@@ -24,10 +32,14 @@ function GameIncrementButton({setArtistAnswer, setTitleAnswer, setYearAnswer, se
         dispatch({
             type: 'INCREMENT_GALLERY',
         })
-        setArtistAnswer(false);
-        setTitleAnswer(false);
-        setYearAnswer(false);
-        setMediaAnswer(false);}
+        setArtistAnswerTrue(false);
+        setTitleAnswerTrue(false);
+        setYearAnswerTrue(false);
+        setMediaAnswerTrue(false);
+        setArtistAnswerFalse(false);
+        setTitleAnswerFalse(false);
+        setYearAnswerFalse(false);
+        setMediaAnswerFalse(false);}
     }
 
     const handleFinishGame = () => {

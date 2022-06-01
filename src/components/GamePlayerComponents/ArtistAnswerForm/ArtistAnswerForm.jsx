@@ -1,44 +1,84 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
-import { TextField } from '@mui/material';
-import Card from '@mui/material/Card';
+import { Button } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+const ValidationTextField = withStyles({
+    root: {
+        '& input:valid + fieldset': {
+            borderColor: 'green',
+            borderWidth: 2,
+        },
+        '& input:invalid + fieldset': {
+            borderColor: 'red',
+            borderWidth: 2,
+        },
+        '& input:valid:focus + fieldset': {
+            borderLeftWidth: 6,
+            padding: '4px !important', // override inline-style
+        },
+    },
+})(TextField);
 
 
-function ArtistAnswerForm({artist, setArtist, artistAnswer, setArtistAnswer, gameImage}) {
+
+function ArtistAnswerForm({ artist, setArtist, artistAnswerTrue, setArtistAnswerTrue, artistAnswerFalse, setArtistAnswerFalse, gameImage }) {
 
     const dispatch = useDispatch();
 
     const handleSubmitArtist = () => {
         console.log('in Submit Artist');
-        if(artist && artist === gameImage.artist){
-            setArtistAnswer(true);
+
+        if (artist && artist === gameImage.artist) {
+            setArtistAnswerTrue(true);
             dispatch({
                 type: 'CORRECT_ANSWER'
             })
         }
-        console.log(artistAnswer);
+
+        else if (artist !== gameImage.artist) {
+            setArtistAnswerFalse(true);
+        }
+
+        console.log(artistAnswerTrue);
     }
 
-    if(artistAnswer===true){
+    if (artistAnswerTrue === true) {
 
-        return(
-            <Card sx={{minHeight: 50,
-                       background: '#66b266',
-                       textAlign: 'center',
-                       }}>
-            <Typography sx={{margin: 2,
-                             color: '#dbefdc'}}>
-                {gameImage.artist} is correct!</Typography>
-            </Card>
+        return (
+
+            <div className='correct-answer'>
+                <ValidationTextField
+                    label="Correct!"
+                    required
+                    variant="outlined"
+                    defaultValue={artist}
+                    id="validation-outlined-input"
+                />
+            </div>
+        )
+    }
+
+    else if (artistAnswerFalse === true) {
+        return (
+            <div className='correct-answer'>
+                <TextField
+                    error
+                    id="outlined-error-helper-text"
+                    label="incorrect!"
+                    defaultValue={artist}
+                    onChange={(event) => setArtist(event.target.value)}
+                />
+                <Button variant='contained' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
+            </div>
         )
     }
 
 
     return (
-        <div>
+        <div className='correct-answer'>
             <TextField
                 required
                 id="outlined-required"
@@ -46,7 +86,7 @@ function ArtistAnswerForm({artist, setArtist, artistAnswer, setArtistAnswer, gam
                 defaultValue=''
                 onChange={(event) => setArtist(event.target.value)}
             />
-            <Button onClick={handleSubmitArtist}>Submit Answer</Button>
+            <Button variant='contained' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
         </div>
     )
 

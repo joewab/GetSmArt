@@ -22,6 +22,11 @@ const Theme = createTheme({
 
     typography: {
         fontFamily: 'Quicksand'
+    },
+
+    MuiTextField: {
+        primary: '#86c736',
+        secondary: '#c7363e'
     }
 
 })

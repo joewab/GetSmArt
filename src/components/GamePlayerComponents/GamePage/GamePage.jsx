@@ -13,7 +13,6 @@ import MediaAnswerForm from '../MediaAnswerForm/MediaAnswerForm';
 import Nav from '../../Nav/Nav';
 import GameIncrementButton from '../GameIncrementButton/GameIncrementButton';
 import PreviousScore from '../PreviousScore/PreviousScore';
-import Theme from '../../_theme/_theme';
 
 //material stuff-----------------------------------------
 import { Button } from '@material-ui/core';
@@ -22,8 +21,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
 import Box from '@mui/material/Box';
-import { createTheme, ThemeProvider } from '@material-ui/core';
-
 
 
 const useStyles = makeStyles({
@@ -70,10 +67,15 @@ function GamePage() {
     const [year, setYear] = useState('');
     const [media, setMedia] = useState('');
 
-    const [artistAnswer, setArtistAnswer] = useState(false);
-    const [titleAnswer, setTitleAnswer] = useState(false);
-    const [yearAnswer, setYearAnswer] = useState(false);
-    const [mediaAnswer, setMediaAnswer] = useState(false);
+    const [artistAnswerTrue, setArtistAnswerTrue] = useState(false);
+    const [titleAnswerTrue, setTitleAnswerTrue] = useState(false);
+    const [yearAnswerTrue, setYearAnswerTrue] = useState(false);
+    const [mediaAnswerTrue, setMediaAnswerTrue] = useState(false);
+
+    const [artistAnswerFalse, setArtistAnswerFalse] = useState(false);
+    const [titleAnswerFalse, setTitleAnswerFalse] = useState(false);
+    const [yearAnswerFalse, setYearAnswerFalse] = useState(false);
+    const [mediaAnswerFalse, setMediaAnswerFalse] = useState(false);
 
 //other constants-------------------------------------------------------------------
     const gameImage = gallery[gallerySlideNumber-1];
@@ -89,7 +91,6 @@ function GamePage() {
     return (
         <>
         <Nav/>
-        <ThemeProvider>
         <Container className={classes.root}>
             <Grid>
                 <PreviousScore/>
@@ -106,25 +107,45 @@ function GamePage() {
                         <Typography> score: {gameScore}</Typography>
                         <Typography>slide: {gallerySlideNumber} / {gallery.length}</Typography>
                         <div>
-                            <ArtistAnswerForm artist={artist} setArtist={setArtist} artistAnswer={artistAnswer} setArtistAnswer={setArtistAnswer} gameImage={gameImage} />
+                            <ArtistAnswerForm 
+                            artist={artist} setArtist={setArtist} 
+                            artistAnswerTrue={artistAnswerTrue} setArtistAnswerTrue={setArtistAnswerTrue} 
+                            artistAnswerFalse={artistAnswerFalse} setArtistAnswerFalse={setArtistAnswerFalse} 
+                            gameImage={gameImage} />
                         </div>
                         <div>
-                            <TitleAnswerForm title={title} setTitle={setTitle} titleAnswer={titleAnswer} setTitleAnswer={setTitleAnswer} gameImage={gameImage} />
+                            <TitleAnswerForm 
+                            title={title} setTitle={setTitle} 
+                            titleAnswerTrue={titleAnswerTrue} setTitleAnswerTrue={setTitleAnswerTrue}
+                            titleAnswerFalse={titleAnswerFalse} setTitleAnswerFalse={setTitleAnswerFalse} 
+                            gameImage={gameImage} />
                         </div>
                         <div>
-                            <YearAnswerForm year={year} setYear={setYear} yearAnswer={yearAnswer} setYearAnswer={setYearAnswer} gameImage={gameImage} />
+                            <YearAnswerForm 
+                            year={year} setYear={setYear} 
+                            yearAnswerTrue={yearAnswerTrue} setYearAnswerTrue={setYearAnswerTrue} 
+                            yearAnswerFalse={yearAnswerFalse} setYearAnswerFalse={setYearAnswerFalse} 
+                            gameImage={gameImage} />
                         </div>
                         <div>
-                            <MediaAnswerForm media={media} setMedia={setMedia} mediaAnswer={mediaAnswer} setMediaAnswer={setMediaAnswer} gameImage={gameImage}/>
+                            <MediaAnswerForm 
+                            media={media} setMedia={setMedia} 
+                            mediaAnswerTrue={mediaAnswerTrue} setMediaAnswerTrue={setMediaAnswerTrue}
+                            mediaAnswerFalse={mediaAnswerFalse} setMediaAnswerFalse={setMediaAnswerFalse} 
+                            gameImage={gameImage}/>
                             {/* <MediaPicker medium={media} /> */}
                             {/* <Button onClick={handleSubmitMedia}>Submit Answer</Button> */}
                         </div>
                         </Box>
                         <Grid item>
-                        <GameIncrementButton  setArtistAnswer={setArtistAnswer} 
-                                             setTitleAnswer={setTitleAnswer}
-                                             setYearAnswer={setYearAnswer}
-                                             setMediaAnswer={setMediaAnswer}
+                        <GameIncrementButton  setArtistAnswerTrue={setArtistAnswerTrue} 
+                                             setTitleAnswerTrue={setTitleAnswerTrue}
+                                             setYearAnswerTrue={setYearAnswerTrue}
+                                             setMediaAnswerTrue={setMediaAnswerTrue}
+                                             setArtistAnswerFalse={setArtistAnswerFalse} 
+                                             setTitleAnswerFalse={setTitleAnswerFalse}
+                                             setYearAnswerFalse={setYearAnswerFalse}
+                                             setMediaAnswerFalse={setMediaAnswerFalse}
                                              galleryId={galleryId} />
                         </Grid>
                         
@@ -134,7 +155,6 @@ function GamePage() {
                 </Grid>
             </Grid>
         </Container>
-        </ThemeProvider>
         </>
     )
 }

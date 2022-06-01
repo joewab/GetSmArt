@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
+import Theme from '../../_theme/_theme';
 
 
 //components--------------------------------------------
@@ -11,11 +12,13 @@ import GameLink from '../GameLink/GameLink';
 import Nav from '../../Nav/Nav';
 
 //material--------------------------------------------
-import Grid from '@mui/material/Grid';
+import { Grid } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import Typography from '@mui/material/Typography';
+import { Typography } from '@material-ui/core';
 import { Button } from '@material-ui/core';
-import { TextField } from '@mui/material';
+import { TextField } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
+
 
 
 
@@ -37,6 +40,7 @@ function AllGamesPage() {
     
 
     return (
+        <ThemeProvider>
         <Container>
             <Nav/>
             <Grid container spacing={2}>
@@ -52,6 +56,7 @@ function AllGamesPage() {
                 
             </Grid>
         </Container>
+        </ThemeProvider>
     )
 }
 

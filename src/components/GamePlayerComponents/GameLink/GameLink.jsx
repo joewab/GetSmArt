@@ -3,14 +3,17 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
+
 //components--------------------------------------------
+import Theme from '../../_theme/_theme';
 
 //material--------------------------------------------
-import Grid from '@mui/material/Grid';
+import { Grid } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import Typography from '@mui/material/Typography';
-import { Button } from '@mui/material';
+import { Typography } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Card } from '@material-ui/core';
+import { createTheme, ThemeProvider } from '@material-ui/core';
 
 
 
@@ -31,12 +34,13 @@ function GameLink({ game, allScores }) {
 
     return (
 
-        <>
-            <Grid item key={game.id} xs={4}>
-                <Card>
-                    <Typography>{game.name}</Typography>
+       
+            <Grid item key={game.id} spacing={2} xs={4}>
+                <Card >
+                    <Typography variant='h5'>{game.name}</Typography>
                     <Button onClick={goToGame}
-                        variant='filled'>
+                        variant='contained'
+                        color = 'primary'>
                         go to game</Button>
                     {allScores.map((score) => {
                         if (game.id === score.gallery_id) {
@@ -48,7 +52,7 @@ function GameLink({ game, allScores }) {
 
                 </Card>
             </Grid>
-        </>
+       
     )
 }
 
