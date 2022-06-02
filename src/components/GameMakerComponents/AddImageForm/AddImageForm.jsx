@@ -13,16 +13,18 @@ import UserPage from '../../UserPage/UserPage';
 
 
 //materialUI----------------------------------------------
-import { Button } from '@mui/material';
+import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import Grid from '@mui/material/Grid';
-import Drawer from '@mui/material/Drawer';
+import {Grid} from '@material-ui/core';
+import {Drawer} from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/styles';
-import { TextField } from '@mui/material';
+import { TextField } from '@material-ui/core';
 import Box from '@mui/material/Box';
+import { SwipeableDrawer } from '@material-ui/core';
 
-const drawerWidth = 500
+
+const drawerWidth = 400
 
 const useStyles = makeStyles({
     drawer: {
@@ -50,7 +52,7 @@ function AddImageForm() {
         })
     }, [])
 
-    
+
 
     const params = useParams();
     const classes = useStyles();
@@ -98,23 +100,26 @@ function AddImageForm() {
         setMedium('');
     }
 
-    return ( user.admin ?
-            <div key={user.id} className={classes.root}>
-                <Container>
-                <Nav/>
+    return (user.admin ?
+        <Container spacing={2}>
+            <Grid>
+                <Grid item xs={7}>
+                    <Nav />
+                </Grid>
+                <Grid item xs={7} >
                 <h2>{user.username}'s gallery: {galleryName}</h2>
-                <h2>Add a slide below:</h2>
-                    <Grid container spacing={2}>
-                        <Grid item xs={6}>
-                            <Box
-                                component="form"
-                                sx={{
-                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                                }}
-                                noValidate
-                                autoComplete="off"
-                            >
-                                <div>
+                <GalleryList galleryId={galleryId} galleryName={galleryName} />
+                </Grid>
+                <Grid item xs={6}>
+                <Drawer
+                    className={classes.drawer}
+                    variant='permanent'
+                    anchor='right'
+                    classes={{ paper: classes.drawerPaper }}>
+                    <Container>
+                        <h2>Add a slide to the gallery:</h2>
+                        <Grid container spacing={2}>
+                            <Grid item xs={8}>
                                     <TextField
                                         required
                                         id="outlined-required"
@@ -122,13 +127,8 @@ function AddImageForm() {
                                         defaultValue={imageUrl}
                                         onChange={(event) => setImageUrl(event.target.value)}
                                     />
-                                    <TextField
-                                        required
-                                        id="outlined-required"
-                                        label="description required"
-                                        defaultValue={description}
-                                        onChange={(event) => setDescription(event.target.value)}
-                                    />
+                                   </Grid>
+                                   <Grid item xs={8}>
                                     <TextField
                                         required
                                         id="outlined-required"
@@ -136,6 +136,8 @@ function AddImageForm() {
                                         defaultValue={artist}
                                         onChange={(event) => setArtist(event.target.value)}
                                     />
+                                    </Grid>
+                                    <Grid item xs={8}>
                                     <TextField
                                         required
                                         id="outlined-required"
@@ -143,6 +145,8 @@ function AddImageForm() {
                                         defaultValue={title}
                                         onChange={(event) => setTitle(event.target.value)}
                                     />
+                                    </Grid>
+                                    <Grid item xs={8}>
                                     <TextField
                                         required
                                         id="outlined-required"
@@ -150,6 +154,8 @@ function AddImageForm() {
                                         defaultValue={year}
                                         onChange={(event) => setYear(event.target.value)}
                                     />
+                                    </Grid>
+                                    <Grid item xs={8}>
                                     <TextField
                                         required
                                         id="outlined-required"
@@ -157,24 +163,32 @@ function AddImageForm() {
                                         defaultValue={medium}
                                         onChange={(event) => setMedium(event.target.value)}
                                     />
+                                    </Grid>
+                                    <Grid item xs={8}>
+                                     <TextField
+                                        id="outlined-multiline-static"
+                                        label="description required"
+                                        multiline
+                                        minRows={4}
+                                        defaultValue={description}
+                                        variant="outlined"
+                                        onChange={(event) => setDescription(event.target.value)}
+                                    />
                                     {/* <MediaPicker medium={medium} handleChange={handleChange} /> */}
-                                </div>
-                                <Button onClick={handleSubmit}>submit</Button>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Container>
+                                    </Grid>
+                                    <Grid item xs={8}>
+                                <Button variant='contained' onClick={handleSubmit}>submit</Button>
 
-                <Drawer
-                    className={classes.drawer}
-                    variant='permanent'
-                    anchor='right'
-                    classes={{ paper: classes.drawerPaper }}>
-                    <GalleryList galleryId={galleryId} galleryName={galleryName}/>
+                            </Grid>
+                        </Grid>
+                    </Container>
+
                 </Drawer>
-            </div>
+                </Grid>
+            </Grid>
+        </Container>
         :
-        <UserPage/>
+        <UserPage />
 
     );
 }
