@@ -54,9 +54,10 @@ function AllGalleriesPage() {
     }
 
     return ( user.admin ?
-        <ThemeProvider theme={theme}>
+        <>
+        <Nav/>
         <Container>
-            <Nav/>
+            
             <Grid container spacing={5}>
                 <Grid item xs={12}>
                     <TextField
@@ -79,7 +80,8 @@ function AllGalleriesPage() {
                 
             </Grid>
         </Container>
-        </ThemeProvider>
+        </>
+        
         :
         <UserPage/>
     )

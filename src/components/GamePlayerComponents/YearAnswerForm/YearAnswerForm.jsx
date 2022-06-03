@@ -48,7 +48,7 @@ function YearAnswerForm({ year, setYear, yearAnswerTrue, setYearAnswerTrue, year
 
         return (
 
-            <div className='correct-answer'>
+            <>
                 <ValidationTextField
                     label="Correct!"
                     required
@@ -56,28 +56,28 @@ function YearAnswerForm({ year, setYear, yearAnswerTrue, setYearAnswerTrue, year
                     defaultValue={year}
                     id="validation-outlined-input"
                 />
-            </div>
+            </>
         )
     }
 
     else if (yearAnswerFalse === true) {
         return (
-            <div className='correct-answer'>
+            <>
                 <TextField
                     error
                     id="outlined-error-helper-text"
-                    label="incorrect!"
+                    label="year is incorrect!"
                     defaultValue={year}
                     onChange={(event) => setYear(event.target.value)}
                 />
-                <Button variant='contained' color='primary' onClick={handleSubmitYear}>Submit Answer</Button>
-            </div>
+                <Button variant='outlined' color='primary' onClick={handleSubmitYear}>Submit Answer</Button>
+            </>
         )
     }
 
 
     return (
-        <div className='correct-answer'>
+        <>
             <TextField
                 required
                 id="outlined-required"
@@ -85,8 +85,8 @@ function YearAnswerForm({ year, setYear, yearAnswerTrue, setYearAnswerTrue, year
                 defaultValue=''
                 onChange={(event) => setYear(event.target.value)}
             />
-            <Button variant='contained' color='primary' onClick={handleSubmitYear}>Submit Answer</Button>
-        </div>
+            <Button variant='outlined' color='primary' onClick={handleSubmitYear}>Submit Answer</Button>
+        </>
     )
 
 }

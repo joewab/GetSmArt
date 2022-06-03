@@ -5,8 +5,8 @@ import { Link, useHistory } from 'react-router-dom';
 
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
+import {Card} from '@material-ui/core';
+import {CardHeader} from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
 import CardMedia from '@mui/material/CardMedia';
 import EditIcon from '@mui/icons-material/Edit';
@@ -59,10 +59,9 @@ function GalleryItem({ image, galleryId, galleryName }) {
     }
 
     return (
-        <ThemeProvider theme={theme}>
-        <Card key={image.id} elevation={10} >
+        <Card elevation={5}>
             <CardHeader
-                disableTypography = 'true'
+                variant= 'h5'
                 title={image.title}
             />
             <CardMedia
@@ -70,19 +69,14 @@ function GalleryItem({ image, galleryId, galleryName }) {
                 height="194"
                 image={image.url}
                 alt={image.title}
+                onClick={editImage}
             />
-            <CardActions disableSpacing>
-           
-                <IconButton onClick={editImage}  aria-label="edit">
-                    <EditIcon />
-                </IconButton>
-               
+            <CardActions disableSpacing>       
                 <IconButton onClick={deleteImage} aria-label="delete">
                     <DeleteForeverIcon  />
                 </IconButton>
             </CardActions>
         </Card>
-        </ThemeProvider>
     )
 }
 

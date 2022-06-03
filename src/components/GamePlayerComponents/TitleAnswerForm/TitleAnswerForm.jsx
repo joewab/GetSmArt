@@ -62,22 +62,22 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
 
     else if (titleAnswerFalse === true) {
         return (
-            <div className='correct-answer'>
+            <>
                 <TextField
                     error
                     id="outlined-error-helper-text"
-                    label="incorrect!"
+                    label="title is incorrect!"
                     defaultValue={title}
                     onChange={(event) => setTitle(event.target.value)}
                 />
-                <Button variant='contained' color='primary' onClick={handleSubmitTitle}>Submit Answer</Button>
-            </div>
+                <Button variant='outlined' color='primary' onClick={handleSubmitTitle}>Submit Answer</Button>
+            </>
         )
     }
 
 
     return (
-        <div className='correct-answer'>
+       <>
             <TextField
                 required
                 id="outlined-required"
@@ -85,8 +85,8 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
                 defaultValue=''
                 onChange={(event) => setTitle(event.target.value)}
             />
-            <Button variant='contained' color='primary' onClick={handleSubmitTitle}>Submit Answer</Button>
-        </div>
+            <Button variant='outlined' color='primary' onClick={handleSubmitTitle}>Submit Answer</Button>
+        </>
     )
 
 }

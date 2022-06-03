@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
+
 import { withStyles } from '@material-ui/core/styles';
 
 const ValidationTextField = withStyles({
@@ -49,45 +51,47 @@ function ArtistAnswerForm({ artist, setArtist, artistAnswerTrue, setArtistAnswer
 
         return (
 
-            <div className='correct-answer'>
+           
                 <ValidationTextField
                     label="Correct!"
-                    required
+                    
                     variant="outlined"
                     defaultValue={artist}
                     id="validation-outlined-input"
                 />
-            </div>
+            
         )
     }
 
     else if (artistAnswerFalse === true) {
         return (
-            <div className='correct-answer'>
+            <>
                 <TextField
                     error
                     id="outlined-error-helper-text"
-                    label="incorrect!"
+                    label="artist is incorrect!"
                     defaultValue={artist}
                     onChange={(event) => setArtist(event.target.value)}
                 />
-                <Button variant='contained' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
-            </div>
+                <Button variant='outlined' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
+            </>
         )
     }
 
 
     return (
-        <div className='correct-answer'>
+
+        <>
             <TextField
-                required
+                
                 id="outlined-required"
-                label="artist required"
+                label="artist"
                 defaultValue=''
                 onChange={(event) => setArtist(event.target.value)}
             />
-            <Button variant='contained' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
-        </div>
+            <Button variant='outlined' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
+        </>
+
     )
 
 }

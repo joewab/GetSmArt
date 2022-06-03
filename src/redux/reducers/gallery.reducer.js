@@ -32,6 +32,10 @@ const editImage = (state = {}, action) => {
     switch (action.type) {
         case 'GET_ONE_IMAGE':
             return action.payload;
+        case 'EDIT_IMAGE_URL':
+            return (
+                { ...state, url: action.payload }
+            )
         case 'EDIT_IMAGE_ARTIST':
             return (
                 { ...state, artist: action.payload }
