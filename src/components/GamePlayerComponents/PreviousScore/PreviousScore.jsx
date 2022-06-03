@@ -17,7 +17,7 @@ console.log('stored score on previous score component:',storedScore);
 
         :
 
-        <>Good Luck!</>
+        <Typography>Good Luck!</Typography>
         )
     }
 

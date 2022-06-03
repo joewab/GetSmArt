@@ -40,9 +40,10 @@ function AllGamesPage() {
     
 
     return (
-        <ThemeProvider>
+        <>
+        <Nav/>
         <Container>
-            <Nav/>
+            
             <Grid container spacing={2}>
                
                
@@ -56,7 +57,7 @@ function AllGamesPage() {
                 
             </Grid>
         </Container>
-        </ThemeProvider>
+        </>
     )
 }
 

@@ -129,11 +129,12 @@ function EditImageForm() {
 
 
     return (user.admin ?
+        <>
+        <Box mr={50}>
+        <Nav />
+        </Box>
         <Container spacing={2}>
             <Grid>
-                <Grid item xs={7}>
-                    <Nav />
-                </Grid>
                 <Grid item xs={7} >
                     <h2>{user.username}'s gallery: {galleryName}</h2>
                     <GalleryList galleryId={galleryId} galleryName={galleryName} imageId={imageId} />
@@ -229,7 +230,7 @@ function EditImageForm() {
                                     <Button variant='contained' color='primary' onClick={handleSubmit}>update slide</Button>
                                 </Grid>
                                 <Grid item xs={8}>
-                                    <Button variant='contained' color='primary' onClick={backToAddSlide}>ext edit mode</Button>
+                                    <Button variant='contained' color='primary' onClick={backToAddSlide}>exit edit mode</Button>
                                 </Grid>
                             </Grid>
                         </Container>
@@ -237,6 +238,7 @@ function EditImageForm() {
                 </Grid>
             </Grid>
         </Container>
+        </>
         :
         <UserPage />
 

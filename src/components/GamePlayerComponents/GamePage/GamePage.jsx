@@ -17,10 +17,9 @@ import PreviousScore from '../PreviousScore/PreviousScore';
 //material stuff-----------------------------------------
 import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import Grid from '@mui/material/Grid';
+import {Grid} from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/styles';
-import Box from '@mui/material/Box';
 
 
 const useStyles = makeStyles({
@@ -57,6 +56,7 @@ function GamePage() {
     const gallery = useSelector(store => store.gallery.gallery);
     const gallerySlideNumber = useSelector(store => store.game.galleryCount);
     const gameScore = useSelector(store => store.game.gameScore);
+    const maxGameScore = (gallery.length*4)
     const user = useSelector(store => store.user);
     const storedScore = useSelector(store => store.game.storedScore)
 
@@ -83,6 +83,9 @@ function GamePage() {
 
 
     function handleGoBack(){
+        dispatch({
+            type: 'FINISH_GAME'
+        })
         history.push('/allgames')
     }
 
@@ -91,43 +94,40 @@ function GamePage() {
     return (
         <>
         <Nav/>
-        <Container className={classes.root}>
-            <Grid>
+        <h2>Welcome, {user.username}!</h2>
+        <Container>
+            <Grid container spacing={2}>
+            <Grid item xs={8}>
                 <PreviousScore/>
-                <Grid item xs={6}>
+                
                     <img className={classes.img} src={gameImage && gameImage.url} />
                 </Grid>
-                <Grid item xs={6}>
-                    <Box component="form"
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '25ch' },
-                        }}
-                        noValidate
-                        autoComplete="off">
-                        <Typography> score: {gameScore}</Typography>
+                <Grid item xs={8}>
+                        <Typography> score: {gameScore} / {maxGameScore}</Typography>
                         <Typography>slide: {gallerySlideNumber} / {gallery.length}</Typography>
-                        <div>
+                       </Grid>
+                       <Grid item xs={8}>
                             <ArtistAnswerForm 
                             artist={artist} setArtist={setArtist} 
                             artistAnswerTrue={artistAnswerTrue} setArtistAnswerTrue={setArtistAnswerTrue} 
                             artistAnswerFalse={artistAnswerFalse} setArtistAnswerFalse={setArtistAnswerFalse} 
                             gameImage={gameImage} />
-                        </div>
-                        <div>
+                       </Grid>
+                       <Grid item xs={8}>
                             <TitleAnswerForm 
                             title={title} setTitle={setTitle} 
                             titleAnswerTrue={titleAnswerTrue} setTitleAnswerTrue={setTitleAnswerTrue}
                             titleAnswerFalse={titleAnswerFalse} setTitleAnswerFalse={setTitleAnswerFalse} 
                             gameImage={gameImage} />
-                        </div>
-                        <div>
+                       </Grid>
+                       <Grid item xs={8}>
                             <YearAnswerForm 
                             year={year} setYear={setYear} 
                             yearAnswerTrue={yearAnswerTrue} setYearAnswerTrue={setYearAnswerTrue} 
                             yearAnswerFalse={yearAnswerFalse} setYearAnswerFalse={setYearAnswerFalse} 
                             gameImage={gameImage} />
-                        </div>
-                        <div>
+                       </Grid>
+                       <Grid item xs={8}>
                             <MediaAnswerForm 
                             media={media} setMedia={setMedia} 
                             mediaAnswerTrue={mediaAnswerTrue} setMediaAnswerTrue={setMediaAnswerTrue}
@@ -135,9 +135,8 @@ function GamePage() {
                             gameImage={gameImage}/>
                             {/* <MediaPicker medium={media} /> */}
                             {/* <Button onClick={handleSubmitMedia}>Submit Answer</Button> */}
-                        </div>
-                        </Box>
-                        <Grid item>
+                        </Grid>
+                        <Grid item xs={8}>
                         <GameIncrementButton  setArtistAnswerTrue={setArtistAnswerTrue} 
                                              setTitleAnswerTrue={setTitleAnswerTrue}
                                              setYearAnswerTrue={setYearAnswerTrue}
@@ -150,9 +149,6 @@ function GamePage() {
                         </Grid>
                         
                         <Button variant='contained' color='primary'onClick={handleGoBack} >Exit Game to Main Menu (score will not be saved)</Button>
-
-                    
-                </Grid>
             </Grid>
         </Container>
         </>

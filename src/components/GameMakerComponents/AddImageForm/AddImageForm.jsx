@@ -20,7 +20,7 @@ import {Drawer} from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@material-ui/core';
-import Box from '@mui/material/Box';
+import { Box } from '@material-ui/core';
 import { SwipeableDrawer } from '@material-ui/core';
 
 
@@ -101,10 +101,14 @@ function AddImageForm() {
     }
 
     return (user.admin ?
+        <>
+        <Box mr={50}>
+        <Nav/>
+        </Box>
         <Container spacing={2}>
             <Grid>
                 <Grid item xs={7}>
-                    <Nav />
+                    
                 </Grid>
                 <Grid item xs={7} >
                 <h2>{user.username}'s gallery: {galleryName}</h2>
@@ -187,6 +191,7 @@ function AddImageForm() {
                 </Grid>
             </Grid>
         </Container>
+        </>
         :
         <UserPage />
 

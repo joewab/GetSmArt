@@ -19,7 +19,7 @@ function GalleryList({galleryId, galleryName, imageId }) {
         <Grid container spacing={2}>
             {gallery && gallery.map((image) => {
                 return (
-                    <Grid key = {image.id} item sm={4}>
+                    <Grid key = {image.id} item sm = {6} md={4}>
                     <GalleryItem galleryId={galleryId} image={image} galleryName={galleryName} imageId={imageId} />
                     </Grid>
                 )

@@ -67,12 +67,12 @@ function GameIncrementButton({setArtistAnswerTrue,
 
     if(gallerySlideNumber < gallery.length){
     return (
-        <Button onClick={handleGallerySlideIncrement}>Skip to next</Button>
+        <Button variant='outlined' onClick={handleGallerySlideIncrement}>Next Slide (you don't have to get everything right)</Button>
     )
     }
     else {
         return(
-            <Button onClick={handleFinishGame}>Exit Game</Button>
+            <Button variant='contained' onClick={handleFinishGame}>Exit Game and Save Current Score</Button>
         )
     }
 }

@@ -25,12 +25,9 @@ function UserPage() {
   else{
 
   return (
-    <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
+    <>
       <AllGamesPage/>
-      <LogOutButton className="btn" />
-    </div>
+    </>
   );}
 }
 

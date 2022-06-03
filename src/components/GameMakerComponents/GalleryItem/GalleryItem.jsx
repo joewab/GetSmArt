@@ -59,7 +59,7 @@ function GalleryItem({ image, galleryId, galleryName }) {
     }
 
     return (
-        <Card elevation={10} >
+        <Card elevation={5}>
             <CardHeader
                 variant= 'h5'
                 title={image.title}
@@ -69,13 +69,9 @@ function GalleryItem({ image, galleryId, galleryName }) {
                 height="194"
                 image={image.url}
                 alt={image.title}
+                onClick={editImage}
             />
-            <CardActions disableSpacing>
-           
-                <IconButton onClick={editImage}  aria-label="edit">
-                    <EditIcon />
-                </IconButton>
-               
+            <CardActions disableSpacing>       
                 <IconButton onClick={deleteImage} aria-label="delete">
                     <DeleteForeverIcon  />
                 </IconButton>
