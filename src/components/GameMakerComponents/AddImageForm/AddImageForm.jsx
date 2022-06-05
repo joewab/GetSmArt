@@ -85,6 +85,15 @@ function AddImageForm() {
         galleryId
     }
 
+    function populateFields(){
+        setImageUrl('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Dante_Gabriel_Rossetti_-_The_Day_Dream_-_Google_Art_Project.jpg/800px-Dante_Gabriel_Rossetti_-_The_Day_Dream_-_Google_Art_Project.jpg');
+        setDescription('a depiction of Jane Morris, she "consumed and obsessed him in paint, poetry, and life".');
+        setArtist('Dante Gabriel Rossetti');
+        setTitle('The Day Dream');
+        setYear('1880');
+        setMedium('oil on canvas');
+    }
+
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -106,7 +115,7 @@ function AddImageForm() {
         <Nav/>
         </Box>
         <Container spacing={2}>
-            <Grid>
+            <Grid >
                 <Grid item xs={7}>
                     
                 </Grid>
@@ -121,15 +130,17 @@ function AddImageForm() {
                     anchor='right'
                     classes={{ paper: classes.drawerPaper }}>
                     <Container>
-                        <h2>Add a slide to the gallery:</h2>
+                        <h2 onClick = {populateFields}>Add a slide to the gallery:</h2>
                         <Grid container spacing={2}>
-                            <Grid item xs={8}>
+                            <Grid item xs={8} >
                                     <TextField
                                         required
                                         id="outlined-required"
                                         label="image url required"
-                                        defaultValue={imageUrl}
+                                        value={imageUrl}
+                                        defaultValue=''
                                         onChange={(event) => setImageUrl(event.target.value)}
+                                        
                                     />
                                    </Grid>
                                    <Grid item xs={8}>
@@ -137,7 +148,8 @@ function AddImageForm() {
                                         required
                                         id="outlined-required"
                                         label="artist required"
-                                        defaultValue={artist}
+                                        value={artist}
+                                        defaultValue=''
                                         onChange={(event) => setArtist(event.target.value)}
                                     />
                                     </Grid>
@@ -146,7 +158,8 @@ function AddImageForm() {
                                         required
                                         id="outlined-required"
                                         label="title required"
-                                        defaultValue={title}
+                                        value={title}
+                                        defaultValue=''
                                         onChange={(event) => setTitle(event.target.value)}
                                     />
                                     </Grid>
@@ -155,7 +168,8 @@ function AddImageForm() {
                                         required
                                         id="outlined-required"
                                         label="year required"
-                                        defaultValue={year}
+                                        value={year}
+                                        defaultValue=''
                                         onChange={(event) => setYear(event.target.value)}
                                     />
                                     </Grid>
@@ -164,7 +178,8 @@ function AddImageForm() {
                                         required
                                         id="outlined-required"
                                         label="media required"
-                                        defaultValue={medium}
+                                        value={medium}
+                                        defaultValue=''
                                         onChange={(event) => setMedium(event.target.value)}
                                     />
                                     </Grid>
@@ -174,11 +189,11 @@ function AddImageForm() {
                                         label="description required"
                                         multiline
                                         minRows={4}
-                                        defaultValue={description}
+                                        value={description}
+                                        defaultValue=''
                                         variant="outlined"
                                         onChange={(event) => setDescription(event.target.value)}
                                     />
-                                    {/* <MediaPicker medium={medium} handleChange={handleChange} /> */}
                                     </Grid>
                                     <Grid item xs={8}>
                                 <Button variant='contained' onClick={handleSubmit}>submit</Button>

@@ -50,7 +50,9 @@ function AllGamesPage() {
                 {galleries.map((game) => {
                     
                     return(
+                        <Grid item key={game.id} spacing={2} xs={4}>
                         <GameLink key={game.id} game={game} allScores={allScores} />
+                        </Grid>
                     )
                
                 })}

@@ -8,7 +8,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import {Card} from '@material-ui/core';
 import {CardHeader} from '@material-ui/core';
 import { CardContent } from '@material-ui/core';
-import CardMedia from '@mui/material/CardMedia';
+import { CardMedia } from '@material-ui/core';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { CardActions } from '@mui/material';
