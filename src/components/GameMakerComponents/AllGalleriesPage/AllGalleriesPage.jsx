@@ -36,6 +36,7 @@ function AllGalleriesPage() {
         }
     })
 
+    
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -52,6 +53,26 @@ function AllGalleriesPage() {
             payload: newGalleryName
         })
     }
+
+    // let filteredGalleryArray = []
+
+    // function filterOutDuplicateGalleries(galleryArray){
+    //     galleryArray.map((gal) => {
+    //         console.log(gal);
+    //         console.log(gal.id);
+    //         filteredGalleryArray.map((newGal) => {
+    //             if(gal.id!==newGal.id){
+    //                 filteredGalleryArray.push(gal)
+    //             }
+    //         })
+    //     })
+    // }
+
+   
+
+   
+
+    // console.log('filtered gallery array from all galleries page:',filteredGalleryArray);
 
     return ( user.admin ?
         <>

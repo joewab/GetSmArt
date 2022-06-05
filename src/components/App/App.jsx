@@ -25,7 +25,7 @@ import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
 import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 import Theme from '../_theme/_theme';
 import { Button } from '@material-ui/core';
-// import { Button } from '@mui/material';
+import swal from 'sweetalert';
 
 import './App.css';
 
@@ -33,6 +33,8 @@ import { ThemeProvider } from '@material-ui/core';
 
 function App() {
   const dispatch = useDispatch();
+
+  
 
   const user = useSelector(store => store.user);
 

@@ -68,7 +68,7 @@ function GalleryLink({ gal }) {
     console.log('galleryImages in gallery link:', galleryImages);
 
 
-    console.log('this is gal', gal);
+    // console.log('this is gal', gal);
 
     function goToGallery() {
         history.push(`/addgallery/${gal.id}/${gal.name}`)
@@ -76,10 +76,27 @@ function GalleryLink({ gal }) {
 
     function deleteGallery() {
         console.log('in deleteGallery');
-        dispatch({
-            type: 'DELETE_GALLERY',
-            payload: gal.id
-        })
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this gallery!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                dispatch({
+                    type: 'DELETE_GALLERY',
+                    payload: gal.id
+                })
+              swal("The gallery has been deleted", {
+                icon: "success",
+              });
+            } else {
+              swal("Your gallery is safe");
+            }
+          });
+       
     }
 
     return (
@@ -100,7 +117,7 @@ function GalleryLink({ gal }) {
                             go to gallery</Button>
                     </ThemeProvider>
                     <Button onClick={deleteGallery}
-                        variant='filled'>
+                        variant='outlined'>
                         delete gallery</Button>
                 </Card>
             </ThemeProvider>

@@ -112,6 +112,8 @@ function EditImageForm() {
     function handleSubmit(e) {
         e.preventDefault();
         console.log('in handleSubmit, here is data:', imageObject);
+        swal({title: "The slide has been updated",
+              icon: "success"});
         dispatch({
             type: 'UPDATE_IMAGE',
             payload: imageToEdit
@@ -121,6 +123,7 @@ function EditImageForm() {
         setArtist('');
         setTitle('');
         setYear('');
+        history.push(`/addgallery/${galleryId}/${galleryName}`)
     }
 
     function backToAddSlide() {
@@ -153,6 +156,7 @@ function EditImageForm() {
                                 <Grid item key={user.id} xs={8}>
                                     <TextField
                                         label="image url"
+                                        defaultValue=' '
                                         value={imageToEdit.url}
                                         onChange={(e) => {
                                             dispatch({
@@ -165,6 +169,7 @@ function EditImageForm() {
                                 <Grid item key={user.id} xs={8}>
                                     <TextField
                                         label="artist"
+                                        defaultValue=' '
                                         value={imageToEdit.artist}
                                         onChange={(e) => {
                                             dispatch({
@@ -177,6 +182,7 @@ function EditImageForm() {
                                 <Grid item key={user.id} xs={8}>
                                     <TextField
                                         label="title"
+                                        defaultValue=' '
                                         value={imageToEdit.title}
                                         onChange={(e) => {
                                             dispatch({
@@ -189,6 +195,7 @@ function EditImageForm() {
                                 <Grid item key={user.id} xs={8}>
                                     <TextField
                                         label="year"
+                                        defaultValue=' '
                                         value={imageToEdit.year}
                                         onChange={(e) => {
                                             dispatch({
@@ -202,6 +209,7 @@ function EditImageForm() {
                                     {/* <MediaPicker medium={imageToEdit.media} handleChange={handleChange} */}
                                     <TextField
                                         label="media"
+                                        defaultValue=' '
                                         value={imageToEdit.media}
                                         onChange={(e) => {
                                             dispatch({
@@ -216,6 +224,7 @@ function EditImageForm() {
                                         label="description"
                                         multiline
                                         minRows={4}
+                                        defaultValue=' '
                                         value={imageToEdit.description}
                                         variant="outlined"
                                         onChange={(e) => {

@@ -52,17 +52,33 @@ function GalleryItem({ image, galleryId, galleryName }) {
     }
 
     const deleteImage = () => {
-        dispatch({
-            type: 'DELETE_IMAGE',
-            payload: {imageId: image.id, galleryId}
-        })
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this slide!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                dispatch({
+                    type: 'DELETE_IMAGE',
+                    payload: {imageId: image.id, galleryId}
+                })
+              swal("The slide has been deleted", {
+                icon: "success",
+              });
+            } else {
+              swal("Your slide is safe");
+            }
+          });
+       
     }
 
     return (
         <Card elevation={5}>
             <CardHeader
-                variant= 'h5'
-                title={image.title}
+                subheader={image.title}
             />
             <CardMedia
                 component="img"

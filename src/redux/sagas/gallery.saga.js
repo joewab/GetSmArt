@@ -19,6 +19,84 @@ function* fetchGalleries() {
     try {
         const galleries = yield axios.get('/api/galleries');
         console.log('get all galleries:', galleries.data);
+
+        let filteredGalleries = []
+
+        let currentId = 0
+
+        function filterGalleries(array) {
+            for(let i=0; i<array.length; i++){
+                if(array[i].id !== currentId){
+                    filteredGalleries.push(array[i]);
+                    currentId = array[i].id
+                }
+            }
+            return true
+        }
+
+        filterGalleries(galleries.data);
+
+        console.log('Filtered Gallery from fetch galleries:', filteredGalleries);
+
+
+
+        // galleries.data.map((galleryItem) => {
+        //     if (checkForDuplicateGalleries(galleryItem) === false);
+        //     { filteredGalleries.push(galleryItem) }
+
+        // })
+
+        // function checkForDuplicateGalleries(galleryItem) {
+        //     filteredGalleries.map((newGalleryItem) => {
+        //         console.log('**gallery item in gallery fetch saga:', galleryItem);
+        //         if (galleryItem.id === newGalleryItem.id) {
+        //             return true
+        //         }
+
+        //         return false
+
+            // }) // end map
+        // }
+
+
+
+
+        // let url = galleryItem.url;
+        // function filterGalleries(){
+        // go thru the array
+        // let currentId = undefined;
+
+        // for(let i = 0; i < galleries.data.length; i++) {
+        //     if(currentId == undefined) {
+        //         // store this item
+        //         currentId = galleries.data[i].id; // the one we're comparing to
+        //         newArray.push(galleries.data[i]);
+        //     } else {
+        //         currentId = newArray[newArray.length - 1].id; // last thing in the array
+        //     }
+
+        //     for(let j = 0; j < galleries.data.length; j++) {
+        //         // for each item, check agains the entire same array
+        //         if(galleries.data[j].id != currentId) {
+        //             // new id
+        //             break; // end loop
+        //         }
+        //     }
+
+
+        // }}
+
+        // if(checkForDuplicateGalleries(galleryItem) !== true){
+        //     filteredGalleries.push(galleryItem)
+        // };
+        // return filteredGalleries;
+        // })
+
+
+        //console.log('*************************************************************************************************************************filtered Galleries in Gallery saga', filteredGalleries);
+
+
+
         yield put({
             type: 'SET_GALLERIES',
             payload: galleries.data
@@ -65,7 +143,7 @@ function* createGallery(action) {
 }
 
 function* deleteImage(action) {
-    console.log('in deleteImage',action);
+    console.log('in deleteImage', action);
     try {
         yield axios({
             method: 'DELETE',
@@ -98,41 +176,41 @@ function* deleteGallery(action) {
 
 }
 
-function* editImage(action){
-    try{
-        
+function* editImage(action) {
+    try {
+
         const imageId = action.payload
         console.log('payload from edit image:', action.payload);
         const oneImage = yield axios.get(`/api/image/${imageId}`);
         console.log('data for one image from edit button:', oneImage.data);
-        yield put ({
+        yield put({
             type: 'GET_ONE_IMAGE',
             payload: oneImage.data
         })
 
 
-    } catch{
+    } catch {
         console.log('error in editImage');
     }
 }
-function* updateImage(action){
-    try{ 
+function* updateImage(action) {
+    try {
         const imageToEdit = action.payload;
-        console.log('payload from update image:',imageToEdit);
+        console.log('payload from update image:', imageToEdit);
         console.log('image to edit id:', imageToEdit.id);
         yield axios({
             method: 'PUT',
             url: `/api/image/${imageToEdit.id}`,
             data: imageToEdit
         })
-       
-        yield put ({
+
+        yield put({
             type: 'GET_ONE_IMAGE',
             payload: imageToEdit
         })
 
 
-    } catch{
+    } catch {
         console.log('error in editImage');
     }
 }
