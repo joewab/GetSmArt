@@ -14,6 +14,9 @@ import { Typography } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core';
+import { CardHeader } from '@material-ui/core';
+import { CardActions } from '@material-ui/core';
+import { CardMedia } from '@material-ui/core';
 
 
 
@@ -30,17 +33,28 @@ function GameLink({ game, allScores }) {
         history.push(`/game/${game.id}/${game.name}`)
     }
 
+    const placeholder = require('./image-placeholder.png');
 
 
     return (
+        <>
 
-       
-            <Grid item key={game.id} spacing={2} xs={4}>
-                <Card >
-                    <Typography variant='h5'>{game.name}</Typography>
+            <Card key={game.id} xs={4} elevation={5}>
+                <CardHeader
+                    disableTypography={true}
+                    
+                    title={game.name}
+                />
+                <CardMedia
+                    component="img"
+                    height="194"
+                    image={game.url ? game.url : placeholder}
+                    alt={game.title}
+                />
+                <CardActions disableSpacing>
                     <Button onClick={goToGame}
                         variant='contained'
-                        color = 'primary'>
+                        color='primary'>
                         go to game</Button>
                     {allScores.map((score) => {
                         if (game.id === score.gallery_id) {
@@ -49,10 +63,12 @@ function GameLink({ game, allScores }) {
                             )
                         }
                     })}
+                </CardActions>
+            </Card>
 
-                </Card>
-            </Grid>
-       
+        </>
+
+
     )
 }
 

@@ -54,29 +54,13 @@ function AllGalleriesPage() {
         })
     }
 
-    // let filteredGalleryArray = []
+    
 
-    // function filterOutDuplicateGalleries(galleryArray){
-    //     galleryArray.map((gal) => {
-    //         console.log(gal);
-    //         console.log(gal.id);
-    //         filteredGalleryArray.map((newGal) => {
-    //             if(gal.id!==newGal.id){
-    //                 filteredGalleryArray.push(gal)
-    //             }
-    //         })
-    //     })
-    // }
-
-   
-
-   
-
-    // console.log('filtered gallery array from all galleries page:',filteredGalleryArray);
 
     return ( user.admin ?
         <>
         <Nav/>
+
         <Container>
             
             <Grid container spacing={5}>

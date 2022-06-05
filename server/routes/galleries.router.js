@@ -9,8 +9,11 @@ const {
 
 router.get('/', rejectUnauthenticated, (req, res) => {
 
-    const query = `SELECT * FROM gallery
-    ORDER BY id;`;
+    const query = `SELECT DISTINCT(gallery.id), gallery.name, image.url
+    FROM gallery 
+    LEFT JOIN gallery_image ON gallery.id = gallery_image.gallery_id
+    LEFT JOIN image ON image.id = gallery_image.image_id
+    ORDER BY gallery.id DESC;`;
     pool.query(query)
     .then( result => {
         res.send(result.rows);

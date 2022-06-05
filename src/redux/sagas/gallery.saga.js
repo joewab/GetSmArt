@@ -38,68 +38,9 @@ function* fetchGalleries() {
 
         console.log('Filtered Gallery from fetch galleries:', filteredGalleries);
 
-
-
-        // galleries.data.map((galleryItem) => {
-        //     if (checkForDuplicateGalleries(galleryItem) === false);
-        //     { filteredGalleries.push(galleryItem) }
-
-        // })
-
-        // function checkForDuplicateGalleries(galleryItem) {
-        //     filteredGalleries.map((newGalleryItem) => {
-        //         console.log('**gallery item in gallery fetch saga:', galleryItem);
-        //         if (galleryItem.id === newGalleryItem.id) {
-        //             return true
-        //         }
-
-        //         return false
-
-            // }) // end map
-        // }
-
-
-
-
-        // let url = galleryItem.url;
-        // function filterGalleries(){
-        // go thru the array
-        // let currentId = undefined;
-
-        // for(let i = 0; i < galleries.data.length; i++) {
-        //     if(currentId == undefined) {
-        //         // store this item
-        //         currentId = galleries.data[i].id; // the one we're comparing to
-        //         newArray.push(galleries.data[i]);
-        //     } else {
-        //         currentId = newArray[newArray.length - 1].id; // last thing in the array
-        //     }
-
-        //     for(let j = 0; j < galleries.data.length; j++) {
-        //         // for each item, check agains the entire same array
-        //         if(galleries.data[j].id != currentId) {
-        //             // new id
-        //             break; // end loop
-        //         }
-        //     }
-
-
-        // }}
-
-        // if(checkForDuplicateGalleries(galleryItem) !== true){
-        //     filteredGalleries.push(galleryItem)
-        // };
-        // return filteredGalleries;
-        // })
-
-
-        //console.log('*************************************************************************************************************************filtered Galleries in Gallery saga', filteredGalleries);
-
-
-
         yield put({
             type: 'SET_GALLERIES',
-            payload: galleries.data
+            payload: filteredGalleries
         })
     } catch {
         console.log('get all galleries error');
