@@ -86,12 +86,12 @@ function AddImageForm() {
     }
 
     function populateFields(){
-        setImageUrl('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Dante_Gabriel_Rossetti_-_The_Day_Dream_-_Google_Art_Project.jpg/800px-Dante_Gabriel_Rossetti_-_The_Day_Dream_-_Google_Art_Project.jpg');
-        setDescription('a depiction of Jane Morris, she "consumed and obsessed him in paint, poetry, and life".');
-        setArtist('Dante Gabriel Rossetti');
-        setTitle('The Day Dream');
-        setYear('1880');
-        setMedium('oil on canvas');
+        setImageUrl('http://joeanthonybrown.com/02-large-images/studio-1/studio1-20.jpg');
+        setDescription('A promising young artist!');
+        setArtist('Joe Anthony-Brown');
+        setTitle('The Excited One');
+        setYear('2015');
+        setMedium('oil on panel');
     }
 
 

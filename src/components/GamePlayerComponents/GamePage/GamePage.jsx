@@ -145,6 +145,10 @@ function GamePage() {
                                              setTitleAnswerFalse={setTitleAnswerFalse}
                                              setYearAnswerFalse={setYearAnswerFalse}
                                              setMediaAnswerFalse={setMediaAnswerFalse}
+                                             setArtist={setArtist}
+                                             setTitle={setTitle}
+                                             setYear={setYear}
+                                             setMedia={setMedia}
                                              galleryId={galleryId} />
                         </Grid>
                         

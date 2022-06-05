@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
 import {Box} from '@material-ui/core';
+import {Button} from '@material-ui/core';
 
 
 function LoginForm() {
@@ -28,7 +29,7 @@ function LoginForm() {
 
   return (
     <Box pt={15}>
-    <form className="formPanel" onSubmit={login}>
+    <form className="formPanel" onSubmit={login} stlye={{}}>
       <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -60,7 +61,14 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+      <Button
+          variant ='contained'
+          type="button"
+          className="btn btn_asLink"
+          onClick={login}
+        >
+          Log In
+        </Button>
       </div>
     </form>
     </Box>
