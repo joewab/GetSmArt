@@ -82,7 +82,7 @@ function MediaAnswerForm({ media, setMedia, mediaAnswerTrue, setMediaAnswerTrue,
         <>
             <TextField
                 id="outlined-required"
-                label="Media required"
+                label="Media"
                 value={media ? media : ''}
                 defaultValue=''
                 onChange={(event) => setMedia(event.target.value)}

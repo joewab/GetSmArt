@@ -81,7 +81,7 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
         <>
             <TextField
                 id="outlined-required"
-                label="Title required"
+                label="Title"
                 value={title ? title : ''}
                 defaultValue=''
                 onChange={(event) => setTitle(event.target.value)}
