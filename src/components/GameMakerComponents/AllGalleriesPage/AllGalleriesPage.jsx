@@ -16,9 +16,11 @@ import Grid from '@mui/material/Grid';
 import { Container } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
 import { Paper, Button } from '@material-ui/core';
-import { TextField } from '@mui/material';
+import { TextField } from '@material-ui/core';
 import { createTheme, ThemeProvider } from '@material-ui/core';
 import Carousel from 'react-material-ui-carousel';
+import { Box } from '@material-ui/core';
+
 
 
 
@@ -48,6 +50,10 @@ function AllGalleriesPage() {
 
     function createGallery() {
         console.log('in createGallery');
+        if(newGalleryName === ''){
+            swal("Please enter a gallery name!");
+            return false
+        }
         dispatch({
             type:'CREATE_GALLERY',
             payload: newGalleryName
@@ -72,8 +78,17 @@ function AllGalleriesPage() {
                         defaultValue={newGalleryName}
                         onChange={(event) => setNewGalleryName(event.target.value)}
                     />
-                    <Button onClick={createGallery}>create new gallery</Button>
-                </Grid>
+                    
+                    <Button variant='outlined' onClick={createGallery}>create new gallery</Button>
+                    </Grid>
+                    </Grid>
+        </Container>
+
+        <Box pt={1} mb={5}>  </Box>
+        
+        <Container>
+            <Grid container spacing={5}>
+                
                 {galleries.map((gal) => {
                     return(
                         <Grid item key={gal.id} xs={4} >

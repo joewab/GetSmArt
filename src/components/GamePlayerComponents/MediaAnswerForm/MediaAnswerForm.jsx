@@ -52,9 +52,9 @@ function MediaAnswerForm({ media, setMedia, mediaAnswerTrue, setMediaAnswerTrue,
             <>
                 <ValidationTextField
                     label="Correct!"
-                    required
                     variant="outlined"
-                    defaultValue={media}
+                    value={media ? media : ''}
+                    defaultValue=''
                     id="validation-outlined-input"
                 />
             </>
@@ -68,7 +68,8 @@ function MediaAnswerForm({ media, setMedia, mediaAnswerTrue, setMediaAnswerTrue,
                     error
                     id="outlined-error-helper-text"
                     label="media is incorrect!"
-                    defaultValue={media}
+                    value={media ? media : ''}
+                    defaultValue=''
                     onChange={(event) => setMedia(event.target.value)}
                 />
                 <Button variant='outlined' color='primary' onClick={handleSubmitMedia}>Submit Answer</Button>
@@ -78,16 +79,16 @@ function MediaAnswerForm({ media, setMedia, mediaAnswerTrue, setMediaAnswerTrue,
 
 
     return (
-       <>
+        <>
             <TextField
-                required
                 id="outlined-required"
-                label="Media required"
+                label="Media"
+                value={media ? media : ''}
                 defaultValue=''
                 onChange={(event) => setMedia(event.target.value)}
             />
             <Button variant='outlined' color='primary' onClick={handleSubmitMedia}>Submit Answer</Button>
-            </>
+        </>
     )
 
 }

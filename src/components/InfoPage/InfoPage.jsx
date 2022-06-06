@@ -23,6 +23,8 @@ function InfoPage() {
 
       <h3>Where do I go from here?</h3>
       <ul>
+        <li>Use an API to autocomplete forms when making galleries</li>
+        <li>Use fuzzy matching so that the students don't have to spell everything perfectly.</li>
         <li>Give teachers the ability to add classes and edit the student list for each class.</li>
         <li>Give teachers the ability to assign galleries to specific classes.</li>
         <li>Add more feedback for students playing the game, make it more exciting!</li>

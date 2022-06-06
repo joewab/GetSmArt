@@ -15,6 +15,10 @@ function GameIncrementButton({setArtistAnswerTrue,
                               setTitleAnswerFalse, 
                               setYearAnswerFalse, 
                               setMediaAnswerFalse, 
+                              setArtist,
+                              setTitle,
+                              setYear,
+                              setMedia,
                                 galleryId}) {
 
     const dispatch = useDispatch();
@@ -39,7 +43,12 @@ function GameIncrementButton({setArtistAnswerTrue,
         setArtistAnswerFalse(false);
         setTitleAnswerFalse(false);
         setYearAnswerFalse(false);
-        setMediaAnswerFalse(false);}
+        setMediaAnswerFalse(false);
+        setArtist('');
+        setTitle('');
+        setYear('');
+        setMedia('');
+    }
     }
 
     const handleFinishGame = () => {

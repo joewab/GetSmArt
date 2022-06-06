@@ -73,13 +73,13 @@ function App() {
           </ProtectedRoute>
 
 
-          <ProtectedRoute
+          <Route
             // logged in shows InfoPage else shows LoginPage
             exact
             path="/info"
           >
             <InfoPage />
-          </ProtectedRoute>
+          </Route>
 
           <ProtectedRoute
             // logged in shows all galleries page

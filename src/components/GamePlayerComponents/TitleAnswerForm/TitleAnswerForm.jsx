@@ -51,9 +51,9 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
             <div className='correct-answer'>
                 <ValidationTextField
                     label="Correct!"
-                    required
                     variant="outlined"
-                    defaultValue={title}
+                    value={title ? title : ''}
+                    defaultValue=''
                     id="validation-outlined-input"
                 />
             </div>
@@ -67,7 +67,8 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
                     error
                     id="outlined-error-helper-text"
                     label="title is incorrect!"
-                    defaultValue={title}
+                    value={title ? title : ''}
+                    defaultValue=''
                     onChange={(event) => setTitle(event.target.value)}
                 />
                 <Button variant='outlined' color='primary' onClick={handleSubmitTitle}>Submit Answer</Button>
@@ -77,11 +78,11 @@ function TitleAnswerForm({ title, setTitle, titleAnswerTrue, setTitleAnswerTrue,
 
 
     return (
-       <>
+        <>
             <TextField
-                required
                 id="outlined-required"
-                label="Title required"
+                label="Title"
+                value={title ? title : ''}
                 defaultValue=''
                 onChange={(event) => setTitle(event.target.value)}
             />

@@ -51,15 +51,16 @@ function ArtistAnswerForm({ artist, setArtist, artistAnswerTrue, setArtistAnswer
 
         return (
 
-           
-                <ValidationTextField
-                    label="Correct!"
-                    
-                    variant="outlined"
-                    defaultValue={artist}
-                    id="validation-outlined-input"
-                />
-            
+
+            <ValidationTextField
+                label="Correct!"
+
+                variant="outlined"
+                value={artist ? artist : ''}
+                defaultValue=''
+                id="validation-outlined-input"
+            />
+
         )
     }
 
@@ -70,7 +71,8 @@ function ArtistAnswerForm({ artist, setArtist, artistAnswerTrue, setArtistAnswer
                     error
                     id="outlined-error-helper-text"
                     label="artist is incorrect!"
-                    defaultValue={artist}
+                    value={artist ? artist : ''}
+                    defaultValue=''
                     onChange={(event) => setArtist(event.target.value)}
                 />
                 <Button variant='outlined' color='primary' onClick={handleSubmitArtist}>Submit Answer</Button>
@@ -83,9 +85,10 @@ function ArtistAnswerForm({ artist, setArtist, artistAnswerTrue, setArtistAnswer
 
         <>
             <TextField
-                
+
                 id="outlined-required"
                 label="artist"
+                value={artist ? artist : ''}
                 defaultValue=''
                 onChange={(event) => setArtist(event.target.value)}
             />

@@ -4,6 +4,10 @@ import { useHistory } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core';
 import {Box} from '@material-ui/core';
+import {Button} from '@material-ui/core';
+
+
+import Nav from '../Nav/Nav';
 
 function LoginPage() {
   const history = useHistory();
@@ -21,11 +25,14 @@ const classes = useStyles();
   return (
     
     <div className={classes.root}>
+
+    <Nav/>
       
       <LoginForm />
     
       <center>
-        <button
+        <Button
+          variant ='contained'
           type="button"
           className="btn btn_asLink"
           onClick={() => {
@@ -33,7 +40,7 @@ const classes = useStyles();
           }}
         >
           Register
-        </button>
+        </Button>
       </center>
      
     </div>
