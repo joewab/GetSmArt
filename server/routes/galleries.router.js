@@ -25,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 })
 
 
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
     const galleryName = req.body.galleryName;
     console.log('this is gallery name in Post route',galleryName);
     const sqlQuery = `INSERT INTO gallery ("name") VALUES ($1);`;
@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
 })
 module.exports = router;
 
-router.delete('/:id', (req,res) => {
+router.delete('/:id', rejectUnauthenticated, (req,res) => {
     const galleryId = req.params.id;
     const sqlQuery = 'DELETE FROM gallery WHERE id=$1;';
     const sqlValues = [galleryId];

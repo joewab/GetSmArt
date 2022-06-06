@@ -27,8 +27,6 @@ const classes = useStyles();
     <div className={classes.root}>
 
     <Nav/>
-
-    <h1>This updates!</h1>
       
       <LoginForm />
     

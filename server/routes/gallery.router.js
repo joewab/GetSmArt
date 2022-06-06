@@ -1,8 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../modules/pool')
+const pool = require('../modules/pool');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 
-router.get('/:id', (req, res) => {
+
+router.get('/:id', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media, gallery.id AS gallery_id
   FROM image JOIN gallery_image ON image.id = gallery_image.image_id
   JOIN gallery ON gallery.id = gallery_image.gallery_id
@@ -15,7 +19,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
 
     try {
@@ -47,7 +51,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const imageId = req.params.id
     console.log('this is req params in delete:',imageId);
     const galleryId = req.body.galleryId
