@@ -42,6 +42,7 @@ function App() {
     dispatch({ type: 'FETCH_USER' });
   }, [dispatch]);
 
+
   return (
     <ThemeProvider theme={Theme}>
     <Router>
