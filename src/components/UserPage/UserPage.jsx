@@ -8,6 +8,7 @@ import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
 import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
+import ClassesForm from '../GameMakerComponents/ClassesForm/ClassesForm';
 
 //material------------------------------------------------------
 
@@ -18,7 +19,7 @@ function UserPage() {
 
   if(user.admin===true){
     return(
-      <AllGalleriesPage/>
+      <ClassesForm/>
     )
   }
 
