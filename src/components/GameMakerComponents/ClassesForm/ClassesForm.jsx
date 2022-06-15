@@ -15,12 +15,10 @@ import UserPage from '../../UserPage/UserPage';
 import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-import { Drawer } from '@material-ui/core';
 import Typography from '@mui/material/Typography';
-import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@material-ui/core';
 import { Box } from '@material-ui/core';
-import { SwipeableDrawer } from '@material-ui/core';
+import { MenuItem } from '@material-ui/core';
 
 function ClassesForm() {
 
@@ -28,29 +26,42 @@ function ClassesForm() {
         dispatch({ type: 'FETCH_CLASSES' });
     }, []);
 
+    //variables that are react functions--------------------------------
     const dispatch = useDispatch();
-    const user = useSelector((store) => store.user);
-    const galleries = useSelector(store => store.gallery.galleries);
     const history = useHistory();
 
-    const [newClassName, setNewClassName] = useState('')
+    //variables that evaluate to something specific from the store or params---------
+    const user = useSelector((store) => store.user);
+    const classes = useSelector(store => store.classes.classes);
+
+
+    //local state--------------------------------------------------------------
+    const [newClassName, setNewClassName] = useState('');
+    const [newClass, setNewClass] = React.useState('');
+
 
     function createClass() {
         console.log('in createClass');
-        if(newClassName === ''){
+        if (newClassName === '') {
             swal("Please enter a class name!");
             return false
         }
         dispatch({
-            type:'CREATE_CLASS',
+            type: 'CREATE_CLASS',
             payload: newClassName
         })
     }
 
-
-    function handleClick() {
-        history.push('/gallery')
+    function goToClassGalleries() {
+        history.push(`/gallery/${newClass}`);
     }
+
+
+    const handleChange = (event) => {
+        setNewClass(event.target.value);
+        console.log(event.target.value);
+    }
+
 
     return (
         <Container>
@@ -73,7 +84,25 @@ function ClassesForm() {
                     <Button variant='outlined' onClick={createClass}>create new class</Button>
                 </Grid>
                 <Grid item>
-                    <Typography onClick={handleClick}>Go to Gallery</Typography>
+                    <TextField
+                        id="outlined-select"
+                        select
+                        label="select class"
+                        defaultValue=''
+                        value={newClass && newClass}
+                        onChange={handleChange}
+                        helperText="Please select class"
+                    >
+                        {classes.map((option) => (
+                            <MenuItem key={option.id} value={option.class_name}>
+                                {option.class_name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
+                </Grid>
+                <Grid item>
+                    <Button variant='outlined' onClick={goToClassGalleries}>Go to class galleries</Button>
+
                 </Grid>
             </Grid>
         </Container>

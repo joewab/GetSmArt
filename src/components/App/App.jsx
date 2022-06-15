@@ -85,7 +85,7 @@ function App() {
           <ProtectedRoute
             // logged in shows all galleries page
             exact
-            path="/gallery"
+            path="/gallery/:className"
           >
             <AllGalleriesPage />
           </ProtectedRoute>

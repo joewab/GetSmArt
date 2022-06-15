@@ -15,10 +15,12 @@ function* fetchGallery(action) {
 
 }
 
-function* fetchGalleries() {
+function* fetchGalleries(action) {
     try {
-        const galleries = yield axios.get('/api/galleries');
-        console.log('get all galleries:', galleries.data);
+        const className = action.payload.className
+        console.log('this is className in fetchGalleries saga -----------', className);
+        const galleries = yield axios.get(`/api/galleries/${className}`);
+        console.log('get class galleries:', galleries.data);
 
         let filteredGalleries = []
 

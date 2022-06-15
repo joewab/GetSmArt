@@ -7,19 +7,27 @@ const {
 
 
 
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/:className', rejectUnauthenticated, (req, res) => {
 
-    const query = `SELECT DISTINCT(gallery.id), gallery.name, image.url
+    const className = req.params.className;
+
+    console.log('this is the className in galleries router:',className);
+
+    const sqlQuery = `SELECT (gallery.id), gallery.name, image.url, classroom.class_name
     FROM gallery 
+    JOIN class_gallery ON gallery.id = class_gallery.gallery_id
+    JOIN classroom ON classroom.id = class_gallery.class_id
     LEFT JOIN gallery_image ON gallery.id = gallery_image.gallery_id
     LEFT JOIN image ON image.id = gallery_image.image_id
+    WHERE classroom.class_name = ($1)
     ORDER BY gallery.id DESC;`;
-    pool.query(query)
+    const sqlValues = [className]
+    pool.query(sqlQuery, sqlValues)
     .then( result => {
         res.send(result.rows);
     })
     .catch(err => {
-        console.log('ERROR: Get all Galleries', err);
+        console.log('ERROR: Get class Galleries', err);
         res.sendStatus(500)
     })
 })
