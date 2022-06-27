@@ -9,13 +9,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 //componenets----------------------------------------------------
-import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import AllGalleriesPage from '../GameMakerComponents/AllGalleriesPage/AllGalleriesPage';
@@ -24,7 +22,6 @@ import EditImageForm from '../GameMakerComponents/EditImageForm/EditImageForm';
 import AllGamesPage from '../GamePlayerComponents/AllGamesPage/AllGamesPage';
 import GamePage from '../GamePlayerComponents/GamePage/GamePage';
 import Theme from '../_theme/_theme';
-import { Button } from '@material-ui/core';
 import swal from 'sweetalert';
 
 import './App.css';
@@ -47,7 +44,6 @@ function App() {
     <ThemeProvider theme={Theme}>
     <Router>
       <div>
-        {/* <Nav /> */}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -61,10 +57,6 @@ function App() {
             <AboutPage />
           </Route>
 
-          {/* For protected routes, the view could show one of several things on the same route.
-            Visiting localhost:3000/user will show the UserPage if the user is logged in.
-            If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
-            Even though it seems like they are different pages, the user is always on localhost:3000/user */}
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
