@@ -9,6 +9,13 @@ function InfoPage() {
     <Nav/>
     <div className="container">
       <p>Info Page</p>
+
+      <h3>Instructions:</h3>
+      <h4>log in as a teacher: username: mrjoe, password: 321</h4>
+      <h4>log in as a student: username: joe, password: 123</h4>
+
+
+
       <h3>Technologies used to build this app:</h3>
       <ul>
         <li>JavaScript</li>
