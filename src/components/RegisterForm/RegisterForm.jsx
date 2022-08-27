@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {Box} from '@material-ui/core';
-import {Button} from '@material-ui/core';
+import {Button, Checkbox, FormControlLabel} from '@material-ui/core';
+
 
 
 
@@ -58,6 +59,12 @@ function RegisterForm() {
         </label>
       </div>
       <div>
+
+      <FormControlLabel 
+        control={<Checkbox defaultChecked color="success"/>} 
+        label="Register as an Instructor?" />
+
+      <div>
       <Button
           variant ='contained'
           type="button"
@@ -66,6 +73,7 @@ function RegisterForm() {
         >
           Register
         </Button>
+        </div>      
       </div>
     </form>
     </Box>
