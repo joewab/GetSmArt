@@ -17,17 +17,14 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
-
-    console.log(username, password, isInstructor);
-
-    // dispatch({
-    //   type: 'REGISTER',
-    //   payload: {
-    //     username: username,
-    //     password: password,
-    //     isInstructor
-    //   },
-    // });
+    dispatch({
+      type: 'REGISTER',
+      payload: {
+        username: username,
+        password: password,
+        isInstructor
+      },
+    });
   }; // end registerUser
 
   return (
@@ -67,7 +64,8 @@ function RegisterForm() {
 
       <FormControlLabel 
         control={
-        <Checkbox color="primary"
+        <Checkbox 
+          color="primary"
           onChange={() => setIsInstructor(!isInstructor)}/>} 
         label="Register as an Instructor?" />
 
