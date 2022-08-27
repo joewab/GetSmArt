@@ -10,19 +10,24 @@ import {Button, Checkbox, FormControlLabel} from '@material-ui/core';
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isInstructor, setIsInstructor] = useState(false);
+
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
 
-    dispatch({
-      type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-      },
-    });
+    console.log(username, password, isInstructor);
+
+    // dispatch({
+    //   type: 'REGISTER',
+    //   payload: {
+    //     username: username,
+    //     password: password,
+    //     isInstructor
+    //   },
+    // });
   }; // end registerUser
 
   return (
@@ -61,7 +66,9 @@ function RegisterForm() {
       <div>
 
       <FormControlLabel 
-        control={<Checkbox defaultChecked color="success"/>} 
+        control={
+        <Checkbox color="primary"
+          onChange={() => setIsInstructor(!isInstructor)}/>} 
         label="Register as an Instructor?" />
 
       <div>
