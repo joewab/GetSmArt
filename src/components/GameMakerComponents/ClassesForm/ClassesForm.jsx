@@ -58,7 +58,12 @@ function ClassesForm() {
 
 
     return (
-        <Container>
+
+        <>
+
+        <Nav />
+        
+        <Container className='all-classes-view'>
             <Grid>
                 <Grid item>
                     <Typography>{user.username}</Typography>
@@ -77,11 +82,16 @@ function ClassesForm() {
 
                     <Button variant='outlined' onClick={createClass}>create new class</Button>
                 </Grid>
+                </Grid>
+
+                <Box pt={1} mb={5}>  </Box>
+               
+                    <Grid container spacing={5}>
                 
                     
                         {classes.map((thisClass) => {
                             return (
-                                <Grid item key={thisClass.id}>
+                                <Grid item key={thisClass.id} xs={4} sx={{m: 200}}>
                                     <ClassLink thisClass={thisClass}/>
                                 </Grid>
                             )
@@ -90,6 +100,8 @@ function ClassesForm() {
                     
             </Grid>
         </Container>
+
+        </>
     )
 }
 

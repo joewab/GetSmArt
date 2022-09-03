@@ -115,3 +115,8 @@ input {
   display:flex
 }
 
+.all-classes-view {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 10em;
+}

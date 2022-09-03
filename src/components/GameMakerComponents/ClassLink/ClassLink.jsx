@@ -6,12 +6,8 @@ import {  useHistory } from 'react-router-dom';
 //components--------------------------------------------
 
 //material--------------------------------------------
-import { Button } from '@material-ui/core';
-import { Card } from '@material-ui/core';
-import { CardHeader } from '@material-ui/core';
-import { CardActions } from '@material-ui/core';
-import { CardMedia } from '@material-ui/core';
-
+import { Button, Typography } from '@material-ui/core';
+import { Card, CardContent, CardHeader, CardActions } from '@material-ui/core';
 
 
 function ClassLink({ thisClass }) {
@@ -21,8 +17,7 @@ function ClassLink({ thisClass }) {
     const dispatch = useDispatch();
 
     function goToClassGalleries() {
-        console.log('classes:', thisClass);
-        //history.push(`/gallery/${newClass}`);
+        history.push(`/gallery/${thisClass.class_name}/${thisClass.id}`);
     }
 
     // function goToClass() {
@@ -64,19 +59,19 @@ function ClassLink({ thisClass }) {
                     disableTypography={true}
                     title={thisClass.class_name}
                 />
-                <CardMedia
-                    component="img"
-                    height="194"
-                    image={placeholder}
-                    alt={thisClass.name}
-                />
+                <CardContent>
+                    <Typography>
+                        Class information goes here
+                    </Typography>
+                </CardContent>
+                
                 <CardActions disableSpacing>
                 <Button
                     variant='contained'
                     color='primary'
                     onClick={goToClassGalleries}
                     >
-                    go to Class</Button>
+                    go to Class Galleries</Button>
 
                 <Button 
                     //onClick={deleteClass}
