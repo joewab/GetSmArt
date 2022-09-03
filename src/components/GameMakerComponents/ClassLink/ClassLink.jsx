@@ -20,6 +20,11 @@ function ClassLink({ thisClass }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    function goToClassGalleries() {
+        console.log('classes:', thisClass);
+        //history.push(`/gallery/${newClass}`);
+    }
+
     // function goToClass() {
     //     history.push(`/addClass/${gal.id}/${gal.name}`)
     // }
@@ -57,7 +62,7 @@ function ClassLink({ thisClass }) {
             <Card key={0} xs={4} elevation={5}>
                 <CardHeader
                     disableTypography={true}
-                    title={thisClass.name}
+                    title={thisClass.class_name}
                 />
                 <CardMedia
                     component="img"
@@ -69,7 +74,7 @@ function ClassLink({ thisClass }) {
                 <Button
                     variant='contained'
                     color='primary'
-                    //onClick={goToClass}
+                    onClick={goToClassGalleries}
                     >
                     go to Class</Button>
 

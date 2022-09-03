@@ -53,9 +53,7 @@ function ClassesForm() {
         })
     }
 
-    function goToClassGalleries() {
-        history.push(`/gallery/${newClass}`);
-    }
+    
 
 
 
@@ -83,18 +81,13 @@ function ClassesForm() {
                     
                         {classes.map((thisClass) => {
                             return (
-                                <Grid item>
+                                <Grid item key={thisClass.id}>
                                     <ClassLink thisClass={thisClass}/>
                                 </Grid>
                             )
                             
                         })}
                     
-                
-                <Grid item>
-                    <Button variant='outlined' onClick={goToClassGalleries}>Go to class galleries</Button>
-
-                </Grid>
             </Grid>
         </Container>
     )
