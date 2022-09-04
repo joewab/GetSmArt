@@ -7,9 +7,10 @@ const {
 
 
 
-router.get('/:className', rejectUnauthenticated, (req, res) => {
+router.get('/:className/:classId', rejectUnauthenticated, (req, res) => {
 
     const className = req.params.className;
+    const classId = req.params.classId;
 
     console.log('this is the className in galleries router:',className);
 
@@ -19,9 +20,9 @@ router.get('/:className', rejectUnauthenticated, (req, res) => {
     JOIN classroom ON classroom.id = class_gallery.class_id
     LEFT JOIN gallery_image ON gallery.id = gallery_image.gallery_id
     LEFT JOIN image ON image.id = gallery_image.image_id
-    WHERE classroom.class_name = ($1)
+    WHERE classroom.id = ($1)
     ORDER BY gallery.id DESC;`;
-    const sqlValues = [className]
+    const sqlValues = [classId]
     pool.query(sqlQuery, sqlValues)
     .then( result => {
         res.send(result.rows);
@@ -33,19 +34,40 @@ router.get('/:className', rejectUnauthenticated, (req, res) => {
 })
 
 
-router.post('/', rejectUnauthenticated, (req, res) => {
-    const galleryName = req.body.galleryName;
-    console.log('req.body in post galery router:', req.body);
-    console.log('this is gallery name in Post route',galleryName);
-    const sqlQuery = `INSERT INTO gallery ("name") VALUES ($1);`;
-    const sqlValues = [galleryName];
-    pool.query (sqlQuery, sqlValues)
-    .then((result) => { console.log(result); res.sendStatus(200) })
-    .catch((err) => {
-      console.log('Error in POST galleryName', err);
-      res.sendStatus(500);})
-})
-module.exports = router;
+router.post('/', rejectUnauthenticated, async (req, res) => {
+    const client = await pool.connect();
+
+    try{
+        const galleryName = req.body.galleryName;
+        const classId = req.body.classId;
+        console.log('this is galleryName and classId in Post route',galleryName, classId);
+    
+        await client.query('BEGIN')
+        const sqlQuery = `
+            INSERT INTO gallery ("name") 
+            VALUES ($1)
+            RETURNING id;`;
+        const sqlValues = [galleryName];
+        const newGalleryPostResults = await client.query (sqlQuery, sqlValues);
+        const newGalleryId = newGalleryPostResults.rows[0].id;
+
+        const createClassGalleryLinkQuery = `
+            INSERT INTO class_gallery ("class_id", "gallery_id")
+            VALUES ($1, $2);`;
+        const createClassGalleryLinkValues = [classId, newGalleryId];
+        await client.query(createClassGalleryLinkQuery, createClassGalleryLinkValues);
+        
+        await client.query('COMMIT')
+        res.sendStatus(201);
+    } catch (error) {
+        await client.query('ROLLBACK')
+        console.log('Error POST /api/galleries', error);
+        res.sendStatus(500);
+    } finally {
+        client.release()
+    } 
+});
+
 
 router.delete('/:id', rejectUnauthenticated, (req,res) => {
     const galleryId = req.params.id;
@@ -58,3 +80,5 @@ router.delete('/:id', rejectUnauthenticated, (req,res) => {
         res.sendStatus(500);})
 
 })
+
+module.exports = router;

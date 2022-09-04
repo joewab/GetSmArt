@@ -1,7 +1,7 @@
 //react, redux, saga -------------------------------------
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 
@@ -12,18 +12,11 @@ import Nav from '../../Nav/Nav';
 import UserPage from '../../UserPage/UserPage';
 
 //material--------------------------------------------
-import Grid from '@mui/material/Grid';
-import { Container } from '@material-ui/core';
-import Typography from '@mui/material/Typography';
-import { Paper, Button } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core';
-import Carousel from 'react-material-ui-carousel';
-import { Box } from '@material-ui/core';
-
-
-
-
+import { Container, 
+         Grid, 
+         Button, 
+         TextField,  
+         Box } from '@material-ui/core';
 
 
 function AllGalleriesPage() {
@@ -31,36 +24,28 @@ function AllGalleriesPage() {
     useEffect(() => {
         dispatch({
             type: 'FETCH_GALLERIES',
-            payload: className
+            payload: {className, classId}
         });
     }, []);
 
-    const theme = createTheme({
-        typography: {
-            fontFamily: 'Quicksand'
-        }
-    })
-
     const params = useParams();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const galleries = useSelector(store => store.gallery.galleries);
     const user = useSelector(store => store.user);
-    const className = params;
-    console.log('here is the class name', className);
+    const className = params.className;
+    const classId = params.classId;
 
     const [newGalleryName, setNewGalleryName] = useState('')
 
     function createGallery() {
-        console.log('in createGallery');
         if (newGalleryName === '') {
             swal("Please enter a gallery name!");
             return false
         }
         dispatch({
             type: 'CREATE_GALLERY',
-            payload: newGalleryName
+            payload: {newGalleryName, classId}
         })
     }
 

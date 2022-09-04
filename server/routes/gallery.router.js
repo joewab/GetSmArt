@@ -26,18 +26,19 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const image = req.body;
         console.log('this is the image object', image);
         await client.query('BEGIN')
-        const sqlQuery = `INSERT INTO "image" ("url", "description", "artist", "title", "year", "media")
-        VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id;`;
+        const sqlQuery = `
+            INSERT INTO "image" ("url", "description", "artist", "title", "year", "media")
+            VALUES ($1, $2, $3, $4, $5, $6)
+            RETURNING id;`;
         const sqlValues = [image.imageUrl, image.description, image.artist, image.title, image.year, image.media]
         const imageInsertResults = await client.query(sqlQuery, sqlValues);
         console.log('this should be the image id:', imageInsertResults.rows[0].id);
         const imageId = imageInsertResults.rows[0].id;
 
 
-        const insertIntoGalleryImageQuery = `INSERT INTO "gallery_image" ("gallery_id", "image_id") VALUES ($1, $2)`;
-        const insertIntoGalleryImageValues = [image.galleryId, imageId];
-        await client.query(insertIntoGalleryImageQuery, insertIntoGalleryImageValues);
+        const createGalleryImageLinkQuery = `INSERT INTO "gallery_image" ("gallery_id", "image_id") VALUES ($1, $2)`;
+        const createGalleryImageLinkValues = [image.galleryId, imageId];
+        await client.query(createGalleryImageLinkQuery, createGalleryImageLinkValues);
 
 
         await client.query('COMMIT')

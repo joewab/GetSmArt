@@ -17,9 +17,10 @@ function* fetchGallery(action) {
 
 function* fetchGalleries(action) {
     try {
-        const className = action.payload.className
+        const className = action.payload.className;
+        const classId = action.payload.classId;
         console.log('this is className in fetchGalleries saga -----------', className);
-        const galleries = yield axios.get(`/api/galleries/${className}`);
+        const galleries = yield axios.get(`/api/galleries/${className}/${classId}`);
         console.log('get class galleries:', galleries.data);
 
         let filteredGalleries = []
@@ -69,13 +70,14 @@ function* addImageToGallery(action) {
 }
 
 function* createGallery(action) {
-    const galleryName = action.payload;
-    console.log('this is galleryName in createGallery:', galleryName);
+    const galleryName = action.payload.newGalleryName;
+    const classId = action.payload.classId;
+    console.log('this is galleryName and classID in createGallery:', galleryName, classId);
     try {
         yield axios({
             method: 'POST',
             url: 'api/galleries',
-            data: { galleryName }
+            data: { galleryName, classId }
         })
         yield put({
             type: 'FETCH_GALLERIES'
