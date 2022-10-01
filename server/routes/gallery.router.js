@@ -32,7 +32,6 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
             RETURNING id;`;
         const sqlValues = [image.imageUrl, image.description, image.artist, image.title, image.year, image.media]
         const imageInsertResults = await client.query(sqlQuery, sqlValues);
-        console.log('this should be the image id:', imageInsertResults.rows[0].id);
         const imageId = imageInsertResults.rows[0].id;
 
 
