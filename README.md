@@ -8,6 +8,9 @@ GetSmArt allows art history instructors to create and share galleries of slides 
 
 Usage: Fork and clone this repository. cd into this repository. Create a database using the SQL query provided. Run npm install to install dependencies from package.json. Run npm run server to connect to express. Run npm run client to run the React app.
 
-Alternatively you can see this app hosted on Heroku at: https://polar-escarpment-47222.herokuapp.com/#/login. Please keep in mind that Heroku is slow, so it will take more time than usual for the app to load.
-
 I used HTML, CSS, Material-UI, JavaScript, React, Redux, Saga, Node.js, Express, PostgreSQL, and Passport to create it. Enjoy!
+
+<!-- to do:
+
+- page does not refresh when adding a new gallery to a class
+- should be able to select an image for the class -->
