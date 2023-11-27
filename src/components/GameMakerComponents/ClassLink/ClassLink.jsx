@@ -20,34 +20,33 @@ function ClassLink({ thisClass }) {
         history.push(`/gallery/${thisClass.class_name}/${thisClass.id}`);
     }
 
-    // function goToClass() {
-    //     history.push(`/addClass/${gal.id}/${gal.name}`)
-    // }
+    function goToClass() {
+        history.push(`/addClass/${gal.id}/${gal.name}`)
+    }
 
-    // function deleteClass() {
-    //     console.log('in deleteClass');
-    //     swal({
-    //         title: "Are you sure?",
-    //         text: "Once deleted, you will not be able to recover this Class!",
-    //         icon: "warning",
-    //         buttons: true,
-    //         dangerMode: true,
-    //     })
-    //         .then((willDelete) => {
-    //             if (willDelete) {
-    //                 dispatch({
-    //                     type: 'DELETE_Class',
-    //                     payload: gal.id
-    //                 })
-    //                 swal("The Class has been deleted", {
-    //                     icon: "success",
-    //                 });
-    //             } else {
-    //                 swal("Your Class is safe");
-    //             }
-    //         });
+    function deleteClass() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this Class!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    dispatch({
+                        type: 'DELETE_Class',
+                        payload: thisClass.id
+                    })
+                    swal("The Class has been deleted", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your Class is safe");
+                }
+            });
 
-    // }
+    }
 
     const placeholder = require('./image-placeholder.png');
 
@@ -74,7 +73,7 @@ function ClassLink({ thisClass }) {
                     go to Class Galleries</Button>
 
                 <Button 
-                    //onClick={deleteClass}
+                    onClick={deleteClass}
                     variant='outlined'>
                     delete Class</Button>
                 </CardActions>

@@ -1,14 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useState } from "react";
 
 //components---------------------------------------------
-import LogOutButton from "../../LogOutButton/LogOutButton";
-import GalleryList from "../GalleryList/GalleryList";
-import MediaPicker from "../MediaPicker/MediaPicker";
 import Nav from "../../Nav/Nav";
-import UserPage from "../../UserPage/UserPage";
 import ClassLink from "../ClassLink/ClassLink";
 
 //materialUI----------------------------------------------
@@ -18,11 +14,9 @@ import { Grid } from "@material-ui/core";
 import Typography from "@mui/material/Typography";
 import { TextField } from "@material-ui/core";
 import { Box } from "@material-ui/core";
-import { MenuItem } from "@material-ui/core";
 
 function ClassesForm() {
   useEffect(() => {
-    console.log('user in classes form', user.id);
     dispatch({ type: "FETCH_CLASSES", payload: user.id });
   }, []);
 

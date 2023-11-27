@@ -5,7 +5,6 @@ import axios from 'axios';
 function* createClass(action) {
     const className = action.payload.newClassName;
     const userId = action.payload.userId;
-    console.log('payload from create class',action.payload);
     try {
         yield axios({
             method: 'POST',
@@ -23,7 +22,6 @@ function* createClass(action) {
 
 function* fetchClasses(action){
     try{
-        console.log('action payload in fetch classes:', action.payload);
         const userId = action.payload;
         const classes = yield axios.get(`/api/classes/${userId}`);
         yield put ({
