@@ -15,6 +15,8 @@ function ClassLink({ thisClass }) {
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const user = useSelector(store => store.user);
+
 
     function goToClassGalleries() {
         history.push(`/gallery/${thisClass.class_name}/${thisClass.id}`);
@@ -25,6 +27,8 @@ function ClassLink({ thisClass }) {
     }
 
     function deleteClass() {
+        const classId = thisClass.id;
+        const userId = user.id;
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this Class!",
@@ -35,8 +39,8 @@ function ClassLink({ thisClass }) {
             .then((willDelete) => {
                 if (willDelete) {
                     dispatch({
-                        type: 'DELETE_Class',
-                        payload: thisClass.id
+                        type: 'DELETE_CLASS',
+                        payload: {classId, userId}
                     })
                     swal("The Class has been deleted", {
                         icon: "success",

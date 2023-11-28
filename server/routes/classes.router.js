@@ -70,4 +70,16 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     }
 });
 
+router.delete('/', rejectUnauthenticated, (req,res) => {
+    const classId = req.body.classId;
+    const sqlQuery = 'DELETE FROM classroom WHERE id=$1;';
+    const sqlValues = [classId];
+    pool.query (sqlQuery, sqlValues)
+    .then((result) => {console.log(result); res.sendStatus(200) })
+    .catch((err) => {
+        console.log('Error in Delete gallery', err);
+        res.sendStatus(500);})
+
+})
+
 module.exports = router;
