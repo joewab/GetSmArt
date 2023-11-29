@@ -1,29 +1,21 @@
 //react, redux, saga -------------------------------------
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {  useHistory } from 'react-router-dom';
 
-//components--------------------------------------------
-
-//material--------------------------------------------
+//materialUI--------------------------------------------
 import { Button, Typography } from '@material-ui/core';
 import { Card, CardContent, CardHeader, CardActions } from '@material-ui/core';
 
 
 function ClassLink({ thisClass }) {
-
-
     const history = useHistory();
     const dispatch = useDispatch();
     const user = useSelector(store => store.user);
+    const placeholder= require('./image-placeholder.png');
 
 
     function goToClassGalleries() {
         history.push(`/gallery/${thisClass.class_name}/${thisClass.id}`);
-    }
-
-    function goToClass() {
-        history.push(`/addClass/${gal.id}/${gal.name}`)
     }
 
     function deleteClass() {
@@ -49,14 +41,10 @@ function ClassLink({ thisClass }) {
                     swal("Your Class is safe");
                 }
             });
-
     }
-
-    const placeholder = require('./image-placeholder.png');
 
     return (
         <>
-
             <Card key={0} xs={4} elevation={5}>
                 <CardHeader
                     disableTypography={true}
@@ -74,15 +62,15 @@ function ClassLink({ thisClass }) {
                     color='primary'
                     onClick={goToClassGalleries}
                     >
-                    go to Class Galleries</Button>
-
+                    go to Class Galleries
+                </Button>
                 <Button 
                     onClick={deleteClass}
                     variant='outlined'>
-                    delete Class</Button>
+                    delete Class
+                </Button>
                 </CardActions>
             </Card>
-
         </>
     )
 }

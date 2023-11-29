@@ -20,20 +20,18 @@ function ClassesForm() {
     dispatch({ type: "FETCH_CLASSES", payload: user.id });
   }, []);
 
-  //variables that are react functions--------------------------------
+  //react methods---------------------------------------------------------
   const dispatch = useDispatch();
   const history = useHistory();
 
-  //variables that evaluate to something specific from the store or params---------
+  //from the redux store------------------------------------------------
   const user = useSelector((store) => store.user);
   const classes = useSelector((store) => store.classes.classes);
 
   //local state--------------------------------------------------------------
   const [newClassName, setNewClassName] = useState("");
-  const [newClass, setNewClass] = React.useState("");
 
   function createClass() {
-    console.log("in createClass");
     if (newClassName === "") {
       swal("Please enter a class name!");
       return false;
@@ -47,7 +45,6 @@ function ClassesForm() {
   return (
     <>
       <Nav />
-
       <Container className="all-classes-view">
         <Grid>
           <Grid item>
@@ -64,17 +61,14 @@ function ClassesForm() {
               defaultValue={newClassName}
               onChange={(event) => setNewClassName(event.target.value)}
             />
-
             <Button variant="outlined" onClick={createClass}>
               create new class
             </Button>
           </Grid>
         </Grid>
-
         <Box pt={1} mb={5}>
           {" "}
         </Box>
-
         <Grid container spacing={5}>
           {classes.map((thisClass) => {
             return (

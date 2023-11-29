@@ -8,11 +8,8 @@ const {
 
 
 router.get('/:className/:classId', rejectUnauthenticated, (req, res) => {
-
     const className = req.params.className;
     const classId = req.params.classId;
-
-    console.log('this is the className in galleries router:',className);
 
     const sqlQuery = `SELECT (gallery.id), gallery.name, image.url, classroom.class_name
     FROM gallery 
@@ -28,7 +25,7 @@ router.get('/:className/:classId', rejectUnauthenticated, (req, res) => {
         res.send(result.rows);
     })
     .catch(err => {
-        console.log('ERROR: Get class Galleries', err);
+        console.log('ERROR: Get class galleries', err);
         res.sendStatus(500)
     })
 })
@@ -40,8 +37,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
     try{
         const galleryName = req.body.galleryName;
         const classId = req.body.classId;
-        console.log('this is galleryName and classId in Post route',galleryName, classId);
-    
+
         await client.query('BEGIN')
         const sqlQuery = `
             INSERT INTO gallery ("name") 
@@ -61,7 +57,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        console.log('Error POST /api/galleries', error);
+        console.log('ERROR: Create new gallery', error);
         res.sendStatus(500);
     } finally {
         client.release()
@@ -76,7 +72,7 @@ router.delete('/:id', rejectUnauthenticated, (req,res) => {
     pool.query (sqlQuery, sqlValues)
     .then((result) => {console.log(result); res.sendStatus(200) })
     .catch((err) => {
-        console.log('Error in Delete gallery', err);
+        console.log('ERROR: Delete gallery', err);
         res.sendStatus(500);})
 
 })

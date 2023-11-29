@@ -3,9 +3,9 @@ import axios from 'axios';
 
 
 function* createClass(action) {
-    const className = action.payload.newClassName;
-    const userId = action.payload.userId;
     try {
+        const className = action.payload.newClassName;
+        const userId = action.payload.userId;
         yield axios({
             method: 'POST',
             url: 'api/classes',
@@ -16,7 +16,7 @@ function* createClass(action) {
             payload: userId
         })
     } catch {
-        console.log('error in createGallery');
+        console.log('error in create class');
     }
 }
 
@@ -49,18 +49,15 @@ function* deleteClass(action){
         })
 
     }catch{
-        console.log('error in fetch all classes');
+        console.log('error in delete class');
     }
 }
 
 
 function* classesSaga() {
-    
     yield takeLatest('CREATE_CLASS', createClass);
     yield takeLatest('FETCH_CLASSES', fetchClasses);
     yield takeLatest('DELETE_CLASS', deleteClass);
-
-
 }
 
 export default classesSaga;

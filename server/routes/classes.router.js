@@ -4,13 +4,8 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
-/**
- * GET route template
- */
+
  router.get('/:userId', rejectUnauthenticated, (req, res) => {
-
-    console.log('params from get all classes:', req.params);
-
     const sqlQuery = `SELECT classroom.id, classroom.class_name
     FROM classroom
     JOIN user_class ON classroom.id = user_class.class_id
@@ -28,17 +23,6 @@ const {
         res.sendStatus(500)
     })
 });
-
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//     const className = req.body.className;
-//     const sqlQuery = `INSERT INTO classroom ("class_name") VALUES ($1);`;
-//     const sqlValues = [className];
-//     pool.query (sqlQuery, sqlValues)
-//     .then((result) => { console.log(result); res.sendStatus(200) })
-//     .catch((err) => {
-//       console.log('Error in POST className', err);
-//       res.sendStatus(500);})
-// });
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
@@ -63,7 +47,7 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        console.log('Error POST /api/classes', error);
+        console.log('ERROR: Create new class', error);
         res.sendStatus(500);
     } finally {
         client.release()
@@ -77,7 +61,7 @@ router.delete('/', rejectUnauthenticated, (req,res) => {
     pool.query (sqlQuery, sqlValues)
     .then((result) => {console.log(result); res.sendStatus(200) })
     .catch((err) => {
-        console.log('Error in Delete gallery', err);
+        console.log('ERROR: Delete class', err);
         res.sendStatus(500);})
 
 })
