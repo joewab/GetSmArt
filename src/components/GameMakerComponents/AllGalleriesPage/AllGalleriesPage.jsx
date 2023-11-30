@@ -20,7 +20,6 @@ import { Container,
 
 
 function AllGalleriesPage() {
-
     useEffect(() => {
         dispatch({
             type: 'FETCH_GALLERIES',
@@ -30,7 +29,6 @@ function AllGalleriesPage() {
 
     const params = useParams();
     const dispatch = useDispatch();
-
     const galleries = useSelector(store => store.gallery.galleries);
     const user = useSelector(store => store.user);
     const className = params.className;

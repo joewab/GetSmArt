@@ -1,10 +1,7 @@
 //react, redux, saga -------------------------------------
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
-import { useState } from 'react';
-import Theme from '../../_theme/_theme';
-
+import { useHistory } from 'react-router-dom';
 
 //components--------------------------------------------
 
@@ -14,18 +11,15 @@ import Nav from '../../Nav/Nav';
 //material--------------------------------------------
 import { Grid } from '@material-ui/core';
 import { Container } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
-import { Button } from '@material-ui/core';
-import { TextField } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core';
-
-
-
 
 function AllGamesPage() {
 
     useEffect(() => {
-        dispatch({ type: 'FETCH_GALLERIES' });
+        dispatch({ 
+            type: 'FETCH_GALLERIES',
+            //TBD give students a class landing page so the className and id can be passed in
+            payload: {className: 'Art 101', classId: '1'}
+         });
         dispatch({ type: 'FETCH_SCORES' });
     }, []);
 
@@ -34,29 +28,20 @@ function AllGamesPage() {
 
     const galleries = useSelector(store => store.gallery.galleries);
     const allScores = useSelector(store => store.game.allScores);
-    console.log('all scores:', allScores);
-    console.log('here are all the galleries', galleries);
-
-    
 
     return (
         <>
         <Nav/>
         <Container>
-            
             <Grid container spacing={2}>
-               
-               
                 {galleries.map((game) => {
-                    
                     return(
                         <Grid item key={game.id} spacing={2} xs={4}>
                         <GameLink key={game.id} game={game} allScores={allScores} />
                         </Grid>
-                    )
-               
-                })}
-                
+                        )
+                    }
+                )}
             </Grid>
         </Container>
         </>

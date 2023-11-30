@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-
 const image = (state = {}, action) => {
     if (action.type === 'ADD_IMAGE') {
         return action.payload;
@@ -16,8 +15,6 @@ const gallery = (state = [], action) => {
             return state;
     }
 }
-
-
 
 const galleries = (state = [], action) => {
     switch (action.type) {
@@ -60,7 +57,6 @@ const editImage = (state = {}, action) => {
             return state;
     }
 }
-
 
 export default combineReducers({
     image,
