@@ -17,18 +17,9 @@ function UserPage() {
   }, []);
   
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
 
-  if(user.admin===true){
     return(
       <ClassesForm/>
     )
-  } else {
-      return (
-        <>
-          <AllGamesPage/>
-        </>
-      );
-  }
 }
 export default UserPage;

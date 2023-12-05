@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 import GalleryLink from '../GalleryLink/GalleryLink';
 import Nav from '../../Nav/Nav';
-import UserPage from '../../UserPage/UserPage';
+import AllGamesPage from '../../GamePlayerComponents/AllGamesPage/AllGamesPage';
 
 //material--------------------------------------------
 import { Container, 
@@ -90,7 +90,7 @@ function AllGalleriesPage() {
         </>
 
         :
-        <UserPage />
+        <AllGamesPage />
     )
 }
 

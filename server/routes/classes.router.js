@@ -5,17 +5,34 @@ const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
 
- router.get('/:userId', rejectUnauthenticated, (req, res) => {
-    const sqlQuery = `SELECT classroom.id, classroom.class_name
-    FROM classroom
-    JOIN user_class ON classroom.id = user_class.class_id
-    JOIN "user" ON "user".id = user_class.user_id
-    WHERE "user".id = $1
-    ORDER BY classroom.id DESC;`;
+//  router.get('/:userId', rejectUnauthenticated, (req, res) => {
+//     const sqlQuery = `SELECT classroom.id, classroom.class_name
+//     FROM classroom
+//     JOIN user_class ON classroom.id = user_class.class_id
+//     JOIN "user" ON "user".id = user_class.user_id
+//     WHERE "user".id = $1
+//     ORDER BY classroom.id DESC;`;
 
-    const sqlValues = [req.params.userId];
-    pool.query(sqlQuery, sqlValues)
-    .then( result => {
+//     const sqlValues = [req.params.userId];
+//     pool.query(sqlQuery, sqlValues)
+//     .then( result => {
+//         res.send(result.rows);
+//     })
+//     .catch(err => {
+//         console.log('ERROR: Get all Classes', err);
+//         res.sendStatus(500)
+//     })
+// });
+
+// The above method will retrieve classes based on user id
+// I altered it below to get all classes regardless of user, could be permenent but not sure yet
+
+router.get('/:userId', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `SELECT *
+    FROM classroom
+    ORDER BY classroom.id DESC;`;
+    pool.query(sqlQuery)
+    .then(result => {
         res.send(result.rows);
     })
     .catch(err => {

@@ -11,8 +11,6 @@ import GalleryItem from '../GalleryItem/GalleryItem';
 function GalleryList({galleryId, galleryName, imageId }) {
 
     const gallery = useSelector(store => store.gallery.gallery);
-    console.log('galleryName in GalleryList component:', galleryName);
-
 
     return (
         <Container container spacing={2}>

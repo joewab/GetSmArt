@@ -46,7 +46,7 @@ function ClassesForm() {
     <>
       <Nav />
       <Container className="all-classes-view">
-        <Grid>
+        <Grid style={ !user.admin ? {display: "none"} : null}>
           <Grid item>
             <Typography>{user.username}</Typography>
           </Grid>
