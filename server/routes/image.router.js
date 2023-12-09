@@ -7,7 +7,6 @@ const {
 
 
 router.get('/:id', rejectUnauthenticated, (req, res) => {
-  console.log('params:', req.params.id);
     const sqlQuery = `SELECT image.id, image.url, image.description, image.artist, image.title, image.year, image.media, gallery.id AS gallery_id
     FROM image JOIN gallery_image ON image.id = gallery_image.image_id
     JOIN gallery ON gallery.id = gallery_image.gallery_id
@@ -24,7 +23,6 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     const imageToEdit = req.body;
     const imageId = req.params.id
-    console.log('image to update:', imageToEdit);
     const sqlQuery = `
     UPDATE image 
       SET 

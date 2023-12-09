@@ -43,7 +43,6 @@ router.get('/:userId', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
-
     try {
         const className = req.body.className;
         const userId = req.body.userId;

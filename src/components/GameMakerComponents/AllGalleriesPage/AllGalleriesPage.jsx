@@ -1,9 +1,8 @@
 //react, redux, saga -------------------------------------
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-
 
 //components--------------------------------------------
 
@@ -17,7 +16,6 @@ import { Container,
          Button, 
          TextField,  
          Box } from '@material-ui/core';
-
 
 function AllGalleriesPage() {
     useEffect(() => {
@@ -47,15 +45,10 @@ function AllGalleriesPage() {
         })
     }
 
-
-
-
     return (user.admin ?
         <>
             <Nav />
-
             <Container>
-
                 <Grid container spacing={5}>
                     <Grid item xs={12}>
                         <TextField
@@ -65,30 +58,23 @@ function AllGalleriesPage() {
                             defaultValue={newGalleryName}
                             onChange={(event) => setNewGalleryName(event.target.value)}
                         />
-
                         <Button variant='outlined' onClick={createGallery}>create new gallery</Button>
                     </Grid>
                 </Grid>
             </Container>
-
             <Box pt={1} mb={5}>  </Box>
-
             <Container>
                 <Grid container spacing={5}>
-
                     {galleries.map((gal) => {
                         return (
                             <Grid item key={gal.id} xs={4} >
                                 <GalleryLink gal={gal} />
                             </Grid>
-
                         )
                     })}
-
                 </Grid>
             </Container>
         </>
-
         :
         <AllGamesPage />
     )
