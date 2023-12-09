@@ -65,6 +65,7 @@ function ClassLink({ thisClass }) {
                     go to Class Galleries
                 </Button>
                 <Button 
+                    style={ !user.admin ? {display: "none"} : null}
                     onClick={deleteClass}
                     variant='outlined'>
                     delete Class

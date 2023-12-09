@@ -72,7 +72,6 @@ function GalleryItem({ image, galleryId, galleryName }) {
               swal("Your slide is safe");
             }
           });
-       
     }
 
     return (
