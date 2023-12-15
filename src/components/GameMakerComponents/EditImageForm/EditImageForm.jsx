@@ -1,16 +1,13 @@
 //react,redux,saga stuff---------------------------------
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 //components---------------------------------------------
-import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
-import MediaPicker from '../MediaPicker/MediaPicker';
 import Nav from '../../Nav/Nav';
 import UserPage from '../../UserPage/UserPage';
-import Theme from '../../_theme/_theme';
 
 
 //materialUI----------------------------------------------
@@ -18,12 +15,10 @@ import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
 import { Drawer } from '@material-ui/core';
-import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@material-ui/core';
 import { Box } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core';
-import Alert from '@mui/material/Alert';
+import { createTheme } from '@material-ui/core';
 
 
 const drawerWidth = 400
@@ -111,7 +106,6 @@ function EditImageForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('in handleSubmit, here is data:', imageObject);
         swal({title: "The slide has been updated",
               icon: "success"});
         dispatch({
@@ -250,9 +244,6 @@ function EditImageForm() {
         </>
         :
         <UserPage />
-
     );
 }
-
-// this allows us to use <App /> in index.js
 export default EditImageForm;
