@@ -1,13 +1,11 @@
 //react,redux,saga stuff---------------------------------
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 
 //components---------------------------------------------
-import LogOutButton from '../../LogOutButton/LogOutButton';
 import GalleryList from '../GalleryList/GalleryList';
-import MediaPicker from '../MediaPicker/MediaPicker';
 import Nav from '../../Nav/Nav';
 import UserPage from '../../UserPage/UserPage';
 
@@ -17,12 +15,9 @@ import { Button } from '@material-ui/core';
 import { Container } from '@material-ui/core';
 import {Grid} from '@material-ui/core';
 import {Drawer} from '@material-ui/core';
-import Typography from '@mui/material/Typography';
 import { makeStyles } from '@material-ui/styles';
 import { TextField } from '@material-ui/core';
 import { Box } from '@material-ui/core';
-import { SwipeableDrawer } from '@material-ui/core';
-
 
 const drawerWidth = 400
 
@@ -42,8 +37,6 @@ const useStyles = makeStyles({
 
 })
 
-
-
 function AddImageForm() {
     useEffect(() => {
         dispatch({
@@ -52,17 +45,13 @@ function AddImageForm() {
         })
     }, [])
 
-
-
     const params = useParams();
     const classes = useStyles();
     const dispatch = useDispatch();
 
-
     const galleryId = params.galleryId;
     const galleryName = params.galleryName;
     const user = useSelector((store) => store.user);
-
 
     const [imageUrl, setImageUrl] = useState('');
     const [description, setDescription] = useState('');

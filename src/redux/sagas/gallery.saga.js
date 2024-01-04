@@ -3,10 +3,8 @@ import axios from 'axios';
 
 function* fetchGallery(action) {
     let galleryId = action.payload;
-    console.log('this is the galleryId:', galleryId);
     try {
         const gallery = yield axios.get(`/api/gallery/${galleryId}`);
-        console.log('got this gallery:', gallery.data);
         yield put({ type: 'SET_GALLERY', payload: gallery.data });
 
     } catch {
@@ -19,14 +17,9 @@ function* fetchGalleries(action) {
     try {
         const className = action.payload.className;
         const classId = action.payload.classId;
-        console.log('this is className in fetchGalleries saga -----------', className);
         const galleries = yield axios.get(`/api/galleries/${className}/${classId}`);
-        console.log('get class galleries:', galleries.data);
-
         let filteredGalleries = []
-
         let currentId = 0
-
         function filterGalleries(array) {
             for(let i=0; i<array.length; i++){
                 if(array[i].id !== currentId){
@@ -36,11 +29,7 @@ function* fetchGalleries(action) {
             }
             return true
         }
-
         filterGalleries(galleries.data);
-
-        console.log('Filtered Gallery from fetch galleries:', filteredGalleries);
-
         yield put({
             type: 'SET_GALLERIES',
             payload: filteredGalleries
@@ -52,7 +41,6 @@ function* fetchGalleries(action) {
 
 function* addImageToGallery(action) {
     const image = action.payload;
-    console.log('to add to gallery:', image);
     try {
         yield axios({
             method: 'POST',
@@ -72,7 +60,6 @@ function* addImageToGallery(action) {
 function* createGallery(action) {
     const galleryName = action.payload.newGalleryName;
     const classId = action.payload.classId;
-    console.log('this is galleryName and classID in createGallery:', galleryName, classId);
     try {
         yield axios({
             method: 'POST',
@@ -88,7 +75,6 @@ function* createGallery(action) {
 }
 
 function* deleteImage(action) {
-    console.log('in deleteImage', action);
     try {
         yield axios({
             method: 'DELETE',
@@ -110,51 +96,40 @@ function* deleteGallery(action) {
         yield axios({
             method: 'DELETE',
             url: `api/galleries/${action.payload}`
-        })
+        });
         yield put({
             type: 'FETCH_GALLERIES'
-        })
-
+        });
     } catch {
         console.log('error in deleteGallery');
     }
-
 }
 
 function* editImage(action) {
     try {
-
         const imageId = action.payload
-        console.log('payload from edit image:', action.payload);
         const oneImage = yield axios.get(`/api/image/${imageId}`);
-        console.log('data for one image from edit button:', oneImage.data);
         yield put({
             type: 'GET_ONE_IMAGE',
             payload: oneImage.data
-        })
-
-
+        });
     } catch {
         console.log('error in editImage');
     }
 }
+
 function* updateImage(action) {
     try {
         const imageToEdit = action.payload;
-        console.log('payload from update image:', imageToEdit);
-        console.log('image to edit id:', imageToEdit.id);
         yield axios({
             method: 'PUT',
             url: `/api/image/${imageToEdit.id}`,
             data: imageToEdit
-        })
-
+        });
         yield put({
             type: 'GET_ONE_IMAGE',
             payload: imageToEdit
-        })
-
-
+        });
     } catch {
         console.log('error in editImage');
     }

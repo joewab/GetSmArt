@@ -4,23 +4,35 @@ const router = express.Router();
 const {
     rejectUnauthenticated,
   } = require('../modules/authentication-middleware');
-/**
- * GET route template
- */
- router.get('/:userId', rejectUnauthenticated, (req, res) => {
 
-    console.log('params from get all classes:', req.params);
+//  router.get('/:userId', rejectUnauthenticated, (req, res) => {
+//     const sqlQuery = `SELECT classroom.id, classroom.class_name
+//     FROM classroom
+//     JOIN user_class ON classroom.id = user_class.class_id
+//     JOIN "user" ON "user".id = user_class.user_id
+//     WHERE "user".id = $1
+//     ORDER BY classroom.id DESC;`;
 
-    const sqlQuery = `SELECT classroom.id, classroom.class_name
+//     const sqlValues = [req.params.userId];
+//     pool.query(sqlQuery, sqlValues)
+//     .then( result => {
+//         res.send(result.rows);
+//     })
+//     .catch(err => {
+//         console.log('ERROR: Get all Classes', err);
+//         res.sendStatus(500)
+//     })
+// });
+
+// The above method will retrieve classes based on user id
+// I altered it below to get all classes regardless of user, could be permenent but not sure yet
+
+router.get('/:userId', rejectUnauthenticated, (req, res) => {
+    const sqlQuery = `SELECT *
     FROM classroom
-    JOIN user_class ON classroom.id = user_class.class_id
-    JOIN "user" ON "user".id = user_class.user_id
-    WHERE "user".id = $1
     ORDER BY classroom.id DESC;`;
-
-    const sqlValues = [req.params.userId];
-    pool.query(sqlQuery, sqlValues)
-    .then( result => {
+    pool.query(sqlQuery)
+    .then(result => {
         res.send(result.rows);
     })
     .catch(err => {
@@ -29,20 +41,8 @@ const {
     })
 });
 
-// router.post('/', rejectUnauthenticated, (req, res) => {
-//     const className = req.body.className;
-//     const sqlQuery = `INSERT INTO classroom ("class_name") VALUES ($1);`;
-//     const sqlValues = [className];
-//     pool.query (sqlQuery, sqlValues)
-//     .then((result) => { console.log(result); res.sendStatus(200) })
-//     .catch((err) => {
-//       console.log('Error in POST className', err);
-//       res.sendStatus(500);})
-// });
-
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
-
     try {
         const className = req.body.className;
         const userId = req.body.userId;
@@ -63,11 +63,23 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         res.sendStatus(201);
     } catch (error) {
         await client.query('ROLLBACK')
-        console.log('Error POST /api/classes', error);
+        console.log('ERROR: Create new class', error);
         res.sendStatus(500);
     } finally {
         client.release()
     }
 });
+
+router.delete('/', rejectUnauthenticated, (req,res) => {
+    const classId = req.body.classId;
+    const sqlQuery = 'DELETE FROM classroom WHERE id=$1;';
+    const sqlValues = [classId];
+    pool.query (sqlQuery, sqlValues)
+    .then((result) => {console.log(result); res.sendStatus(200) })
+    .catch((err) => {
+        console.log('ERROR: Delete class', err);
+        res.sendStatus(500);})
+
+})
 
 module.exports = router;

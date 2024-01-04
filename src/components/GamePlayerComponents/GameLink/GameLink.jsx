@@ -1,48 +1,27 @@
 //react, redux, saga -------------------------------------
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
-
-
-//components--------------------------------------------
-import Theme from '../../_theme/_theme';
+import { useHistory } from 'react-router-dom';
 
 //material--------------------------------------------
-import { Grid } from '@material-ui/core';
-import { Container } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Button } from '@material-ui/core';
 import { Card } from '@material-ui/core';
-import { createTheme, ThemeProvider } from '@material-ui/core';
 import { CardHeader } from '@material-ui/core';
 import { CardActions } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 
-
-
 function GameLink({ game, allScores }) {
     const history = useHistory();
-    const dispatch = useDispatch();
-
-    const storedScore = useSelector(store => store.game.storedScore.score)
-
-    console.log('this is game', game);
-    console.log('all scores in gamelink:', allScores);
+    const placeholder = require('./image-placeholder.png');
 
     function goToGame() {
         history.push(`/game/${game.id}/${game.name}`)
     }
 
-    const placeholder = require('./image-placeholder.png');
-
-
     return (
         <>
-
             <Card key={game.id} xs={4} elevation={5}>
                 <CardHeader
                     disableTypography={true}
-                    
                     title={game.name}
                 />
                 <CardMedia
@@ -65,7 +44,6 @@ function GameLink({ game, allScores }) {
                     })}
                 </CardActions>
             </Card>
-
         </>
 
 

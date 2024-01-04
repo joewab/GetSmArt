@@ -21,10 +21,8 @@ router.get('/:id', rejectUnauthenticated, (req, res) => {
 
 router.post('/', rejectUnauthenticated, async (req, res) => {
     const client = await pool.connect();
-
     try {
         const image = req.body;
-        console.log('this is the image object', image);
         await client.query('BEGIN')
         const sqlQuery = `
             INSERT INTO "image" ("url", "description", "artist", "title", "year", "media")
@@ -33,13 +31,9 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
         const sqlValues = [image.imageUrl, image.description, image.artist, image.title, image.year, image.media]
         const imageInsertResults = await client.query(sqlQuery, sqlValues);
         const imageId = imageInsertResults.rows[0].id;
-
-
         const createGalleryImageLinkQuery = `INSERT INTO "gallery_image" ("gallery_id", "image_id") VALUES ($1, $2)`;
         const createGalleryImageLinkValues = [image.galleryId, imageId];
         await client.query(createGalleryImageLinkQuery, createGalleryImageLinkValues);
-
-
         await client.query('COMMIT')
         res.sendStatus(201);
     } catch (error) {
@@ -53,12 +47,10 @@ router.post('/', rejectUnauthenticated, async (req, res) => {
 
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const imageId = req.params.id
-    console.log('this is req params in delete:',imageId);
     const galleryId = req.body.galleryId
-    console.log('this is req body in delete:', galleryId);
     const sqlText = 'DELETE FROM gallery_image WHERE image_id=$1 AND gallery_id=$2';
     const sqlValues = [imageId, galleryId]
-    
+
     pool.query(sqlText, sqlValues)
         .then((result) => { res.send(result.rows); })
         .catch((err) => {

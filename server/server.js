@@ -36,9 +36,6 @@ app.use('/api/image', imageRouter);
 app.use('/api/game', gameRouter);
 app.use('/api/classes', classesRouter);
 
-
-
-
 // Serve static files
 app.use(express.static('build'));
 

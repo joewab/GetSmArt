@@ -24,9 +24,6 @@ router.get('/:userId/:galleryId', (req, res) => {
 })
 
 router.put('/:gameScore/:userId/:galleryId', (req, res) => {
-
-    console.log('params in update score:', req.params);
-
     const gameScore = req.params.gameScore;
     const userId = req.params.userId;
     const galleryId = req.params.galleryId;
@@ -46,9 +43,6 @@ router.put('/:gameScore/:userId/:galleryId', (req, res) => {
 })
 
 router.post('/:gameScore/:userId/:galleryId', (req, res) => {
-
-    console.log('params in post new score:', req.params);
-
     const gameScore = req.params.gameScore;
     const userId = req.params.userId;
     const galleryId = req.params.galleryId;
