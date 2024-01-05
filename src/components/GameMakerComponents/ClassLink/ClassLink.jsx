@@ -1,5 +1,5 @@
 //react, redux, saga -------------------------------------
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, Provider } from 'react-redux';
 import {  useHistory } from 'react-router-dom';
 
 //materialUI--------------------------------------------
@@ -44,7 +44,7 @@ function ClassLink({ thisClass }) {
     }
 
     return (
-        <>
+        <Provider dispatch = {dispatch}>
             <Card key={0} xs={4} elevation={5}>
                 <CardHeader
                     disableTypography={true}
@@ -72,7 +72,7 @@ function ClassLink({ thisClass }) {
                 </Button>
                 </CardActions>
             </Card>
-        </>
+        </Provider>
     )
 }
 
