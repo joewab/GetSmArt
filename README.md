@@ -1,5 +1,3 @@
-Hello! Thanks for checking out my project. I'm not quite done with the README file so please forgive its sparseness.
-
 This is a full-stack desktop application called GetSmart. 
 
 When I was studying art history my classmates and I had to create our own art history flash cards. This was a frustrating process for a number of reasons, including the time it took, the lack of access to high quality images and/ or a printer, and the lack of clarity regarding which images we would be resonsible for memorizing.
